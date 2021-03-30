@@ -13,7 +13,7 @@ Le but de cette 2ème version est de simplifier le code afin de faciliter les fu
 
 ## Version 1
 
-Le projet de la version 1 est disponible sur github : [CodeforFR/OpenCompaniesData](https://github.com/CodeforFR/OpenCompaniesData).
+Le projet de la version 1 est disponible sur github : [CodeforFR/OpenCompaniesData](https://github.com/CodeforFR/OpenCompaniesData)
 et le site est déployé sur Netlify : [OpenCompaniesData](https://opencompaniesdata.netlify.app/).
 
 ## Configuration du projet
