@@ -1,11 +1,6 @@
 <template>
   <div>
-    <h1>Enthic DataViz</h1>
-    <h2>Explorez les données financières des entreprises françaises</h2>
-    <h3 class="wip">en cours de développement...</h3>
-    <a href="https://opencompaniesdata.netlify.app/" rel="alternate">
-      <h3>retour à la version 1 (open companies data)</h3>
-    </a>
+    <Header />
     <SearchBar />
     <PresentationSection />
     <PartnersSection />
@@ -14,14 +9,16 @@
 </template>
 
 <script>
+import Header from "@/components/home/Header";
 import SearchBar from "@/components/search/SearchBar";
-import PresentationSection from "@/components/PresentationSection";
-import PartnersSection from "@/components/PartnersSection";
-import FooterSection from "@/components/FooterSection";
+import PresentationSection from "@/components/home/PresentationSection";
+import PartnersSection from "@/components/global/PartnersSection";
+import FooterSection from "@/components/global/FooterSection";
 
 export default {
   name: "Home",
   components: {
+    Header,
     SearchBar,
     PresentationSection,
     PartnersSection,
@@ -29,9 +26,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.wip {
-  color: burlywood;
-}
-</style>

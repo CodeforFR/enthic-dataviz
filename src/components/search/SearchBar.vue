@@ -41,6 +41,9 @@
 </template>
 
 <script>
+// TODO:
+// - clean up styles
+
 export default {};
 </script>
 

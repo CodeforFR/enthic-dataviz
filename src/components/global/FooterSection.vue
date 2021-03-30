@@ -8,7 +8,7 @@
   </footer>
 </template>
 <script>
-import SiteVersion from "@/components/SiteVersion";
+import SiteVersion from "@/components/global/SiteVersion";
 
 export default {
   components: {
