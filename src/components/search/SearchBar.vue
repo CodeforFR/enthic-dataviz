@@ -2,10 +2,6 @@
   <section id="top" class="hero primary-bg">
     <div class="background columns is-centered top-section">
       <div class="column is-8">
-        <br />
-        <h1 class="title is-1 has-text-centered">
-          Explorez les données financières des entreprises françaises
-        </h1>
         <form action="/recherche" method="GET" class="columns">
           <div class="column is-9">
             <div class="control has-icons-left is-large">
