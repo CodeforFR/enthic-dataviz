@@ -6,6 +6,7 @@
     <a href="https://opencompaniesdata.netlify.app/" rel="alternate">
       <h3>retour à la version 1 (open companies data)</h3>
     </a>
+    <SearchBar />
     <PresentationSection />
     <PartnersSection />
     <FooterSection />
@@ -13,13 +14,19 @@
 </template>
 
 <script>
+import SearchBar from "@/components/search/SearchBar";
 import PresentationSection from "@/components/PresentationSection";
 import PartnersSection from "@/components/PartnersSection";
 import FooterSection from "@/components/FooterSection";
 
 export default {
   name: "Home",
-  components: { PresentationSection, PartnersSection, FooterSection },
+  components: {
+    SearchBar,
+    PresentationSection,
+    PartnersSection,
+    FooterSection,
+  },
 };
 </script>
 
