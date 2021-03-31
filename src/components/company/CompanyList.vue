@@ -10,15 +10,17 @@
       </thead>
       <tr v-for="(company, index) in companies" :key="index">
         <td>
-          {{ company.denomination.value }}
+          <router-link :to="companyDetailRoute(company)">
+            {{ company.denomination.value }}
+          </router-link>
         </td>
         <td>
           {{ company.ape.value }}
         </td>
         <td>
           <router-link :to="companyDetailRoute(company)">
-            {{ company.siren.value }}</router-link
-          >
+            {{ company.siren.value }}
+          </router-link>
         </td>
       </tr>
     </table>
