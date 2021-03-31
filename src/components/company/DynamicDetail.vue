@@ -747,7 +747,6 @@ export default {
     FoldingArray,
   },
   props: ["company"],
-
   data() {
     return {
       contentFields: [
@@ -763,26 +762,6 @@ export default {
       isError: false,
     };
   },
-
-  // beforeMount: function () {
-  //   console.log("\n - - DynamicDetail / beforeMount ... ");
-  //   // this.contentFields = this.routeConfig.contents_fields;
-  // },
-
-  mounted() {
-    // hack to scroll top because vue-router scrollBehavior thing doesn't seem to work on Firefox on Linux at least
-    console.log(" - - DynamicDetail / mounted... ");
-    const int = setInterval(() => {
-      if (window.pageYOffset < 50) {
-        clearInterval(int);
-      } else {
-        window.scrollTo(0, 0);
-      }
-    }, 100);
-
-    console.log("OLD SEARCH siren--");
-  },
-
   computed: {
     // TEXT TRANSLATORS - NO DATA
     noData() {
@@ -1359,7 +1338,7 @@ export default {
     isPositionFilled(fieldBlock) {
       console.log("isPositionFilled", fieldBlock);
       // console.log("isPositionFilled /  fieldBlock :", fieldBlock)
-      return true; // this.listOfPositions.indexOf(fieldBlock) !== -1;
+      return false; // this.listOfPositions.indexOf(fieldBlock) !== -1;
     },
 
     matchProjectWithConfig(fieldBlock) {
