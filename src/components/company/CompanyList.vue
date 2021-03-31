@@ -16,7 +16,9 @@
           {{ company.ape.value }}
         </td>
         <td>
-          {{ company.siren.value }}
+          <router-link :to="companyDetailRoute(company)">
+            {{ company.siren.value }}</router-link
+          >
         </td>
       </tr>
     </table>
@@ -26,6 +28,12 @@
 <script>
 export default {
   props: ["companies"],
+  methods: {
+    companyDetailRoute: (company) => ({
+      name: "Detail",
+      params: { siren: company.siren.value },
+    }),
+  },
 };
 </script>
 
