@@ -1,12 +1,12 @@
 <template>
   <div>
-    <main v-if="!displayableItem">
+    <main v-if="!company">
       <div class="container" :style="`margin-right:auto; margin-left:auto`">
         <div class="pending">Recherche en cours...</div>
       </div>
     </main>
 
-    <main v-if="displayableItem">
+    <main v-if="company">
       <div class="container">
         <!-- BACK TO RESULTS -->
         <a class="back" @click="goBack">
@@ -22,7 +22,7 @@
           <div class="column">
             <div class="box has-background-warning">
               <h1 id="block-title" class="title is-3">
-                {{ displayableItem.Enthic.denomination.value }}
+                {{ company.denomination.value }}
               </h1>
               <ul>
                 <li
@@ -58,15 +58,14 @@
             </div>
           </div>
         </div>
-        <template v-if="displayableItem.Enthic.comptesDeResultats">
+        <template v-if="company.comptesDeResultats">
           <div class="box has-background-grey-lighter">
             <div class="tile is-ancestor is-vertical">
               <div class="tile is-parent">
                 <div class="tile"></div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in displayableItem.Enthic
-                    .comptesDeResultats"
+                  v-for="(oneYeardata, index) in company.comptesDeResultats"
                   :key="index"
                 >
                   Année {{ oneYeardata.year }}
@@ -76,8 +75,7 @@
                 <div class="tile">score de transparence (sur 100)</div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in displayableItem.Enthic
-                    .comptesDeResultats"
+                  v-for="(oneYeardata, index) in company.comptesDeResultats"
                   :key="index"
                 >
                   {{ oneYeardata.scores.transparencyScore }}
@@ -87,8 +85,7 @@
                 <div class="tile">score de partage (sur 100)</div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in displayableItem.Enthic
-                    .comptesDeResultats"
+                  v-for="(oneYeardata, index) in company.comptesDeResultats"
                   :key="index"
                 >
                   {{ oneYeardata.scores.sharingScore }}
@@ -100,8 +97,7 @@
                 </div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in displayableItem.Enthic
-                    .comptesDeResultats"
+                  v-for="(oneYeardata, index) in company.comptesDeResultats"
                   :key="index"
                 >
                   {{ oneYeardata.scores.realEconomyScore }}
@@ -123,15 +119,14 @@
                 <div class="tile is-6"></div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in displayableItem.Enthic
-                    .comptesDeResultats"
+                  v-for="(oneYeardata, index) in company.comptesDeResultats"
                   :key="index"
                 >
                   Année {{ oneYeardata.year }}
                 </div>
               </div>
               <FoldingArray
-                :rowItem="displayableItem.Enthic.comptesDeResultats"
+                :rowItem="company.comptesDeResultats"
               ></FoldingArray>
               <div class="tile is-parent">
                 <p class="tile" style="color: #194">
@@ -416,7 +411,7 @@
                 Autre représentation des comptes de résultat
               </h1>
               <ul
-                v-for="oneYeardata in displayableItem.Enthic.comptesDeResultats"
+                v-for="oneYeardata in company.comptesDeResultats"
                 v-bind:key="oneYeardata.year"
               >
                 <p>Année {{ oneYeardata.year }}</p>
@@ -753,7 +748,7 @@ export default {
   },
   props: ["company"],
 
-  data: () => {
+  data() {
     return {
       contentFields: [
         {
@@ -789,27 +784,6 @@ export default {
   },
 
   computed: {
-    displayableItem() {
-      return {
-        // Fake object !!
-        Enthic: this.company,
-        // {
-        //   denomination: {
-        //     value: "FAKE denomination",
-        //   },
-        //   declarations: [],
-        //   flatData: {
-        //     siren: "flatData siren" },
-        // },
-      };
-    },
-
-    // POSITIONS TO BE FILLED
-    // listOfPositions() {
-    //   // console.log("listOfPositions /  this.contentFields.map( c => c.position ) :", this.contentFields.map( c => c.position ))
-    //   return this.contentFields.map((c) => c.position);
-    // },
-
     // TEXT TRANSLATORS - NO DATA
     noData() {
       return "Pas de données";
@@ -820,7 +794,7 @@ export default {
         "P.Physique": new Map(),
         "P. Morale": new Map(),
       };
-      for (const representant of this.displayableItem.RncsImr.representants) {
+      for (const representant of this.company.RncsImr.representants) {
         // Personne physique
         if (
           ["P.Physique", "P. Physique"].includes(representant.type_representant)
@@ -865,8 +839,8 @@ export default {
       let result = {
         nodes: [
           {
-            id: this.displayableItem.CompanyNumber,
-            name: this.displayableItem.Name,
+            id: this.company.CompanyNumber,
+            name: this.company.Name,
           },
         ],
         links: [],
@@ -948,16 +922,14 @@ export default {
       });
       let displayableEnthicData = { flatData: {}, yearData: [] };
       console.log("B");
-      for (var property in this.displayableItem.Enthic) {
+      for (var property in this.company) {
         if (["siren", "ape", "postal_code", "town"].includes(property)) {
-          displayableEnthicData.flatData[
-            property
-          ] = this.displayableItem.Enthic[property];
+          displayableEnthicData.flatData[property] = this.company[property];
         }
       }
-      console.log("C", this.displayableItem);
-      for (let enthicDeclaration of this.displayableItem.Enthic.declarations) {
-        console.log('enthicDeclaration', enthicDeclaration)
+      console.log("C", this.company);
+      for (let enthicDeclaration of this.company.declarations) {
+        console.log("enthicDeclaration", enthicDeclaration);
         let yearDataItem = {
           year: enthicDeclaration.declaration.value,
           data: {},
@@ -983,7 +955,7 @@ export default {
 
     chartDetails() {
       // Find perfect unit for CA graphic (€, k€ or M€)
-      var beneficeItem = this.displayableItem.Enthic.comptesDeResultats[0];
+      var beneficeItem = this.company.comptesDeResultats[0];
       var factorCA = 1;
       var unitCA = "€";
       var CADeReference =
@@ -1040,15 +1012,11 @@ export default {
       var listOfUndisplayableData = [];
       var showResultatExploitation = true;
       var showTaxeVsSubvention = true;
-      for (
-        var i = 0;
-        i < this.displayableItem.Enthic.comptesDeResultats.length;
-        i++
-      ) {
-        xLabels.push(this.displayableItem.Enthic.comptesDeResultats[i].year);
+      for (var i = 0; i < this.company.comptesDeResultats.length; i++) {
+        xLabels.push(this.company.comptesDeResultats[i].year);
 
         // Local variables for code visibility
-        var rootItem = this.displayableItem.Enthic.comptesDeResultats[i];
+        var rootItem = this.company.comptesDeResultats[i];
         var resultExploit =
           rootItem.children.ResultatAvantImpot.children.ResultatExploitation;
         var produits = resultExploit.children.ProduitsExploitation;
@@ -1393,19 +1361,6 @@ export default {
       // console.log("isPositionFilled /  fieldBlock :", fieldBlock)
       return true; // this.listOfPositions.indexOf(fieldBlock) !== -1;
     },
-
-    // itemImage(fieldBlock){
-    //   let image = this.matchProjectWithConfig(fieldBlock)
-    //   if ( !image ){
-    //     let idFieldObject = this.contentFields.find( c => c.position === 'block_id' )
-    //     // let idField = idFieldObject.field
-    //     let idField = idFieldObject ? idFieldObject.field : 'sd_id'
-    //     let d = this.$store.getters['config/getRouteConfigDefaultDatasetImages']
-    //     let image_default = getDefaultImage(d, this.displayableItem, idField)
-    //     image = image_default
-    //   }
-    //   return image
-    // },
 
     matchProjectWithConfig(fieldBlock) {
       console.log("matchProjectWithConfig fieldBlock =", fieldBlock);
