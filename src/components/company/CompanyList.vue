@@ -1,21 +1,31 @@
 <template>
   <div>
-    <ul>
-      <li v-for="(company, index) in companies" :key="index">
-        <CompanyListItem :company="company" />
-      </li>
-    </ul>
+    <table v-if="companies">
+      <thead>
+        <tr>
+          <th>Dénomination</th>
+          <th>Secteur (code APE)</th>
+          <th>SIREN</th>
+        </tr>
+      </thead>
+      <tr v-for="(company, index) in companies" :key="index">
+        <td>
+          {{ company.denomination.value }}
+        </td>
+        <td>
+          {{ company.ape.value }}
+        </td>
+        <td>
+          {{ company.siren.value }}
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
 <script>
-import CompanyListItem from "@/components/company/CompanyListItem.vue";
-
 export default {
   props: ["companies"],
-  components: {
-    CompanyListItem,
-  },
 };
 </script>
 

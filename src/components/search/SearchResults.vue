@@ -10,13 +10,18 @@
     <div class="error-message" v-if="error">
       Erreur lors de la recherche '{{ text }}' : {{ error }}
     </div>
-    <h3 v-if="results">Résultats pour la recherche '{{ text }}' :</h3>
-    <CompanyList :companies="results" />
+    <div v-if="results">
+      <h3>Résultats pour la recherche '{{ text }}' :</h3>
+      <h4>{{ results.totalItems }} sociétés trouvées</h4>
+      <CompanyList :companies="results.member" />
+    </div>
   </div>
 </template>
 
 <script>
 import CompanyList from "@/components/company/CompanyList.vue";
+import SearchService from "@/services/search/SearchService";
+// import SearchService from "@/services/search/SearchService.fake";
 
 export default {
   components: {
@@ -30,23 +35,27 @@ export default {
     };
   },
   created() {
-    try {
-      this.loading = true;
-      // call the API
-      this.results = [
-        { denomination: { value: "google France" } },
-        { denomination: { value: "google Corporate" } },
-      ];
-      // throw new Error("impossible to get the result");
-    } catch (e) {
-      this.error = e;
-    } finally {
-      this.loading = false;
-    }
+    this.search(() => SearchService.searchCompaniesFromText(this.text));
   },
   computed: {
     text() {
       return this.$route.query.text;
+    },
+  },
+  methods: {
+    async search(fetchOperation) {
+      console.log("search");
+      try {
+        this.loading = true;
+        this.results = null;
+        const results = await fetchOperation();
+        this.error = null;
+        this.results = results;
+      } catch (e) {
+        this.error = e;
+      } finally {
+        this.loading = false;
+      }
     },
   },
 };
