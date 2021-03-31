@@ -20,8 +20,8 @@
 
 <script>
 import CompanyList from "@/components/company/CompanyList.vue";
-import SearchService from "@/services/search/SearchService";
-// import SearchService from "@/services/search/SearchService.fake";
+// import SearchService from "@/services/search/SearchService";
+import SearchService from "@/services/search/SearchService.fake";
 
 export default {
   components: {
