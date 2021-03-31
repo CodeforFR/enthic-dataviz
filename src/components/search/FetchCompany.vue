@@ -41,7 +41,9 @@ export default {
     };
   },
   created() {
-    this.search(() => CompaniesService.getCompaniesFromSiren(this.siren));
+    this.search(
+      async () => await CompaniesService.getCompaniesFromSiren(this.siren)
+    );
   },
   methods: {
     async search(fetchOperation) {
@@ -53,6 +55,7 @@ export default {
         this.error = null;
         this.results = results;
         this.noResult = results === null;
+        console.log("company", results);
       } catch (e) {
         this.error = e;
         this.noResult = false;
