@@ -1,5 +1,5 @@
 <template>
-  <div>Apex chart are disabled for now...</div>
+  <div class="warning">Apex chart are disabled for now...</div>
   <!-- <apexchart type="bar" height="350" :options="chartDetails.chartOptionsCA" :series="chartDetails.seriesCA"></apexchart> -->
   <!-- <apexchart type="bar" height="350" :options="chartDetails.chartOptionsMargin" :series="chartDetails.seriesMargin"></apexchart> -->
 </template>
@@ -8,4 +8,8 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+.warning {
+  color: orangered;
+}
+</style>
