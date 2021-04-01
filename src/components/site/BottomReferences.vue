@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import SiteVersion from "@/components/global/SiteVersion";
+import SiteVersion from "@/components/site/SiteVersion";
 
 export default {
   components: {

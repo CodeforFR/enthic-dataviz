@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import NavBar from "@/components/global/NavBar";
-import Footer from "@/components/global/Footer";
-import BottomReferences from "@/components/global/BottomReferences";
+import NavBar from "@/components/site/NavBar";
+import Footer from "@/components/site/Footer";
+import BottomReferences from "@/components/site/BottomReferences";
 
 export default {
   components: { NavBar, Footer, BottomReferences },
