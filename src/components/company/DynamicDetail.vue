@@ -33,21 +33,17 @@
               <h3>
                 Vérifiez les données de cette entreprise directement sur la
                 <a
-                  v-bind:href="
-                    'https://data.inpi.fr/entreprises/' +
-                    displayableEnthicData.flatData.siren.value
-                  "
+                  class="inline-link"
+                  :href="`https://data.inpi.fr/entreprises/${displayableEnthicData.flatData.siren.value}`"
                 >
-                  page dédiée de l'INPI</a
-                >
+                  page dédiée de l'INPI
+                </a>
               </h3>
               <h3>
                 Retrouvez d'autre données de cette entreprise sur le
                 <a
-                  v-bind:href="
-                    'https://entreprise.data.gouv.fr/sirene/' +
-                    displayableEnthicData.flatData.siren.value
-                  "
+                  class="inline-link"
+                  :href="`https://entreprise.data.gouv.fr/sirene/${displayableEnthicData.flatData.siren.value}`"
                 >
                   portail data.gouv.fr</a
                 >
@@ -1505,5 +1501,9 @@ path {
   fill: none;
   stroke: #76bf8a;
   stroke-width: 3px;
+}
+.inline-link {
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
 }
 </style>
