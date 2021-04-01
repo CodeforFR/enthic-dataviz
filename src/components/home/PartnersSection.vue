@@ -1,33 +1,48 @@
 <template>
   <section class="container">
-    <div class="partner-layout">
-      <h2 class="title">L'écosystème</h2>
-      <hr class="section-barre" />
-      <div class="logo-list">
-        <figure>
-          <a href="https://www.enthic.fr"
-            ><img
-              src="@/assets/enthic.png"
-              alt="logo Enthic"
-              class="logo-partner scaleDown"
-          /></a>
-        </figure>
-        <figure>
-          <a href="https://codefor.fr/"
-            ><img
-              src="https://fork.osp.cat/uploads/decidim/organization/logo/1/medium_logo-code-for-france-alpha-gray.png"
-              alt="logo Code For France"
-              class="logo-partner"
-          /></a>
-        </figure>
-        <figure>
-          <a href="https://wexample.com/"
-            ><img
-              src="https://wexample.com/wp-content/uploads/2019/08/header-site-web-v3.png"
-              alt="Logo Wexample"
-              class="logo-partner scaleUp"
-          /></a>
-        </figure>
+    <div class="columns is-centered">
+      <div class="column is-10 content">
+        <h2 class="has-text-centered">L'écosystème</h2>
+        <hr />
+        <div class="columns is-centered is-multiline">
+          <div class="column is-3 content is-horizontal-center">
+            <figure class="image img-mini is-inline-block">
+              <a href="https://www.enthic.fr"
+                ><img src="/favicon.ico" alt="logo Enthic" style="width: 40%"
+              /></a>
+            </figure>
+          </div>
+
+          <div class="column is-3 content is-horizontal-center">
+            <figure class="image img-mini is-inline-block">
+              <a href="https://codefor.fr/"
+                ><img
+                  src="https://fork.osp.cat/uploads/decidim/organization/logo/1/medium_logo-code-for-france-alpha-gray.png"
+                  alt="logo Code For France"
+              /></a>
+            </figure>
+          </div>
+
+          <div class="column is-3 content is-horizontal-center">
+            <figure class="image img-mini is-inline-block">
+              <a href="https://wexample.com/"
+                ><img
+                  src="https://wexample.com/wp-content/uploads/2019/08/header-site-web-v3.png"
+                  alt="Logo Wexample"
+              /></a>
+            </figure>
+          </div>
+
+          <div class="column is-3 content is-horizontal-center">
+            <figure class="image img-mini is-inline-block">
+              <a href="https://apiviz.io/"
+                ><img
+                  src="https://raw.githubusercontent.com/co-demos/apiviz-frontend/master/static/logos/logo_apiviz_15.png"
+                  alt="Logo ApiViz"
+              /></a>
+            </figure>
+          </div>
+        </div>
       </div>
     </div>
   </section>
