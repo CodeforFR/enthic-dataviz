@@ -1,0 +1,152 @@
+@import "../../../node_modules/bulma/sass/utilities/initial-variables.sass";
+@import "../../../node_modules/bulma/sass/utilities/functions.sass";
+
+@import "./rem.scss";
+@import "./apiviz-colors.scss";
+@import "./apiviz-misc.scss";
+
+// Nexa
+@font-face {
+  font-family: 'Nexa';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://github.com/co-demos/carto-sonum/blob/master/graphisme/Nexa/Nexa-Book.otf?raw=true") format("opentype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+// BonvenoCF
+@font-face {
+  font-family: 'BonvenoCF';
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://github.com/co-demos/carto-sonum/blob/master/graphisme/BonvenoCF/BonvenoCF-Light.otf?raw=true") format("opentype");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+$primary        : $apiviz-primary;
+$primary-invert : $apiviz-primary-invert;
+$info           : $apiviz-info;
+$link           : $apiviz-link;
+$success        : $apiviz-success;
+$warning        : $apiviz-warning;
+$danger         : $apiviz-danger;
+
+
+$light          : $apiviz-grey-light;
+$dark           : $apiviz-grey-dark;
+
+$text           : $apiviz-text-color;
+$body-size      : $apiviz-base-font-size;
+
+$size-1         : rem(40px);
+$size-2         : rem(28px);
+
+$link           : $grey;
+$link-hover     : $apiviz-primary;
+
+$disabled-opacity: 0.7 ;
+$button-disabled-opacity: $disabled-opacity ;
+
+$family-Nexa       : "Nexa" ;
+$family-BonvenoCF  : "BonvenoCF" ;
+
+$family-sans-serif  : "Nexa", sans-serif ;
+$family-primary     : $family-sans-serif ;
+$family-secondary   : $family-BonvenoCF ;
+
+
+
+// Import the rest of Bulma at the end
+@import "../../../node_modules/bulma/bulma.sass";
+@import "../../../node_modules/bulma-extensions/bulma-carousel/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-checkradio/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-accordion/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-slider/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-tooltip/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-divider/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-badge/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-calendar/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-steps/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-timeline/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-tagsinput/src/sass/index.sass";
+@import "../../../node_modules/bulma-extensions/bulma-ribbon/src/sass/index.sass";
+// @import "../../../node_modules/bulma-extensions/bulma-switch/src/sass/index.sass"; // not working
+// @import "../../../node_modules/bulma-extensions/src/sass/index.sass"; // not working with build
+
+// available bulma extensions
+/*
+  @import "@/bulma-accordion/src/sass/index.sass"
+  @import "@/bulma-badge/src/sass/index.sass"
+  @import "@/bulma-calendar/src/sass/index.sass"
+  @import "@/bulma-carousel/src/sass/index.sass"
+  @import "@/bulma-checkradio/src/sass/index.sass"
+  @import "@/bulma-divider/src/sass/index.sass"
+    @import "@/bulma-iconpicker/src/sass/index.sass"
+    @import "@/bulma-pageloader/src/sass/index.sass"
+    @import "@/bulma-pricingtable/src/sass/index.sass"
+    @import "@/bulma-quickview/src/sass/index.sass"
+    @import "@/bulma-ribbon/src/sass/index.sass"
+  @import "@/bulma-slider/src/sass/index.sass"
+  @import "@/bulma-steps/src/sass/index.sass"
+    @import "@/bulma-switch/src/sass/index.sass" ////// ERROR
+  @import "@/bulma-tagsinput/src/sass/index.sass"
+  @import "@/bulma-timeline/src/sass/index.sass"
+  @import "@/bulma-tooltip/src/sass/index.sass"
+*/
+
+// BULMA OVERRIDE
+
+// form .control{
+//   font-size: rem(14px);
+// }
+
+.is-checkradio[type="checkbox"] + label{
+  font-size: $apiviz-navbar-font-size
+}
+
+
+
+// Bulma default behaviour darkens the button, doesn't fit for CIS
+.button.is-primary:hover{
+  background-color:$primary-invert;
+  color:$primary;
+  border-color:$primary;
+}
+// Bulma default has a transparent background, causing the button
+// to become invisible on a purple background
+.button.is-primary.is-outlined{
+  background-color:$primary-invert;
+}
+.button.is-primary.is-outlined:hover{
+  border-color:$primary-invert;
+}
+
+
+
+
+
+
+// BULMA-CAROUSEL OVERRIDE
+.slider-navigation-previous, .slider-navigation-next {
+  top: unset !important;
+  margin: 1em;
+
+  &:hover {
+box-shadow : $apiviz-strong-shadow;
+  }
+
+}
+
+.slider:focus {
+  outline: none !important;
+}
+.slider-navigation-previous {
+  background-image: url('/static/icons/icon_chevron2_violet.svg');
+  left: calc( 50% + (-4em)); // To ensure correct spacing and alignment on various screen sizes; avoid buttons to overflow
+}
+.slider-navigation-next {
+  background-image: url('/static/icons/icon_chevron1_violet.svg');
+  right: calc( 50% + (-4em)); // Same as above
+}
+
+
