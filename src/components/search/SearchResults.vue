@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout-search">
     <img
       v-if="loading"
       class="loading-indicator"
@@ -62,6 +62,11 @@ export default {
 </script>
 
 <style scoped>
+.layout-search {
+  text-align: center;
+  margin: auto 0;
+}
+
 .loading-indicator {
   transform: scale(0.4);
 }

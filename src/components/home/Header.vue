@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout-header">
     <h1>Enthic DataViz</h1>
     <h2>Explorez les données financières des entreprises françaises</h2>
     <h3 class="wip">en cours de développement...</h3>
@@ -9,6 +9,10 @@
   </div>
 </template>
 <style scoped>
+.layout-header {
+  text-align: center;
+}
+
 .wip {
   color: burlywood;
 }

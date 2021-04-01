@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table v-if="companies">
+    <table v-if="companies" class="layout-search-table">
       <thead>
         <tr>
           <th>Dénomination</th>
@@ -39,4 +39,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.layout-search-table {
+  margin: 0 auto;
+}
+</style>
