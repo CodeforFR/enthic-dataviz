@@ -7,7 +7,7 @@
     </a>
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 .layout-header {
   text-align: center;
 }

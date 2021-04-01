@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .alt-link {
   font-size: 0.8rem;
   background: gray;

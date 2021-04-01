@@ -48,7 +48,7 @@
   </footer>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .enthic-name {
   text-decoration: underline;
   color: black;
