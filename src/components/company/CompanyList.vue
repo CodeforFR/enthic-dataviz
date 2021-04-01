@@ -10,7 +10,7 @@
       </thead>
       <tr v-for="(company, index) in companies" :key="index">
         <td>
-          <router-link :to="companyDetailRoute(company)">
+          <router-link class="result-link" :to="companyDetailRoute(company)">
             {{ company.denomination.value }}
           </router-link>
         </td>
@@ -18,7 +18,7 @@
           {{ company.ape.value }}
         </td>
         <td>
-          <router-link :to="companyDetailRoute(company)">
+          <router-link class="result-link" :to="companyDetailRoute(company)">
             {{ company.siren.value }}
           </router-link>
         </td>
@@ -39,8 +39,24 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../assets/css/apiviz-colors.scss";
+
 .layout-search-table {
   margin: 0 auto;
+}
+
+th,
+td {
+  padding: 0 0.5rem;
+}
+.result-link {
+  font-weight: 560;
+  text-decoration: underline;
+  color: $apiviz-grey-light;
+
+  &:hover {
+    color: $apiviz-success;
+  }
 }
 </style>
