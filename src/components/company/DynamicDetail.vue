@@ -138,7 +138,7 @@
               </div>
             </div>
           </div>
-          <div class="box has-background-info">
+          <div class="box has-background-info" v-if="chartDetails">
             <h1 id="block-title" class="title is-6">
               Répartition du chiffre d'affaire
             </h1>
@@ -163,7 +163,7 @@
               </li>
             </ul>
           </div>
-          <div class="box has-background-info">
+          <div class="box has-background-info" v-if="chartDetails">
             <h1 id="block-title" class="title is-6">
               Répartition de la marge de l'entreprise
             </h1>
@@ -934,6 +934,9 @@ export default {
     chartDetails() {
       // Find perfect unit for CA graphic (€, k€ or M€)
       var beneficeItem = this.company.comptesDeResultats[0];
+      if (!beneficeItem) {
+        return null;
+      }
       var factorCA = 1;
       var unitCA = "€";
       var CADeReference =
