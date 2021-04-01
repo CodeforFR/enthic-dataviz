@@ -51,7 +51,7 @@ td {
   padding: 0 0.5rem;
 }
 .result-link {
-  font-weight: 560;
+  font-weight: 600;
   text-decoration: underline;
   color: $apiviz-grey-light;
 

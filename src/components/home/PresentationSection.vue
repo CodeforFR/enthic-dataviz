@@ -25,7 +25,7 @@
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .logo-enthic {
   width: 100px;
 }

@@ -33,7 +33,7 @@
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .logo-list {
   display: flex;
   flex-direction: column;

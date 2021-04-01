@@ -9,7 +9,7 @@
 export default {};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .nav {
   text-align: center;
   padding: 10px;

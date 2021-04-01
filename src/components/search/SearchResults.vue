@@ -12,7 +12,12 @@
     </div>
     <div v-if="results">
       <h3>Résultats pour la recherche '{{ text }}' :</h3>
-      <h4>{{ results.totalItems }} sociétés trouvées</h4>
+      <h4 class="result-count">
+        <span class="result-count-number">
+          {{ results.totalItems }}
+        </span>
+        sociétés trouvées
+      </h4>
       <CompanyList :companies="results.member" />
     </div>
   </div>
@@ -61,7 +66,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "../../assets/css/apiviz-colors.scss";
+
 .layout-search {
   text-align: center;
   margin: auto 0;
@@ -71,6 +78,13 @@ export default {
   transform: scale(0.4);
 }
 .error-message {
-  color: red;
+  color: $apiviz-danger;
+}
+.result-count {
+  margin: 1rem;
+}
+.result-count-number {
+  font-weight: 600;
+  color: $apiviz-grey-light;
 }
 </style>

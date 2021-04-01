@@ -66,7 +66,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .layout-search {
   text-align: center;
   margin: auto 0;
