@@ -1,10 +1,6 @@
 <template>
   <div class="layout-company-details">
-    <DynamicDetail
-      routeConfig="INVALID routeConfig"
-      endPointConfig="INVALID endPointConfig"
-      :companyData="companyData"
-    />
+    <DynamicDetail v-if="companyData" :companyData="companyData" />
   </div>
 </template>
 
