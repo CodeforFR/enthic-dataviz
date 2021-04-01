@@ -25,8 +25,8 @@
 
 <script>
 import CompanyList from "@/components/company/CompanyList.vue";
-// import SearchRepository from "@/repositories/search/SearchRepository";
-import SearchRepository from "@/repositories/search/SearchRepository.fake";
+import SearchRepository from "@/repositories/search/SearchRepository";
+// import SearchRepository from "@/repositories/search/SearchRepository.fake";
 
 export default {
   components: {
@@ -75,7 +75,8 @@ h3 {
 .layout-search {
   text-align: center;
   margin-top: 1rem;
-  height: 30vh;
+  margin-bottom: 4rem;
+  min-height: 30vh;
 }
 
 .loading-indicator {

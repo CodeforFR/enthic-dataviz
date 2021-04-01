@@ -1,5 +1,5 @@
-// import CompaniesRepository from "@/repositories/company/CompanyRepository";
-import CompaniesRepository from "@/repositories/company/CompanyRepository.fake";
+import CompaniesRepository from "@/repositories/company/CompanyRepository";
+// import CompaniesRepository from "@/repositories/company/CompanyRepository.fake";
 import AccountingService from "@/services/accounting/AccountingService";
 
 const getCompanyDataBySiren = async (siren) => {
