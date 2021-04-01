@@ -1,11 +1,5 @@
 <template>
   <div>
-    <main v-if="!companyData">
-      <div class="container" :style="`margin-right:auto; margin-left:auto`">
-        <div class="pending">Recherche en cours...</div>
-      </div>
-    </main>
-
     <main v-if="companyData">
       <div class="container">
         <!-- BACK TO RESULTS -->
@@ -722,20 +716,16 @@
         <!-- end column right -->
       </div>
     </main>
-
-    <NotFoundError v-if="isError" />
   </div>
 </template>
 
 <script>
-import NotFoundError from "./NotFoundError.vue";
 import TreeView from "./TreeView.vue";
 import FoldingArray from "./FoldingArray.vue";
 
 export default {
   name: "DynamicDetail",
   components: {
-    NotFoundError,
     TreeItem: TreeView,
     FoldingArray,
   },
@@ -752,7 +742,6 @@ export default {
           position: "block_title",
         },
       ],
-      isError: false,
     };
   },
   computed: {

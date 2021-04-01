@@ -15,7 +15,7 @@
     <div v-if="results">
       <CompanyDetails :companyData="results" />
     </div>
-    <div v-if="noResult">
+    <div v-if="noResult" class="no-results">
       Il n'y a pas d'entreprise avec le SIREN '{{ siren }}' dans les données
       Enthic.
     </div>
@@ -54,6 +54,7 @@ export default {
         this.results = results;
         this.noResult = results === null;
       } catch (e) {
+        console.log("e", e);
         this.error = e;
         this.noResult = false;
       } finally {
@@ -75,5 +76,12 @@ export default {
 }
 .error-message {
   color: red;
+  font-size: 1.6rem;
+  margin: 3rem;
+}
+
+.no-results {
+  font-size: 1.6rem;
+  margin: 3rem;
 }
 </style>
