@@ -210,10 +210,7 @@
                 Autres données présentes dans la base Enthic, mais pas
                 valorisées ici :
               </h1>
-              <div
-                v-for="(year, index) in displayableEnthicData.yearData"
-                :key="index"
-              >
+              <div v-for="(year, index) in companyData.yearData" :key="index">
                 {{ year.year }}
                 <ul>
                   <li v-for="(data, index) in year.data" :key="index">
@@ -764,44 +761,6 @@ export default {
       return "Pas de données";
     },
 
-    displayableEnthicData() {
-      console.log("A");
-      var formatter = new Intl.NumberFormat(undefined, {
-        minimumFractionDigits: 0,
-      });
-      let displayableEnthicData = { yearData: [] };
-      // console.log("B");
-      // for (var property in this.companyData) {
-      //   if (["siren", "ape", "postal_code", "town"].includes(property)) {
-      //     displayableEnthicData.flatData[property] = this.companyData[property];
-      //   }
-      // }
-      console.log("C", this.companyData);
-      for (let enthicDeclaration of this.companyData.declarations) {
-        console.log("enthicDeclaration", enthicDeclaration);
-        let yearDataItem = {
-          year: enthicDeclaration.declaration.value,
-          data: {},
-        };
-        for (var yearProp in enthicDeclaration.financial_data_refined) {
-          yearDataItem.data[yearProp] = {
-            description:
-              enthicDeclaration.financial_data_refined[yearProp].description,
-            value: formatter.format(
-              enthicDeclaration.financial_data_refined[yearProp].value
-            ),
-          };
-        }
-        displayableEnthicData.yearData.push(yearDataItem);
-      }
-      console.log("D");
-      console.log(
-        " - - DynamicDetail / computed / displayableEnthicData :",
-        displayableEnthicData
-      );
-      return displayableEnthicData;
-    },
-
     chartDetails() {
       // Find perfect unit for CA graphic (€, k€ or M€)
       var beneficeItem = this.companyData.comptesDeResultats[0];
@@ -1178,11 +1137,11 @@ export default {
     lastEffectif() {
       console.log(
         " - - DynamicDetail / computed / lastEffectif :",
-        this.displayableEnthicData.yearData
+        this.companyData.yearData
       );
       var lastEffectif = "Nombre de salarié⋅es non déclaré :-(";
       var lastYear = 0;
-      for (var year of this.displayableEnthicData.yearData) {
+      for (var year of this.companyData.yearData) {
         if (year.year > lastYear && year.data.YP) {
           lastYear = year.year;
           lastEffectif =
