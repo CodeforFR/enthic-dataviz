@@ -21,7 +21,7 @@
               <h1 id="block-title" class="title is-3">
                 {{ company.denomination.value }}
               </h1>
-              <ul>
+              <ul class="list-company-props">
                 <li
                   v-for="(data, index) in displayableEnthicData.flatData"
                   :key="index"
@@ -147,7 +147,12 @@
               chiffre d'affaire de l'entreprise. La hauteur de chaque colonne
               correspond au chiffre d'affaire.
             </p>
-            <ApexChartWrapper />
+            <apexchart
+              type="bar"
+              height="350"
+              :options="chartDetails.chartOptionsCA"
+              :series="chartDetails.seriesCA"
+            ></apexchart>
             <p>Listes des problèmes pour afficher le graphique</p>
             <ul>
               <li
@@ -175,7 +180,12 @@
                 exceptionnel)
               </li>
             </ul>
-            <ApexChartWrapper />
+            <apexchart
+              type="bar"
+              height="350"
+              :options="chartDetails.chartOptionsMargin"
+              :series="chartDetails.seriesMargin"
+            ></apexchart>
 
             <p>
               Un montant positif signifie que l'entreprise a donné de l'argent à
@@ -728,14 +738,10 @@ import NotFoundError from "./NotFoundError.vue";
 import TreeView from "./TreeView.vue";
 import FoldingArray from "./FoldingArray.vue";
 
-// import VueApexCharts from 'vue-apexcharts'
-import ApexChartWrapper from "./ApexChartWrapper.vue";
-
 export default {
   name: "DynamicDetail",
   components: {
     NotFoundError,
-    ApexChartWrapper,
     TreeItem: TreeView,
     FoldingArray,
   },
@@ -1505,5 +1511,11 @@ path {
 .inline-link {
   padding-left: 0.3rem;
   padding-right: 0.3rem;
+}
+
+.list-company-props {
+  padding-left: 1em;
+  line-height: 1.5em;
+  list-style-type: circle;
 }
 </style>
