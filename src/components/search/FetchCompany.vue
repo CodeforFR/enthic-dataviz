@@ -13,7 +13,7 @@
       Erreur lors de la récuperation des donnés : {{ error }}
     </div>
     <div v-if="results">
-      <CompanyDetails :company="results" />
+      <CompanyDetails :companyData="results" />
     </div>
     <div v-if="noResult">
       Il n'y a pas d'entreprise avec le SIREN '{{ siren }}' dans les données

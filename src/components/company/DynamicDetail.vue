@@ -1,12 +1,12 @@
 <template>
   <div>
-    <main v-if="!company">
+    <main v-if="!companyData">
       <div class="container" :style="`margin-right:auto; margin-left:auto`">
         <div class="pending">Recherche en cours...</div>
       </div>
     </main>
 
-    <main v-if="company">
+    <main v-if="companyData">
       <div class="container">
         <!-- BACK TO RESULTS -->
         <a class="back" @click="goBack">
@@ -19,7 +19,7 @@
           <div class="column">
             <div class="box has-background-warning">
               <h1 id="block-title" class="title is-3">
-                {{ company.denomination.value }}
+                {{ companyData.denomination.value }}
               </h1>
               <ul class="list-company-props">
                 <li
@@ -51,14 +51,14 @@
             </div>
           </div>
         </div>
-        <template v-if="company.comptesDeResultats">
+        <template v-if="companyData.comptesDeResultats">
           <div class="box has-background-grey-lighter">
             <div class="tile is-ancestor is-vertical">
               <div class="tile is-parent">
                 <div class="tile"></div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in company.comptesDeResultats"
+                  v-for="(oneYeardata, index) in companyData.comptesDeResultats"
                   :key="index"
                 >
                   Année {{ oneYeardata.year }}
@@ -68,7 +68,7 @@
                 <div class="tile">score de transparence (sur 100)</div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in company.comptesDeResultats"
+                  v-for="(oneYeardata, index) in companyData.comptesDeResultats"
                   :key="index"
                 >
                   {{ oneYeardata.scores.transparencyScore }}
@@ -78,7 +78,7 @@
                 <div class="tile">score de partage (sur 100)</div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in company.comptesDeResultats"
+                  v-for="(oneYeardata, index) in companyData.comptesDeResultats"
                   :key="index"
                 >
                   {{ oneYeardata.scores.sharingScore }}
@@ -90,7 +90,7 @@
                 </div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in company.comptesDeResultats"
+                  v-for="(oneYeardata, index) in companyData.comptesDeResultats"
                   :key="index"
                 >
                   {{ oneYeardata.scores.realEconomyScore }}
@@ -112,14 +112,14 @@
                 <div class="tile is-6"></div>
                 <div
                   class="tile"
-                  v-for="(oneYeardata, index) in company.comptesDeResultats"
+                  v-for="(oneYeardata, index) in companyData.comptesDeResultats"
                   :key="index"
                 >
                   Année {{ oneYeardata.year }}
                 </div>
               </div>
               <FoldingArray
-                :rowItem="company.comptesDeResultats"
+                :rowItem="companyData.comptesDeResultats"
               ></FoldingArray>
               <div class="tile is-parent">
                 <p class="tile" style="color: #194">
@@ -414,7 +414,7 @@
                 Autre représentation des comptes de résultat
               </h1>
               <ul
-                v-for="oneYeardata in company.comptesDeResultats"
+                v-for="oneYeardata in companyData.comptesDeResultats"
                 v-bind:key="oneYeardata.year"
               >
                 <p>Année {{ oneYeardata.year }}</p>
@@ -745,7 +745,7 @@ export default {
     TreeItem: TreeView,
     FoldingArray,
   },
-  props: ["company"],
+  props: ["companyData"],
   data() {
     return {
       contentFields: [
@@ -772,7 +772,7 @@ export default {
         "P.Physique": new Map(),
         "P. Morale": new Map(),
       };
-      for (const representant of this.company.RncsImr.representants) {
+      for (const representant of this.companyData.RncsImr.representants) {
         // Personne physique
         if (
           ["P.Physique", "P. Physique"].includes(representant.type_representant)
@@ -817,8 +817,8 @@ export default {
       let result = {
         nodes: [
           {
-            id: this.company.CompanyNumber,
-            name: this.company.Name,
+            id: this.companyData.CompanyNumber,
+            name: this.companyData.Name,
           },
         ],
         links: [],
@@ -900,13 +900,13 @@ export default {
       });
       let displayableEnthicData = { flatData: {}, yearData: [] };
       console.log("B");
-      for (var property in this.company) {
+      for (var property in this.companyData) {
         if (["siren", "ape", "postal_code", "town"].includes(property)) {
-          displayableEnthicData.flatData[property] = this.company[property];
+          displayableEnthicData.flatData[property] = this.companyData[property];
         }
       }
-      console.log("C", this.company);
-      for (let enthicDeclaration of this.company.declarations) {
+      console.log("C", this.companyData);
+      for (let enthicDeclaration of this.companyData.declarations) {
         console.log("enthicDeclaration", enthicDeclaration);
         let yearDataItem = {
           year: enthicDeclaration.declaration.value,
@@ -933,7 +933,7 @@ export default {
 
     chartDetails() {
       // Find perfect unit for CA graphic (€, k€ or M€)
-      var beneficeItem = this.company.comptesDeResultats[0];
+      var beneficeItem = this.companyData.comptesDeResultats[0];
       if (!beneficeItem) {
         return null;
       }
@@ -993,11 +993,11 @@ export default {
       var listOfUndisplayableData = [];
       var showResultatExploitation = true;
       var showTaxeVsSubvention = true;
-      for (var i = 0; i < this.company.comptesDeResultats.length; i++) {
-        xLabels.push(this.company.comptesDeResultats[i].year);
+      for (var i = 0; i < this.companyData.comptesDeResultats.length; i++) {
+        xLabels.push(this.companyData.comptesDeResultats[i].year);
 
         // Local variables for code visibility
-        var rootItem = this.company.comptesDeResultats[i];
+        var rootItem = this.companyData.comptesDeResultats[i];
         var resultExploit =
           rootItem.children.ResultatAvantImpot.children.ResultatExploitation;
         var produits = resultExploit.children.ProduitsExploitation;
