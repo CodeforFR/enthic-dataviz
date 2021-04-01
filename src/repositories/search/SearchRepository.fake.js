@@ -68,7 +68,7 @@ const stubResponse = {
   ],
 };
 
-const returnStubIn2s = () => {
+const returnStubAfterFewSeconds = () => {
   return new Promise((resolve) =>
     setTimeout(() => {
       resolve(stubResponse);
@@ -77,6 +77,6 @@ const returnStubIn2s = () => {
 };
 
 export default {
-  searchCompaniesFromText: () => returnStubIn2s(),
-  searchCompaniesFromUrl: () => returnStubIn2s(),
+  searchCompaniesFromText: () => returnStubAfterFewSeconds(),
+  searchCompaniesFromUrl: () => returnStubAfterFewSeconds(),
 };

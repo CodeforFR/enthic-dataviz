@@ -578,14 +578,14 @@ const stubResponse = {
   ],
 };
 
-const returnStubIn2s = () => {
+const returnStubAfterFewSeconds = () => {
   return new Promise((resolve) =>
     setTimeout(() => {
       resolve(stubResponse);
-    }, 2000)
+    }, 200)
   );
 };
 
 export default {
-  getCompanyDataBySiren: () => returnStubIn2s(),
+  getCompanyDataBySiren: () => returnStubAfterFewSeconds(),
 };
