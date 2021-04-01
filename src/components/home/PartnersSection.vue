@@ -39,6 +39,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  figure {
+    margin: 1rem;
+  }
 }
 
 @media (min-width: 960px) {
