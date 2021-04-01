@@ -1,9 +1,9 @@
-import calculateComptesDeResultats from "./comptesDeResultats";
+import { calculateComptesDeResultats } from "./comptesDeResultats";
 
 /**
  * Add comptes De Résultats
  */
-const accountingTransformation1 = (companyData1) => {
+const addAccountingCalculations = (companyData1) => {
   console.log("companyData1", companyData1);
 
   const companyData2 = companyData1;
@@ -16,5 +16,5 @@ const accountingTransformation1 = (companyData1) => {
 };
 
 export default {
-  accountingTransformation1,
+  addAccountingCalculations,
 };

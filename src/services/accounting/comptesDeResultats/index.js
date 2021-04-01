@@ -18,4 +18,4 @@ const declarationToTree = (declaration) => {
   return yearTree;
 };
 
-export default calculateComptesDeResultats;
+export { calculateComptesDeResultats };
