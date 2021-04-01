@@ -11,7 +11,7 @@
       Erreur lors de la recherche '{{ text }}' : {{ error }}
     </div>
     <div v-if="results">
-      <h3>Résultats pour la recherche '{{ text }}' :</h3>
+      <h3>résultats pour la recherche '{{ text }}'</h3>
       <h4 class="result-count">
         <span class="result-count-number">
           {{ results.totalItems }}
@@ -69,9 +69,13 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/css/apiviz-colors.scss";
 
+h3 {
+  font-size: 130%;
+}
 .layout-search {
   text-align: center;
-  margin: auto 0;
+  margin-top: 1rem;
+  height: 30vh;
 }
 
 .loading-indicator {

@@ -15,7 +15,7 @@ h2 {
 
 .layout-header {
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 1rem;
 }
 
 .wip {
