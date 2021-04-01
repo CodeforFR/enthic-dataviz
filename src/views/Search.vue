@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h1>Recherche</h1>
-    <h3>en cours de développement de la version 2 ...</h3>
-    <a href="https://opencompaniesdata.netlify.app/" rel="alternate">
-      <h3>retour à la version 1 (open companies data)</h3>
+    <a
+      class="alt-link"
+      href="https://opencompaniesdata.netlify.app/"
+      rel="alternate"
+    >
+      <h3>retour open companies data version 1</h3>
     </a>
     <SearchResults :text="text" />
   </div>
@@ -24,4 +26,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.alt-link {
+  font-size: 0.8rem;
+  background: gray;
+}
+</style>

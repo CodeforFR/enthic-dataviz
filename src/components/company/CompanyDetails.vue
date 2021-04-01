@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div>
-      <DynamicDetail
-        routeConfig="INVALID routeConfig"
-        endPointConfig="INVALID endPointConfig"
-        :company="company"
-      />
-    </div>
+  <div class="layout-company-details">
+    <DynamicDetail
+      routeConfig="INVALID routeConfig"
+      endPointConfig="INVALID endPointConfig"
+      :company="company"
+    />
   </div>
 </template>
 
@@ -20,4 +18,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.layout-company-details {
+  text-align: left;
+}
+</style>

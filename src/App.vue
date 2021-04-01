@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Enthic DataViz</router-link> |
-      <router-link to="/recherche">Rechercher</router-link>
-    </div>
+    <NavBar />
     <router-view />
   </div>
 </template>
+
+<script>
+import NavBar from "@/components/global/NavBar";
+export default {
+  components: { NavBar },
+};
+</script>
 
 <style lang="scss">
 @import "@/assets/css/main.scss";
@@ -15,20 +19,6 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 10px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #2c3e5085;
 }
 
 hr {
