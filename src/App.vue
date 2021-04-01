@@ -35,6 +35,6 @@ hr {
 }
 
 .container {
-  margin: 0.5rem auto;
+  margin: 0 auto;
 }
 </style>

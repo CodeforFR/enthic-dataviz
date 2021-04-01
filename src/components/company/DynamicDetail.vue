@@ -1369,7 +1369,7 @@ export default {
 main {
   // background-color: $apiviz-blue-deep;
   background-color: $apiviz-grey-background;
-  margin-top: $apiviz-navbar-height;
+  margin-top: 0; // $apiviz-navbar-height;
   height: 100%;
   padding-bottom: 3em;
 }
