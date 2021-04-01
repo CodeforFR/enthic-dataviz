@@ -4,18 +4,17 @@ const getYearData = (companyData) => {
   });
   const yearData = [];
 
-  for (let enthicDeclaration of companyData.declarations) {
-    console.log("enthicDeclaration", enthicDeclaration);
+  for (let declaration of companyData.declarations) {
+    // console.log("declaration", declaration);
     let yearDataItem = {
-      year: enthicDeclaration.declaration.value,
+      year: declaration.declaration.value,
       data: {},
     };
-    for (var yearProp in enthicDeclaration.financial_data_refined) {
+    for (var yearProp in declaration.financial_data_refined) {
       yearDataItem.data[yearProp] = {
-        description:
-          enthicDeclaration.financial_data_refined[yearProp].description,
+        description: declaration.financial_data_refined[yearProp].description,
         value: formatter.format(
-          enthicDeclaration.financial_data_refined[yearProp].value
+          declaration.financial_data_refined[yearProp].value
         ),
       };
     }
