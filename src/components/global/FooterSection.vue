@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="layout">
     <div>
       Propulsé par
       <a href="https://www.enthic.fr/" class="enthic-name"> Enthic </a>
@@ -24,7 +24,8 @@ export default {
   font-weight: bold;
 }
 
-footer {
+.layout {
   padding: 1rem 0;
+  text-align: center;
 }
 </style>
