@@ -110,26 +110,26 @@ function computeSharingScore(yearTreeData) {
       if (sharedPart < 10 * resultatExploitation) {
         return sharedPart / resultatExploitation;
       } else {
-        console.log(
-          "computeSharingScore / cannot compute because participation + impot too high for resultatExploit :",
-          sharedPart / resultatExploitation
-        );
+        // console.log(
+        //   "computeSharingScore / cannot compute because participation + impot too high for resultatExploit :",
+        //   sharedPart / resultatExploitation
+        // );
       }
     } else {
       if (sharedPart < 10 * benefice) {
         return sharedPart / benefice;
       } else {
-        console.log(
-          "computeSharingScore / cannot compute because participation + impot too high for benef :",
-          sharedPart / benefice
-        );
+        // console.log(
+        //   "computeSharingScore / cannot compute because participation + impot too high for benef :",
+        //   sharedPart / benefice
+        // );
       }
     }
   } else {
-    console.log(
-      "computeSharingScore / cannot compute because participation + impot negative :",
-      sharedPart
-    );
+    // console.log(
+    //   "computeSharingScore / cannot compute because participation + impot negative :",
+    //   sharedPart
+    // );
   }
   return "N/A";
 }
@@ -158,6 +158,6 @@ function checkValueExist(item) {
   if (typeof item.data.value !== "undefined") {
     return true;
   } else {
-    console.log("checkValueExist / missing :", item);
+    // console.log("checkValueExist / missing :", item);
   }
 }

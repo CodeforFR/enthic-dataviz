@@ -10,7 +10,7 @@ data = {
 */
 export function checkTreeData(item) {
   if (!item.data) {
-    console.log(" from item :", item);
+    // console.log(" from item :", item);
     item.data = {
       code: item.codeLiasses.toString(),
       description: "non fourni",
@@ -111,39 +111,39 @@ export function checkTreeData(item) {
         Math.abs((computedSum - item.data.value) / item.data.value) > 100
       ) {
         item.data.status = "error";
-        console.log(
-          "checkTreeData detected very big error for ",
-          item.name,
-          " value doesn't match by several order of magnitude. Maybe units problem ?"
-        );
+        // console.log(
+        //   "checkTreeData detected very big error for ",
+        //   item.name,
+        //   " value doesn't match by several order of magnitude. Maybe units problem ?"
+        // );
       } else {
         item.data.status = "error";
-        console.log(
-          "checkTreeData detected error for ",
-          item.name,
-          " value doesn't match with ",
-          computedSumWithoutSign
-        );
+        // console.log(
+        //   "checkTreeData detected error for ",
+        //   item.name,
+        //   " value doesn't match with ",
+        //   computedSumWithoutSign
+        // );
       }
     }
     if (computedSum != item.data.value) {
-      console.log(
-        "computed sum : ",
-        computedSum,
-        "computed sum from computed : ",
-        computedSumFromComputed,
-        " and given sum : ",
-        item.data.value,
-        " diff en pour 100 : ",
-        ((computedSum - item.data.value) * 100) / item.data.value
-      );
+      // console.log(
+      //   "computed sum : ",
+      //   computedSum,
+      //   "computed sum from computed : ",
+      //   computedSumFromComputed,
+      //   " and given sum : ",
+      //   item.data.value,
+      //   " diff en pour 100 : ",
+      //   ((computedSum - item.data.value) * 100) / item.data.value
+      // );
       item.data.computedValue = computedSumFromComputed;
     }
   }
 }
 
 function setToZeroComputed(item) {
-  console.log("setToZeroComputed called for : ", item.name, item.data);
+  // console.log("setToZeroComputed called for : ", item.name, item.data);
   if (
     item.data.value == undefined &&
     (item.data.computedValue == undefined || item.data.computedValue == 0)
@@ -157,7 +157,7 @@ function setToZeroComputed(item) {
 }
 
 function flipSign(item) {
-  console.log("flipSign called for : ", item.name, item.data);
+  // console.log("flipSign called for : ", item.name, item.data);
   if (item.sign && item.sign == -1) {
     item.data.value = -item.data.value;
     item.data.status = "signFlipped";
