@@ -25,7 +25,6 @@
 <script>
 import CompanyDetails from "@/components/company/CompanyDetails.vue";
 import CompanyDataService from "@/services/companyData/CompanyDataService";
-// import CompanyDataService from "/services/companyData/CompanyDataService.fake";
 
 export default {
   props: ["siren"],
