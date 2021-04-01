@@ -20,8 +20,8 @@
 
 <script>
 import CompanyList from "@/components/company/CompanyList.vue";
-import SearchService from "@/services/search/SearchService";
-// import SearchService from "@/services/search/SearchService.fake";
+import SearchRepository from "@/repositories/search/SearchRepository";
+// import SearchRepository from "@/repositories/search/SearchRepository.fake";
 
 export default {
   components: {
@@ -35,7 +35,7 @@ export default {
     };
   },
   created() {
-    this.search(() => SearchService.searchCompaniesFromText(this.text));
+    this.search(() => SearchRepository.searchCompaniesFromText(this.text));
   },
   computed: {
     text() {
