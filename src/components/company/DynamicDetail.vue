@@ -22,10 +22,7 @@
                 {{ companyData.denomination.value }}
               </h1>
               <ul class="list-company-props">
-                <li
-                  v-for="(data, index) in displayableEnthicData.flatData"
-                  :key="index"
-                >
+                <li v-for="(data, index) in companyData.flatData" :key="index">
                   {{ data.description }} : {{ data.value }}
                 </li>
                 <li>{{ lastEffectif }}</li>
@@ -34,7 +31,7 @@
                 Vérifiez les données de cette entreprise directement sur la
                 <a
                   class="inline-link"
-                  :href="`https://data.inpi.fr/entreprises/${displayableEnthicData.flatData.siren.value}`"
+                  :href="`https://data.inpi.fr/entreprises/${companyData.flatData.siren.value}`"
                 >
                   page dédiée de l'INPI
                 </a>
@@ -43,7 +40,7 @@
                 Retrouvez d'autre données de cette entreprise sur le
                 <a
                   class="inline-link"
-                  :href="`https://entreprise.data.gouv.fr/sirene/${displayableEnthicData.flatData.siren.value}`"
+                  :href="`https://entreprise.data.gouv.fr/sirene/${companyData.flatData.siren.value}`"
                 >
                   portail data.gouv.fr</a
                 >
@@ -898,13 +895,13 @@ export default {
       var formatter = new Intl.NumberFormat(undefined, {
         minimumFractionDigits: 0,
       });
-      let displayableEnthicData = { flatData: {}, yearData: [] };
-      console.log("B");
-      for (var property in this.companyData) {
-        if (["siren", "ape", "postal_code", "town"].includes(property)) {
-          displayableEnthicData.flatData[property] = this.companyData[property];
-        }
-      }
+      let displayableEnthicData = { yearData: [] };
+      // console.log("B");
+      // for (var property in this.companyData) {
+      //   if (["siren", "ape", "postal_code", "town"].includes(property)) {
+      //     displayableEnthicData.flatData[property] = this.companyData[property];
+      //   }
+      // }
       console.log("C", this.companyData);
       for (let enthicDeclaration of this.companyData.declarations) {
         console.log("enthicDeclaration", enthicDeclaration);
