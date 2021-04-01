@@ -7,9 +7,7 @@ import FetchCompany from "@/components/search/FetchCompany.vue";
 
 export default {
   props: ["siren"],
-  components: {
-    FetchCompany,
-  },
+  components: { FetchCompany },
 };
 </script>
 
