@@ -10,7 +10,7 @@ const apiClient = axios.create({
 });
 
 export default {
-  async getCompaniesFromSiren(siren) {
+  async getCompanyDataBySiren(siren) {
     const url = `/company/siren/${siren}`;
     let results = null;
     try {

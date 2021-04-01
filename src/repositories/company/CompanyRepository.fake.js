@@ -587,5 +587,5 @@ const returnStubIn2s = () => {
 };
 
 export default {
-  getCompaniesFromSiren: () => returnStubIn2s(),
+  getCompanyDataBySiren: () => returnStubIn2s(),
 };

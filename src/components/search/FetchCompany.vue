@@ -24,8 +24,8 @@
 
 <script>
 import CompanyDetails from "@/components/company/CompanyDetails.vue";
-import CompaniesService from "@/services/companies/CompaniesService";
-// import CompaniesService from "@/services/companies/CompaniesService.fake";
+import CompanyDataService from "@/services/companyData/CompanyDataService";
+// import CompanyDataService from "/services/companyData/CompanyDataService.fake";
 
 export default {
   props: ["siren"],
@@ -42,7 +42,7 @@ export default {
   },
   created() {
     this.search(
-      async () => await CompaniesService.getCompaniesFromSiren(this.siren)
+      async () => await CompanyDataService.getCompanyDataBySiren(this.siren)
     );
   },
   methods: {
