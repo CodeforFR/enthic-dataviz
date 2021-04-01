@@ -1,7 +1,8 @@
 <template>
-  <div class="nav">
-    <router-link to="/">Enthic DataViz</router-link> |
-    <router-link to="/recherche">Rechercher</router-link>
+  <div class="navbar-layout">
+    <router-link to="/"
+      ><img src="@/assets/enthic.png" alt="Main logo" class="logo-enthic" />
+    </router-link>
   </div>
 </template>
 
@@ -22,5 +23,15 @@ export default {};
 
 .nav a.router-link-exact-active {
   color: #2c3e5085;
+}
+
+.logo-enthic {
+  margin: 0.3rem 0 0 1rem;
+  width: 60px;
+  // transform: scale(0.2);
+}
+
+.navbar-layout {
+  border-bottom: solid 1px darkgray;
 }
 </style>

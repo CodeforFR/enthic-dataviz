@@ -1,12 +1,5 @@
 <template>
   <div>
-    <a
-      class="alt-link"
-      href="https://opencompaniesdata.netlify.app/"
-      rel="alternate"
-    >
-      <h3>retour open companies data version 1</h3>
-    </a>
     <SearchResults :text="text" />
   </div>
 </template>
