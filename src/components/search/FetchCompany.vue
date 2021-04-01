@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     async search(fetchOperation) {
-      console.log("search");
       try {
         this.loading = true;
         this.results = null;
@@ -54,7 +53,6 @@ export default {
         this.error = null;
         this.results = results;
         this.noResult = results === null;
-        console.log("company", results);
       } catch (e) {
         this.error = e;
         this.noResult = false;

@@ -21,7 +21,6 @@ export default {
       }
       console.log("Error", error);
     }
-    console.log("results axios=", results);
     return results ? results.data : null;
   },
 };

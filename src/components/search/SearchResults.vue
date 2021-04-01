@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     async search(fetchOperation) {
-      console.log("search");
       try {
         this.loading = true;
         this.results = null;
