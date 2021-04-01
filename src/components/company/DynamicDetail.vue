@@ -13,10 +13,7 @@
           <span class="icon">
             <i class="fas fa-arrow-left"></i>
           </span>
-          <span>
-            <!-- {{ backToResults }} -->
-            {{ getDefaultText("back_to_results") }}
-          </span>
+          <span> Retour aux résultats de recherche </span>
         </a>
         <div class="columns">
           <div class="column">
