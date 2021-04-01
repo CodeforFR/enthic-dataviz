@@ -2,14 +2,20 @@
   <div class="layout-header">
     <h1>Enthic DataViz</h1>
     <h2>Explorez les données financières des entreprises françaises</h2>
-    <a href="https://opencompaniesdata.netlify.app/" rel="alternate">
-      <h3>retour à la version 1 (open companies data)</h3>
-    </a>
   </div>
 </template>
 <style lang="scss" scoped>
+h1 {
+  font-size: 300%;
+}
+
+h2 {
+  font-size: 200%;
+}
+
 .layout-header {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .wip {

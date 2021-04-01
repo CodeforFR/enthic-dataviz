@@ -4,6 +4,7 @@
       <figure class="image img-large is-inline-block">
         <img src="@/assets/enthic.png" alt="Main logo" class="logo-enthic" />
       </figure>
+
       <p>
         <a href="/">Enthic DataViz</a> est un outil de data visualisation de la
         base de données <a href="https://www.enthic.fr">Enthic</a> qui contient
@@ -28,10 +29,11 @@
 <style lang="scss" scoped>
 .logo-enthic {
   width: 100px;
+  margin-bottom: 1rem;
 }
 
 .content-section {
-  margin: 0 auto;
+  margin: 1rem auto;
   width: 90%;
   max-width: 800px;
   display: flex;
