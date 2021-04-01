@@ -868,7 +868,7 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@fortawesome/fontawesome-free@^5.15.3":
+"@fortawesome/fontawesome-free@5.15.3":
   version "5.15.3"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.3.tgz#c36ffa64a2a239bf948541a97b6ae8d729e09a9a"
   integrity sha512-rFnSUN/QOtnOAgqFRooTA3H57JLDm0QEG/jPdk+tLQNL/eWd+Aok8g3qCI+Q1xuDPWpGW/i9JySpJVsq8Q0s9w==
@@ -2187,6 +2187,26 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
+
+bulma-carousel@4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/bulma-carousel/-/bulma-carousel-4.0.4.tgz#96a2e93e6042d196cb064b9a1ea48ca4db4bb030"
+  integrity sha512-fxARvrPZ0meiVMkxI1ayK2RBd9YUNPc7FFnDpD+SgPnQdZgW+VAvHM8YdR3BJfnmR9lNWNqfKR/hk7Ko0GP2tA==
+
+bulma-checkradio@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/bulma-checkradio/-/bulma-checkradio-1.1.1.tgz#d94c4bce810089957102670b19cafb194bcb97be"
+  integrity sha512-6Wn2faBiFkctSeiaQkeU2MbjkQeuXsN4AthBDEKrHGGPl5wmV2GEj4iZCqzvw7Te7baaHdU8PbUgrmlD5D6oGA==
+
+bulma-extensions@6.2.7:
+  version "6.2.7"
+  resolved "https://registry.yarnpkg.com/bulma-extensions/-/bulma-extensions-6.2.7.tgz#f9f4d1478a7ac1606ae8db1e765aa45e3f12bb31"
+  integrity sha512-y3dHsxlCYkuxUg87KKN9H4InM8NCk8tdnrlxLkYak8sd2WQdllg3wP2Nv41lj8X46uPXX2ADP0MO65LlXPHt/Q==
+
+bulma@0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.5.tgz#35066c37f82c088b68f94450be758fc00a967208"
+  integrity sha512-cX98TIn0I6sKba/DhW0FBjtaDpxTelU166pf7ICXpCCuplHWyu6C9LYZmL5PEsnePIeJaiorsTEzzNk3Tsm1hw==
 
 bytes@3.0.0:
   version "3.0.0"
