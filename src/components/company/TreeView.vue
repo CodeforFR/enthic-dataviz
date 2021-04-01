@@ -90,7 +90,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 body {
   color: #444;
 }

@@ -1,5 +1,5 @@
 <template>
-  <section id="top" class="hero primary-bg">
+  <section id="top" class="container layout-search-bar hero primary-bg">
     <div class="background columns is-centered top-section">
       <div class="column is-8">
         <form action="/recherche" method="GET" class="columns">
@@ -36,11 +36,8 @@
   </section>
 </template>
 
-<script>
-// TODO:
-// - clean up styles
-
-export default {};
-</script>
-
-<style></style>
+<style lang="scss" scoped>
+.layout-search-bar {
+  margin: 1rem auto;
+}
+</style>
