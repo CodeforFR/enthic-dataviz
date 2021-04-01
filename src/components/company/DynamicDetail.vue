@@ -19,7 +19,7 @@
                 <li v-for="(data, index) in companyData.flatData" :key="index">
                   {{ data.description }} : {{ data.value }}
                 </li>
-                <li>{{ lastEffectif }}</li>
+                <li>{{ companyData.lastEffectif }}</li>
               </ul>
               <h3>
                 Vérifiez les données de cette entreprise directement sur la
@@ -1121,24 +1121,6 @@ export default {
         chartOptionsMargin: chartOptionsMargin,
         undisplayables: listOfUndisplayableData,
       };
-    },
-
-    lastEffectif() {
-      console.log(
-        " - - DynamicDetail / computed / lastEffectif :",
-        this.companyData.yearData
-      );
-      var lastEffectif = "Nombre de salarié⋅es non déclaré :-(";
-      var lastYear = 0;
-      for (var year of this.companyData.yearData) {
-        if (year.year > lastYear && year.data.YP) {
-          lastYear = year.year;
-          lastEffectif =
-            year.data.YP.value + " salarié⋅es en moyenne sur " + year.year;
-        }
-        console.log(" - - DynamicDetail / computed / lastEffectif :", year);
-      }
-      return lastEffectif;
     },
   },
 
