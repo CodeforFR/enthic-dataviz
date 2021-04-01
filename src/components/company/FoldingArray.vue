@@ -10,17 +10,17 @@
       </div>
       <div
         class="tile is-child tooltip"
-        v-for="oneYearItem in rowItem"
+        v-for="(oneYearItem, index) in rowItem"
         v-bind:style="{ color: '#' + getColor(oneYearItem) }"
+        :key="index"
       >
         <span class="tooltiptext">{{ getTooltip(oneYearItem) }}</span>
         {{ getDisplayedValue(oneYearItem) }}
       </div>
     </div>
-    <div v-bind:class="{ subtotal: hasChildren && isOpen }">
+    <div v-if="hasChildren" v-bind:class="{ subtotal: hasChildren && isOpen }">
       <FoldingRow
         v-show="isOpen"
-        v-if="hasChildren"
         v-for="(child, index) in getChildren"
         :key="index"
         :rowItem="child"
