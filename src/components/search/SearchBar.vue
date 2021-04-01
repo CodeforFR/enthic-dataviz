@@ -22,7 +22,10 @@
               style="padding-left: 0"
               type="submit"
             >
-              <span class="is-hidden-touch" style="padding-left: 0.7em">
+              <span
+                class="search-text is-hidden-touch"
+                style="padding-left: 0.7em"
+              >
                 Rechercher
               </span>
               <span class="icon is-hidden-desktop">
@@ -39,5 +42,8 @@
 <style lang="scss" scoped>
 .layout-search-bar {
   margin: 1rem auto;
+}
+.search-text {
+  font-size: 1.2rem;
 }
 </style>
