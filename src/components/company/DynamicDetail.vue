@@ -1016,6 +1016,7 @@ export default {
       ];
 
       let chartOptionsCA = {
+        colors: ['#fc2003', '#fc8403', '#e3d519', '#4db81f', '#c115d4', '#0345fc', '#eb33ff', '#ff3690'],
         chart: {
           type: "bar",
           height: 350,
