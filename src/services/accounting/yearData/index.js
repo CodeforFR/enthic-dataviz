@@ -5,7 +5,6 @@ const getYearData = (companyData) => {
   const yearData = [];
 
   for (let declaration of companyData.declarations) {
-    // console.log("declaration", declaration);
     let yearDataItem = {
       year: declaration.declaration.value,
       data: {},
