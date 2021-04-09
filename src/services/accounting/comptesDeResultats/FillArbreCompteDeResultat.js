@@ -25,7 +25,7 @@ function recursiveFillTree(treeToFill, rawData) {
         treeToFill.data = rawData[i][property];
         treeToFill.data.status = "official";
         treeToFill.data.code = property;
-        rawData.splice(i, 1);
+        rawData.splice(i, 1); // Remove used data from rawData
         break;
       }
     }

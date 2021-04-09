@@ -196,6 +196,9 @@
             </p>
           </div>
         </template>
+
+        <CompanyStatisticsDisplay :companyData="companyData" />
+
         <div class="columns">
           <!-- //// COLUMN LEFT //// -->
           <div class="column">
@@ -720,14 +723,16 @@
 </template>
 
 <script>
-import TreeView from "./TreeView.vue";
+import CompanyStatisticsDisplay from "./CompanyStatisticsDisplay.vue";
 import FoldingArray from "./FoldingArray.vue";
+import TreeView from "./TreeView.vue";
 
 export default {
   name: "DynamicDetail",
   components: {
-    TreeItem: TreeView,
+    CompanyStatisticsDisplay,
     FoldingArray,
+    TreeItem: TreeView,
   },
   props: ["companyData"],
   data() {
