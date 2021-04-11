@@ -47,7 +47,7 @@ export default {
     },
     getDescription() {
       let text = "";
-      if (this.rowItem[0].data.description == "non fourni") {
+      if (this.rowItem[0].data.description === "non fourni") {
         text += this.rowItem[0].name;
       } else {
         text += this.rowItem[0].data.description;
@@ -110,7 +110,7 @@ export default {
         } else {
           text += "non fourni";
         }
-      } else if (oneYearItem.data.status == "checked") {
+      } else if (oneYearItem.data.status === "checked") {
         text += "montant fourni et cohérent avec les autres montants présents";
         if (oneYearItem.data.computedValue && oneYearItem.data.value) {
           text +=
@@ -120,12 +120,12 @@ export default {
             ) +
             " de différence)";
         }
-      } else if (oneYearItem.data.status == "computed") {
+      } else if (oneYearItem.data.status === "computed") {
         text +=
           "montant non fourni mais déduit d'après les autres montants présents";
-      } else if (oneYearItem.data.status == "official") {
+      } else if (oneYearItem.data.status === "official") {
         text += "montant fourni et pas de vérification possible";
-      } else if (oneYearItem.data.status == "signFlipped") {
+      } else if (oneYearItem.data.status === "signFlipped") {
         text += "montant fourni avec, semble-t-il, une erreur de signe";
       } else {
         text +=
@@ -146,15 +146,15 @@ export default {
     },
     getColor(oneYearItem) {
       if (
-        oneYearItem.data.status == "official" ||
-        oneYearItem.data.status == "checked"
+        oneYearItem.data.status === "official" ||
+        oneYearItem.data.status === "checked"
       ) {
         return 194;
-      } else if (oneYearItem.data.status == "error") {
+      } else if (oneYearItem.data.status === "error") {
         return 941;
-      } else if (oneYearItem.data.status == "computed") {
+      } else if (oneYearItem.data.status === "computed") {
         return 419;
-      } else if (oneYearItem.data.status == "signFlipped") {
+      } else if (oneYearItem.data.status === "signFlipped") {
         return 499;
       }
       return 941;
