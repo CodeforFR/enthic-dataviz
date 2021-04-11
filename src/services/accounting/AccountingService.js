@@ -3,7 +3,7 @@ import { enhanceDeclaration } from "./financialDataRefined";
 import { getFlatData } from "./flatData";
 import { getYearData } from "./yearData";
 import { getLastEffectifFromYearData } from "./lastEffectif";
-import { getStatisticDataFake } from "./statistics"
+import { getStatisticDataFake } from "./statistics";
 
 /**
  * Add comptes De Résultats
@@ -22,7 +22,7 @@ const addAccountingCalculations = (companyData) => {
 
   const lastEffectif = getLastEffectifFromYearData(yearData);
 
-  const  statistics = getStatisticDataFake(companyData)
+  const statistics = getStatisticDataFake(companyData);
 
   return {
     ...companyData,
@@ -30,7 +30,7 @@ const addAccountingCalculations = (companyData) => {
     flatData,
     yearData,
     lastEffectif,
-    statistics
+    statistics,
   };
 };
 
