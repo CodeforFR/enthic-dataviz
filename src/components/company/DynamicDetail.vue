@@ -91,14 +91,19 @@
           </div>
           <div class="box has-background-grey-lighter">
             <h1 class="title is-6">
-              Voici les données des bilans comptables présentées de façon
-              arborescente :
+              Données des bilans comptables présentées de façon arborescente :
             </h1>
-            <p class="subtitle">
-              Cliquer sur une ligne permet de découvrir les détails de sa
-              composition
-            </p>
-            <div class="tile is-ancestor is-vertical">
+            <div
+              class="tile is-ancestor is-vertical"
+              v-if="
+                companyData.comptesDeResultats &&
+                companyData.comptesDeResultats.length > 0
+              "
+            >
+              <p class="subtitle">
+                Cliquer sur une ligne permet de découvrir les détails de sa
+                composition
+              </p>
               <div class="tile is-parent">
                 <div class="tile is-6"></div>
                 <div
@@ -128,6 +133,7 @@
                 </p>
               </div>
             </div>
+            <div v-else>Aucune données</div>
           </div>
           <div class="box has-background-info" v-if="chartDetails">
             <h1 id="block-title" class="title is-6">
@@ -1021,7 +1027,16 @@ export default {
       ];
 
       let chartOptionsCA = {
-        colors: ['#fc2003', '#fc8403', '#e3d519', '#4db81f', '#c115d4', '#0345fc', '#eb33ff', '#ff3690'],
+        colors: [
+          "#fc2003",
+          "#fc8403",
+          "#e3d519",
+          "#4db81f",
+          "#c115d4",
+          "#0345fc",
+          "#eb33ff",
+          "#ff3690",
+        ],
         chart: {
           type: "bar",
           height: 350,
