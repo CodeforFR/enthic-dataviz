@@ -4,7 +4,7 @@
       <div class="column is-10 content">
         <h2 class="has-text-centered">L'écosystème</h2>
         <hr />
-        <div class="columns is-centered is-multiline">
+        <div class="columns is-centered is-multiline is-vcentered">
           <div class="column is-3 content is-horizontal-center">
             <figure class="image img-mini is-inline-block">
               <a href="https://www.enthic.fr"
@@ -32,13 +32,21 @@
               /></a>
             </figure>
           </div>
-
           <div class="column is-3 content is-horizontal-center">
             <figure class="image img-mini is-inline-block">
-              <a href="https://apiviz.io/"
+              <a href="https://dataforgood.fr"
                 ><img
-                  src="https://raw.githubusercontent.com/co-demos/apiviz-frontend/master/static/logos/logo_apiviz_15.png"
-                  alt="Logo ApiViz"
+                  src="https://dataforgood.fr/img/logo-white.png"
+                  alt="logo Data For Good"
+              /></a>
+            </figure>
+          </div>
+          <div class="column is-3 content is-horizontal-center">
+            <figure class="image img-mini is-inline-block">
+              <a href="https://www.latitudes.cc/"
+                ><img
+                  src="//user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_1440,w_720,f_auto,q_auto/1127947/550388_944467.png"
+                  alt="logo Latitude - Exploring Tech for Good"
               /></a>
             </figure>
           </div>
