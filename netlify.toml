@@ -1,0 +1,5 @@
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover. No restriction here to share with the most
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
