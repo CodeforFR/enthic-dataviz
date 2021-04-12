@@ -16,19 +16,27 @@
       <thead>
         <tr>
           <th>Indicateur</th>
-          <th v-for="oneYear in companyData.declarations"
-              v-bind:key="oneYear.declaration.value">
-            {{ oneYear.declaration.value}}
+          <th
+            v-for="oneYear in companyData.declarations"
+            v-bind:key="oneYear.declaration.value"
+          >
+            {{ oneYear.declaration.value }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="statType in companyData.statistics" v-bind:key="statType.id">
           <td>{{ statType.description }}</td>
-          <td v-for="value in statType.values" class="statsValue" v-bind:style="{ color: getColor(value) }" v-bind:key="value.id">
+          <td
+            v-for="value in statType.values"
+            class="statsValue"
+            v-bind:style="{ color: getColor(value) }"
+            v-bind:key="value.id"
+          >
             <div class="tooltip">
               <span class="tooltiptext">{{ getTooltip(value) }}</span>
-              {{ value }} </div>
+              {{ value }}
+            </div>
           </td>
         </tr>
       </tbody>
@@ -43,13 +51,13 @@ export default {
   props: {
     companyData: Object,
   },
-  data: function() {
+  data() {
     return {
       apeSelected: null,
     };
   },
   computed: {
-    deciles: function() {
+    deciles() {
       var result = [];
       for (var i = 0; i < 10; i++) {
         result.push(Math.random());
@@ -57,7 +65,7 @@ export default {
       result.sort();
       return result;
     },
-    apeCodes: function() {
+    apeCodes() {
       var randomApe = Math.floor(Math.random() * 9999).toString();
       while (randomApe.length < 4) {
         randomApe = "0" + randomApe;
@@ -66,19 +74,30 @@ export default {
     },
   },
   methods: {
-    getDecile: function(value) {
+    getDecile(value) {
       for (var i = 0; i < 10; i++) {
         if (value < this.deciles[i]) {
           return i;
         }
       }
-      return 9
+      return 9;
     },
-    getColor: function(value) {
-      var colorsGradient = ['#f80d01', '#f73302', '#f66403', '#f49404', '#F2C307', '#f1f108', '#BEEF09', '#8FED0C', '#63EC0D', '#37EA0E'];
+    getColor(value) {
+      var colorsGradient = [
+        "#f80d01",
+        "#f73302",
+        "#f66403",
+        "#f49404",
+        "#F2C307",
+        "#f1f108",
+        "#BEEF09",
+        "#8FED0C",
+        "#63EC0D",
+        "#37EA0E",
+      ];
       return colorsGradient[this.getDecile(value)];
     },
-    getTooltip: function(value) {
+    getTooltip(value) {
       return "dans le décile " + this.getDecile(value);
     },
   },
