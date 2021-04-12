@@ -3,7 +3,7 @@
     <div class="columns is-centered">
       <div class="column is-10 content">
         <h2 class="has-text-centered">L'écosystème</h2>
-        <div class="columns is-centered is-multiline is-vcentered">
+        <div class="columns is-centered is-vcentered">
           <div class="column is-3 is-mobile-center">
             <figure class="image is-128">
               <a href="https://www.enthic.fr"
