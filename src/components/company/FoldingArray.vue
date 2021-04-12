@@ -46,7 +46,7 @@ export default {
     },
     getDescription() {
       let text = "";
-      if (this.rowItem[0].data.description == "non fourni") {
+      if (this.rowItem[0].data.description === "non fourni") {
         text += this.rowItem[0].name;
       } else {
         text += this.rowItem[0].data.description;
