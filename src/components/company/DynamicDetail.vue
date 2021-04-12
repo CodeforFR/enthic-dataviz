@@ -311,12 +311,12 @@
                     <a
                       v-if="matchProjectWithConfig('block_wesite')"
                       :class="
-                        matchProjectWithConfig('block_wesite') ==== noData
+                        matchProjectWithConfig('block_wesite') === noData
                           ? 'disabled has-text-grey'
                           : ''
                       "
                       :href="
-                        matchProjectWithConfig('block_wesite') ==== noData
+                        matchProjectWithConfig('block_wesite') === noData
                           ? ''
                           : matchProjectWithConfig('block_wesite')
                       "
@@ -335,12 +335,12 @@
                     <a
                       v-if="matchProjectWithConfig('block_contact')"
                       :class="
-                        matchProjectWithConfig('block_contact') ==== noData
+                        matchProjectWithConfig('block_contact') === noData
                           ? 'disabled has-text-grey'
                           : ''
                       "
                       :href="
-                        matchProjectWithConfig('block_wesite') ==== noData
+                        matchProjectWithConfig('block_wesite') === noData
                           ? ''
                           : 'mailto:' + matchProjectWithConfig('block_contact')
                       "
@@ -826,7 +826,7 @@ export default {
       for (let i = 0; i < this.companyData.comptesDeResultats.length; i++) {
         xLabels.push(this.companyData.comptesDeResultats[i].year);
 
-        // Local letiables for code visibility
+        // Local variables for code visibility
         let rootItem = this.companyData.comptesDeResultats[i];
         let resultExploit =
           rootItem.children.ResultatAvantImpot.children.ResultatExploitation;
@@ -849,7 +849,7 @@ export default {
           listOfUndisplayableData,
           xLabels[i]
         );
-        let letiationMarchandises = this.cleanUndefinedDataForGraphicalDisplay(
+        let variationMarchandises = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.VariationStockMarchandises,
           listOfUndisplayableData,
           xLabels[i]
@@ -859,7 +859,7 @@ export default {
           listOfUndisplayableData,
           xLabels[i]
         );
-        let letiationMatierePremiere = this.cleanUndefinedDataForGraphicalDisplay(
+        let variationMatierePremiere = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.VariationStockMatierePremiereEtAppro,
           listOfUndisplayableData,
           xLabels[i]
@@ -910,9 +910,9 @@ export default {
         // Compute other complexe data to display
         dataSeriesCA.marchandisesTotalAfficher.push(
           achatMarchandises +
-            letiationMarchandises +
+            variationMarchandises +
             achatMatierePremiere +
-            letiationMatierePremiere
+            variationMatierePremiere
         );
         dataSeriesCA.autreChargesMoinsAutresProduitsAffiches.push(
           produits.children.ChiffresAffairesNet.data.value -
@@ -1162,7 +1162,7 @@ export default {
     isPositionFilled(fieldBlock) {
       console.log("isPositionFilled", fieldBlock);
       // console.log("isPositionFilled /  fieldBlock :", fieldBlock)
-      return false; // this.listOfPositions.indexOf(fieldBlock) !=== -1;
+      return false; // this.listOfPositions.indexOf(fieldBlock) !== -1;
     },
 
     matchProjectWithConfig(fieldBlock) {
@@ -1176,7 +1176,7 @@ export default {
         (f) => f.position === fieldBlock
       );
       if (contentField) {
-        customBlockTitle === contentField.custom_title;
+        customBlockTitle = contentField.custom_title;
       }
       return customBlockTitle;
     },
