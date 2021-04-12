@@ -32,7 +32,6 @@
 <script>
 export default {
   name: "FoldingRow",
-  template: "#item-template",
   props: {
     rowItem: Array,
   },
