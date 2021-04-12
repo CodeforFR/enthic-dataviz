@@ -924,27 +924,26 @@ export default {
         );
 
         // Application du ratio pour l'affichage du graphe sur le CA
-        dataSeriesCA.salaires.push(
-          Math.round((1000 * salaire) / factorCA) / 1000
-        );
+        dataSeriesCA.salaires.push(this.computeRatio(salaire, factorCA));
         dataSeriesCA.cotisationSociale.push(
-          Math.round((1000 * cotisation) / factorCA) / 1000
+          this.computeRatio(cotisation, factorCA)
         );
-        dataSeriesCA.taxesMoinsSubventions[i] =
-          Math.round(
-            (1000 * dataSeriesCA.taxesMoinsSubventions[i]) / factorCA
-          ) / 1000;
-        dataSeriesCA.marchandisesTotalAfficher[i] =
-          Math.round(
-            (1000 * dataSeriesCA.marchandisesTotalAfficher[i]) / factorCA
-          ) / 1000;
-        dataSeriesCA.autreChargesMoinsAutresProduitsAffiches[i] =
-          Math.round(
-            (1000 * dataSeriesCA.autreChargesMoinsAutresProduitsAffiches[i]) /
-              factorCA
-          ) / 1000;
+        dataSeriesCA.taxesMoinsSubventions[i] = this.computeRatio(
+          dataSeriesCA.taxesMoinsSubventions[i],
+          factorCA
+        );
+        dataSeriesCA.marchandisesTotalAfficher[i] = this.computeRatio(
+          dataSeriesCA.marchandisesTotalAfficher[i],
+          factorCA
+        );
+        dataSeriesCA.autreChargesMoinsAutresProduitsAffiches[
+          i
+        ] = this.computeRatio(
+          dataSeriesCA.autreChargesMoinsAutresProduitsAffiches[i],
+          factorCA
+        );
         dataSeriesCA.resultatExploitation.push(
-          Math.round((1000 * resultatExploitation) / factorCA) / 1000
+          this.computeRatio(resultatExploitation, factorCA)
         );
 
         // Application du ratio pour l'affichage du graphe sur le résultat d'exploitation
@@ -1163,6 +1162,10 @@ export default {
       console.log("isPositionFilled", fieldBlock);
       // console.log("isPositionFilled /  fieldBlock :", fieldBlock)
       return false; // this.listOfPositions.indexOf(fieldBlock) !== -1;
+    },
+
+    computeRatio(value, factor) {
+      return Math.round((1000 * value) / factor) / 1000;
     },
 
     matchProjectWithConfig(fieldBlock) {
