@@ -27,14 +27,10 @@
       <div class="error-message" v-if="errorNext">
         Erreur lors de la recherche des pages suivante : {{ errorNext }}
       </div>
-      <div class="next-results-plachodler-item">
+      <div>
         {{ remainingResultsCount }} sociétés restantes - chargement en cours ...
       </div>
-      <div
-        v-for="i in Math.min(remainingResultsCount, 100)"
-        :key="i"
-        class="next-results-plachodler-item"
-      ></div>
+      <img class="loading-indicator" src="@/assets/loading.svg" alt="" />
     </div>
     <div v-else>
       <div class="end-results">
@@ -95,7 +91,6 @@ export default {
   },
   methods: {
     registerOnScroll() {
-      // console.log("register On Scroll");
       window.onscroll = () => {
         this.checkScrollPosition();
       };
@@ -123,7 +118,6 @@ export default {
         const shouldTriggerMoreData =
           endOfContentHeight < clientHeight * screenRatio;
         if (shouldTriggerMoreData) {
-          // console.log("trigger more data", endOfContentHeight - clientHeight);
           this.searchNext();
         }
       } catch (error) {
@@ -217,37 +211,6 @@ h4 {
   line-height: 2rem;
   color: rgb(124, 124, 124);
   font-style: italic;
-  margin: 0 0.5rem;
-}
-.next-results-plachodler-item {
-  height: 2rem;
-  margin: 0.5rem 0;
-  background-color: #ddd;
-  border-radius: 0.5rem;
-  // display: inline-block;
-  position: relative;
-  &::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: translateX(-100%);
-    background-image: linear-gradient(
-      70deg,
-      rgba(#fff, 0) 0,
-      rgba(#fff, 0.2) 20%,
-      rgba(#fff, 0.5) 60%,
-      rgba(#fff, 0)
-    );
-    animation: shimmer 3s infinite;
-    content: "";
-  }
-}
-
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
+  margin: 1rem;
 }
 </style>
