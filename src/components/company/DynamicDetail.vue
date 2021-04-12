@@ -311,12 +311,12 @@
                     <a
                       v-if="matchProjectWithConfig('block_wesite')"
                       :class="
-                        matchProjectWithConfig('block_wesite') === noData
+                        matchProjectWithConfig('block_wesite') ==== noData
                           ? 'disabled has-text-grey'
                           : ''
                       "
                       :href="
-                        matchProjectWithConfig('block_wesite') === noData
+                        matchProjectWithConfig('block_wesite') ==== noData
                           ? ''
                           : matchProjectWithConfig('block_wesite')
                       "
@@ -335,12 +335,12 @@
                     <a
                       v-if="matchProjectWithConfig('block_contact')"
                       :class="
-                        matchProjectWithConfig('block_contact') === noData
+                        matchProjectWithConfig('block_contact') ==== noData
                           ? 'disabled has-text-grey'
                           : ''
                       "
                       :href="
-                        matchProjectWithConfig('block_wesite') === noData
+                        matchProjectWithConfig('block_wesite') ==== noData
                           ? ''
                           : 'mailto:' + matchProjectWithConfig('block_contact')
                       "
@@ -1162,7 +1162,7 @@ export default {
     isPositionFilled(fieldBlock) {
       console.log("isPositionFilled", fieldBlock);
       // console.log("isPositionFilled /  fieldBlock :", fieldBlock)
-      return false; // this.listOfPositions.indexOf(fieldBlock) !== -1;
+      return false; // this.listOfPositions.indexOf(fieldBlock) !=== -1;
     },
 
     matchProjectWithConfig(fieldBlock) {
@@ -1173,10 +1173,10 @@ export default {
     getCustomBlockTitle(fieldBlock) {
       let customBlockTitle = undefined;
       const contentField = this.contentFields.find(
-        (f) => f.position == fieldBlock
+        (f) => f.position === fieldBlock
       );
       if (contentField) {
-        customBlockTitle = contentField.custom_title;
+        customBlockTitle === contentField.custom_title;
       }
       return customBlockTitle;
     },
