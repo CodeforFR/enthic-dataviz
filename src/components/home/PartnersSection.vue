@@ -21,7 +21,6 @@
               /></a>
             </figure>
           </div>
-
           <div class="column is-3 is-mobile-center">
             <figure class="image is-128">
               <a href="https://wexample.com/"
@@ -62,42 +61,11 @@
 .is-128 {
   width: 128px;
 }
-.logo-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
-  figure {
-    margin: 1rem;
-  }
-}
 @media (max-width: 960px) {
   .is-mobile-center {
     justify-content: center;
     display: flex;
   }
-}
-@media (min-width: 960px) {
-  .logo-list {
-    flex-direction: row;
-  }
-}
-.scaleDown {
-  scale: 0.65;
-}
-.scaleUp {
-  scale: 1.2;
-}
-
-.logo-partner {
-  width: 50vmin;
-  max-width: 150px;
-}
-.partner-layout {
-  padding-top: 2rem;
-  text-align: center;
-  margin: auto 0;
-  /* background: chocolate; */
 }
 </style>
