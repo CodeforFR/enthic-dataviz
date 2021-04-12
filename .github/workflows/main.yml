@@ -28,4 +28,4 @@ jobs:
         run: yarn
       - name: "Run linter"
         run: |
-          yarn lint
+          yarn lint --no-fix
