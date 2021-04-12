@@ -763,13 +763,13 @@ export default {
 
     chartDetails() {
       // Find perfect unit for CA graphic (€, k€ or M€)
-      var beneficeItem = this.companyData.comptesDeResultats[0];
+      let beneficeItem = this.companyData.comptesDeResultats[0];
       if (!beneficeItem) {
         return null;
       }
-      var factorCA = 1;
-      var unitCA = "€";
-      var CADeReference =
+      let factorCA = 1;
+      let unitCA = "€";
+      let CADeReference =
         beneficeItem.children.ResultatAvantImpot.children.ResultatExploitation
           .children.ProduitsExploitation.children.ChiffresAffairesNet.data
           .value;
@@ -784,7 +784,7 @@ export default {
       // Find perfect unit for margin graphic (€, k€ or M€)
       let factor = 1;
       let unitMargin = "€";
-      var resultatDeReference =
+      let resultatDeReference =
         beneficeItem.children.ResultatAvantImpot.children.ResultatExploitation
           .data.value;
       if (isNaN(resultatDeReference)) {
@@ -798,16 +798,16 @@ export default {
         unitMargin = "milliers d'€";
       }
 
-      var xLabels = [];
+      let xLabels = [];
 
-      var dataSeriesMargin = {
+      let dataSeriesMargin = {
         resultatExceptionnelEtFinancier: [],
         Participation: [],
         ImpotsSurLesSocietes: [],
         resultatPourProprietaire: [],
       };
 
-      var dataSeriesCA = {
+      let dataSeriesCA = {
         salaires: [],
         cotisationSociale: [],
         taxesMoinsSubventions: [],
@@ -815,66 +815,66 @@ export default {
         autreChargesMoinsAutresProduitsAffiches: [],
         resultatExploitation: [],
       };
-      var euroFormatter = new Intl.NumberFormat(undefined, {
+      let euroFormatter = new Intl.NumberFormat(undefined, {
         style: "currency",
         currency: "EUR",
         minimumFractionDigits: 0,
       });
-      var listOfUndisplayableData = [];
-      var showResultatExploitation = true;
-      var showTaxeVsSubvention = true;
-      for (var i = 0; i < this.companyData.comptesDeResultats.length; i++) {
+      let listOfUndisplayableData = [];
+      let showResultatExploitation = true;
+      let showTaxeVsSubvention = true;
+      for (let i = 0; i < this.companyData.comptesDeResultats.length; i++) {
         xLabels.push(this.companyData.comptesDeResultats[i].year);
 
-        // Local variables for code visibility
-        var rootItem = this.companyData.comptesDeResultats[i];
-        var resultExploit =
+        // Local letiables for code visibility
+        let rootItem = this.companyData.comptesDeResultats[i];
+        let resultExploit =
           rootItem.children.ResultatAvantImpot.children.ResultatExploitation;
-        var produits = resultExploit.children.ProduitsExploitation;
-        var charges = resultExploit.children.ChargesExploitation;
+        let produits = resultExploit.children.ProduitsExploitation;
+        let charges = resultExploit.children.ChargesExploitation;
 
         // Get all needed values for first graphic (about Chiffre d'Affaire)
-        var impotsEtAssimiles = this.cleanUndefinedDataForGraphicalDisplay(
+        let impotsEtAssimiles = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.ImpotTaxesEtVersementsAssimiles,
           listOfUndisplayableData,
           xLabels[i]
         );
-        var subventions = this.cleanUndefinedDataForGraphicalDisplay(
+        let subventions = this.cleanUndefinedDataForGraphicalDisplay(
           produits.children.SubventionsExploitation,
           listOfUndisplayableData,
           xLabels[i]
         );
-        var achatMarchandises = this.cleanUndefinedDataForGraphicalDisplay(
+        let achatMarchandises = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.AchatsDeMarchandises,
           listOfUndisplayableData,
           xLabels[i]
         );
-        var variationMarchandises = this.cleanUndefinedDataForGraphicalDisplay(
+        let letiationMarchandises = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.VariationStockMarchandises,
           listOfUndisplayableData,
           xLabels[i]
         );
-        var achatMatierePremiere = this.cleanUndefinedDataForGraphicalDisplay(
+        let achatMatierePremiere = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.AchatMatierePremiereAutreAppro,
           listOfUndisplayableData,
           xLabels[i]
         );
-        var variationMatierePremiere = this.cleanUndefinedDataForGraphicalDisplay(
+        let letiationMatierePremiere = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.VariationStockMatierePremiereEtAppro,
           listOfUndisplayableData,
           xLabels[i]
         );
-        var salaire = this.cleanUndefinedDataForGraphicalDisplay(
+        let salaire = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.SalairesEtTraitements,
           listOfUndisplayableData,
           xLabels[i]
         );
-        var cotisation = this.cleanUndefinedDataForGraphicalDisplay(
+        let cotisation = this.cleanUndefinedDataForGraphicalDisplay(
           charges.children.ChargesSociales,
           listOfUndisplayableData,
           xLabels[i]
         );
-        var resultatExploitation = this.cleanUndefinedDataForGraphicalDisplay(
+        let resultatExploitation = this.cleanUndefinedDataForGraphicalDisplay(
           resultExploit,
           listOfUndisplayableData,
           xLabels[i]
@@ -910,9 +910,9 @@ export default {
         // Compute other complexe data to display
         dataSeriesCA.marchandisesTotalAfficher.push(
           achatMarchandises +
-            variationMarchandises +
+            letiationMarchandises +
             achatMatierePremiere +
-            variationMatierePremiere
+            letiationMatierePremiere
         );
         dataSeriesCA.autreChargesMoinsAutresProduitsAffiches.push(
           produits.children.ChiffresAffairesNet.data.value -
