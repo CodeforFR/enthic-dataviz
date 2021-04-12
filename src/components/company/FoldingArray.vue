@@ -36,18 +36,18 @@ export default {
   props: {
     rowItem: Array,
   },
-  data: function () {
+  data() {
     return {
       isOpen: false,
     };
   },
   computed: {
-    hasChildren: function () {
+    hasChildren() {
       return this.rowItem[0].children;
     },
-    getDescription: function () {
-      var text = "";
-      if (this.rowItem[0].data.description == "non fourni") {
+    getDescription() {
+      let text = "";
+      if (this.rowItem[0].data.description === "non fourni") {
         text += this.rowItem[0].name;
       } else {
         text += this.rowItem[0].data.description;
@@ -56,11 +56,11 @@ export default {
       return text;
     },
 
-    getChildren: function () {
-      var children = {};
-      for (var property in this.rowItem[0].children) {
+    getChildren() {
+      let children = {};
+      for (let property in this.rowItem[0].children) {
         children[property] = [];
-        for (var yearItem of this.rowItem) {
+        for (let yearItem of this.rowItem) {
           children[property].push(yearItem.children[property]);
         }
       }
@@ -68,18 +68,18 @@ export default {
     },
   },
   methods: {
-    toggle: function () {
+    toggle() {
       if (this.hasChildren) {
         this.isOpen = !this.isOpen;
       }
     },
-    getDisplayedValue: function (oneYearItem) {
-      var formatter = new Intl.NumberFormat(undefined, {
+    getDisplayedValue(oneYearItem) {
+      let formatter = new Intl.NumberFormat(undefined, {
         style: "currency",
         currency: "EUR",
         minimumFractionDigits: 0,
       });
-      var text = "";
+      let text = "";
       if (isNaN(oneYearItem.data.value)) {
         if (oneYearItem.data.computedValue) {
           text +=
@@ -92,17 +92,17 @@ export default {
       }
       return text; //+ ' ' + JSON.stringify(oneYearItem.data, {}, 2)
     },
-    getTooltip: function (oneYearItem) {
-      var euroFormatter = new Intl.NumberFormat(undefined, {
+    getTooltip(oneYearItem) {
+      let euroFormatter = new Intl.NumberFormat(undefined, {
         style: "currency",
         currency: "EUR",
         minimumFractionDigits: 0,
       });
-      var percentFormatter = new Intl.NumberFormat(undefined, {
+      let percentFormatter = new Intl.NumberFormat(undefined, {
         style: "percent",
         maximumFractionDigits: 2,
       });
-      var text = "";
+      let text = "";
       if (isNaN(oneYearItem.data.value)) {
         if (oneYearItem.data.computedValue) {
           text +=
@@ -110,7 +110,7 @@ export default {
         } else {
           text += "non fourni";
         }
-      } else if (oneYearItem.data.status == "checked") {
+      } else if (oneYearItem.data.status === "checked") {
         text += "montant fourni et cohérent avec les autres montants présents";
         if (oneYearItem.data.computedValue && oneYearItem.data.value) {
           text +=
@@ -120,19 +120,19 @@ export default {
             ) +
             " de différence)";
         }
-      } else if (oneYearItem.data.status == "computed") {
+      } else if (oneYearItem.data.status === "computed") {
         text +=
           "montant non fourni mais déduit d'après les autres montants présents";
-      } else if (oneYearItem.data.status == "official") {
+      } else if (oneYearItem.data.status === "official") {
         text += "montant fourni et pas de vérification possible";
-      } else if (oneYearItem.data.status == "signFlipped") {
+      } else if (oneYearItem.data.status === "signFlipped") {
         text += "montant fourni avec, semble-t-il, une erreur de signe";
       } else {
         text +=
           "montant fourni mais incohérent avec les autres montants présents";
         if (oneYearItem.data.computedValue && oneYearItem.data.value) {
-          var diff = oneYearItem.data.value - oneYearItem.data.computedValue;
-          var percentDiff = Math.abs(diff / oneYearItem.data.value);
+          let diff = oneYearItem.data.value - oneYearItem.data.computedValue;
+          let percentDiff = Math.abs(diff / oneYearItem.data.value);
 
           text +=
             " (" +
@@ -144,17 +144,17 @@ export default {
       }
       return text; //+ JSON.stringify(oneYearItem.data, {}, 2)
     },
-    getColor: function (oneYearItem) {
+    getColor(oneYearItem) {
       if (
-        oneYearItem.data.status == "official" ||
-        oneYearItem.data.status == "checked"
+        oneYearItem.data.status === "official" ||
+        oneYearItem.data.status === "checked"
       ) {
         return 194;
-      } else if (oneYearItem.data.status == "error") {
+      } else if (oneYearItem.data.status === "error") {
         return 941;
-      } else if (oneYearItem.data.status == "computed") {
+      } else if (oneYearItem.data.status === "computed") {
         return 419;
-      } else if (oneYearItem.data.status == "signFlipped") {
+      } else if (oneYearItem.data.status === "signFlipped") {
         return 499;
       }
       return 941;
