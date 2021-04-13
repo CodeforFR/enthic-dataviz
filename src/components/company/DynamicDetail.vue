@@ -12,7 +12,7 @@
         <div class="columns">
           <div class="column">
             <div class="box has-background-warning">
-              <h1 id="block-title" class="title is-3">
+              <h1 class="title is-3">
                 {{ companyData.denomination.value }}
               </h1>
               <ul class="list-company-props">
@@ -89,8 +89,8 @@
               </div>
             </div>
           </div>
-          <div class="box has-background-grey-lighter">
-            <h1 class="title is-6">
+          <div class="box">
+            <h1 class="title is-6 has-background-grey-lighter">
               Données des bilans comptables présentées de façon arborescente :
             </h1>
             <div
@@ -136,20 +136,17 @@
             <div v-else>Aucune données</div>
           </div>
           <div class="box has-background-info" v-if="chartDetails">
-            <h1 id="block-title" class="title is-6">
-              Répartition du chiffre d'affaire
-            </h1>
+            <h1 class="title is-6">Répartition du chiffre d'affaire</h1>
             <p>
               Ce graphique montre la répartition des charges payées par le
               chiffre d'affaire de l'entreprise. La hauteur de chaque colonne
               correspond au chiffre d'affaire.
             </p>
-            <apexchart
-              type="bar"
-              height="350"
-              :options="chartDetails.chartOptionsCA"
-              :series="chartDetails.seriesCA"
-            ></apexchart>
+
+            <BarChart
+              :options="chartDetails.optionsChartCA"
+              :isStacked="true"
+            ></BarChart>
             <p>Listes des problèmes pour afficher le graphique</p>
             <ul>
               <li
@@ -161,9 +158,7 @@
             </ul>
           </div>
           <div class="box has-background-info" v-if="chartDetails">
-            <h1 id="block-title" class="title is-6">
-              Répartition de la marge de l'entreprise
-            </h1>
+            <h1 class="title is-6">Répartition de la marge de l'entreprise</h1>
             <p>
               Ce graphique montre comment la marge de l'entreprise sur son
               activité principale (résultat d'exploitation) est répartie entre :
@@ -177,12 +172,7 @@
                 exceptionnel)
               </li>
             </ul>
-            <apexchart
-              type="bar"
-              height="350"
-              :options="chartDetails.chartOptionsMargin"
-              :series="chartDetails.seriesMargin"
-            ></apexchart>
+            <BarChart :options="chartDetails.optionsChartMargin"></BarChart>
 
             <p>
               Un montant positif signifie que l'entreprise a donné de l'argent à
@@ -193,7 +183,7 @@
         </template>
         <template v-else>
           <div class="box has-background-info">
-            <h1 id="block-title" class="title is-6">
+            <h1 class="title is-6">
               Aucun compte disponible pour cette entreprise
             </h1>
             <p>
@@ -202,9 +192,7 @@
             </p>
           </div>
         </template>
-
         <CompanyStatisticsDisplay :companyData="companyData" />
-
         <div class="columns">
           <!-- //// COLUMN LEFT //// -->
           <div class="column">
@@ -732,10 +720,12 @@
 import CompanyStatisticsDisplay from "./CompanyStatisticsDisplay.vue";
 import FoldingArray from "./FoldingArray.vue";
 import TreeView from "./TreeView.vue";
+import BarChart from "@/components/charts/BarChart";
 
 export default {
   name: "DynamicDetail",
   components: {
+    BarChart,
     CompanyStatisticsDisplay,
     FoldingArray,
     TreeItem: TreeView,
@@ -903,7 +893,7 @@ export default {
           showResultatExploitation = false;
           resultatExploitation = 0;
           listOfUndisplayableData.push(
-            "résultat d'exploitation négatif en " + xLabels[i]
+            "Résultat d'exploitation négatif en " + xLabels[i]
           );
         }
 
@@ -955,12 +945,13 @@ export default {
           ) / 1000
         );
         dataSeriesMargin.ImpotsSurLesSocietes.push(
-          Math.round(
-            (1000 * rootItem.children.ImpotsSurLesBenefices.data.value) / factor
-          ) / 1000
+          this.computeRatio(
+            rootItem.children.ImpotsSurLesBenefices.data.value,
+            factor
+          )
         );
         dataSeriesMargin.resultatPourProprietaire.push(
-          Math.round((1000 * rootItem.data.value) / factor) / 1000
+          this.computeRatio(rootItem.data.value, factor)
         );
         dataSeriesMargin.resultatExceptionnelEtFinancier.push(
           Math.round(
@@ -1006,139 +997,45 @@ export default {
           data: dataSeriesCA.resultatExploitation,
         });
       }
-      let seriesMargin = [
-        {
-          name: "Participation",
-          data: dataSeriesMargin.Participation,
-        },
-        {
-          name: "Impôts",
-          data: dataSeriesMargin.ImpotsSurLesSocietes,
-        },
-        {
-          name: "Bénéfices",
-          data: dataSeriesMargin.resultatPourProprietaire,
-        },
-        {
-          name: "Résultats financier et exceptionnel",
-          data: dataSeriesMargin.resultatExceptionnelEtFinancier,
-        },
-      ];
 
-      let chartOptionsCA = {
-        colors: [
-          "#fc2003",
-          "#fc8403",
-          "#e3d519",
-          "#4db81f",
-          "#c115d4",
-          "#0345fc",
-          "#eb33ff",
-          "#ff3690",
-        ],
-        chart: {
-          type: "bar",
-          height: 350,
-          stacked: true,
-          toolbar: {
-            show: true,
-          },
-          zoom: {
-            enabled: true,
-          },
+      let optionsChartCA = {
+        series: seriesCA,
+        xAxis: {
+          data: xLabels,
         },
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              legend: {
-                position: "bottom",
-                offsetX: -5,
-                offsetY: 0,
-              },
-            },
-          },
-        ],
-        plotOptions: {
-          bar: {
-            horizontal: false,
-          },
-        },
-        xaxis: {
-          categories: xLabels,
-        },
-        yaxis: {
-          title: {
-            text: unitCA,
-            style: {
-              color: "#008FFB",
-            },
-          },
-        },
-        legend: {
-          position: "right",
-          offsetY: 40,
-        },
-        fill: {
-          opacity: 1,
+        yAxis: {
+          name: unitCA,
         },
       };
-
-      let chartOptionsMargin = {
-        chart: {
-          type: "bar",
-          height: 350,
-          stacked: false,
-          toolbar: {
-            show: true,
-          },
-          zoom: {
-            enabled: false,
-          },
-        },
-        responsive: [
+      let optionsChartMargin = {
+        series: [
           {
-            breakpoint: 480,
-            options: {
-              legend: {
-                position: "bottom",
-                offsetX: -10,
-                offsetY: 0,
-              },
-            },
+            name: "Participation",
+            data: dataSeriesMargin.Participation,
+          },
+          {
+            name: "Impôts",
+            data: dataSeriesMargin.ImpotsSurLesSocietes,
+          },
+          {
+            name: "Bénéfices",
+            data: dataSeriesMargin.resultatPourProprietaire,
+          },
+          {
+            name: "Résultats financier et exceptionnel",
+            data: dataSeriesMargin.resultatExceptionnelEtFinancier,
           },
         ],
-        plotOptions: {
-          bar: {
-            horizontal: false,
-          },
+        xAxis: {
+          data: xLabels,
         },
-        xaxis: {
-          categories: xLabels,
-        },
-        yaxis: {
-          title: {
-            text: unitMargin,
-            style: {
-              color: "#008FFB",
-            },
-          },
-        },
-        legend: {
-          position: "right",
-          offsetY: 40,
-        },
-        fill: {
-          opacity: 1,
+        yAxis: {
+          name: unitMargin,
         },
       };
-      console.log(" - - DynamicDetail / computed / chartDetails :", seriesCA);
-
       return {
-        seriesMargin: seriesMargin,
-        seriesCA: seriesCA,
-        chartOptionsCA: chartOptionsCA,
-        chartOptionsMargin: chartOptionsMargin,
+        optionsChartMargin: optionsChartMargin,
+        optionsChartCA: optionsChartCA,
         undisplayables: listOfUndisplayableData,
       };
     },
