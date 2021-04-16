@@ -16,6 +16,7 @@ import {
   LegendComponent,
   GridComponent,
 } from "echarts/components";
+
 import VChart, { THEME_KEY } from "vue-echarts";
 use([
   CanvasRenderer,
@@ -37,6 +38,9 @@ const DEFAULT_COLOR_SCHEMA = [
 
 const DEFAULT_CHART_OPTIONS = {
   color: DEFAULT_COLOR_SCHEMA,
+  grid: {
+    right: "20%",
+  },
   xAxis: {
     type: "category",
   },
@@ -46,9 +50,23 @@ const DEFAULT_CHART_OPTIONS = {
     nameGap: 50,
   },
   legend: {
-    orient: "horizontal",
-    bottom: "bottom",
-    marginTop: -50,
+    orient: "vertical",
+    width: "40%",
+    x: "right", //The legend can be set to the left, right and center
+    y: "top", //You can set the legend to be on top, bottom, and center
+    align: "left",
+    formatter: "{a|{name}}",
+    textStyle: {
+      color: "#1B1B4E",
+      padding: [0, 0, 0, 0],
+      rich: {
+        a: {
+          fontSize: 12,
+          padding: 5,
+          lineHeight: 14,
+        },
+      },
+    },
   },
   tooltip: {
     trigger: "axis",
@@ -90,16 +108,27 @@ export default {
     },
   },
   computed: {
-    chartOptions() {
-      /* We need to */
-      this.processingSeries();
-      return this.updateChartOptions();
+    chartOptions: {
+      get() {
+        this.processingSeries();
+        let options = this.updateChartOptions();
+        return options;
+      },
+      set() {
+        return this.updateChartOptions();
+      },
     },
   },
   data() {
     return {};
   },
   methods: {
+    breakLine(str) {
+      /* Break words if the string contains a certain length  */
+      const DEFAULT_LINE_BREAK = 20;
+      if (str.length < DEFAULT_LINE_BREAK) return str;
+      return str.replace(/(.{1,20})(?:\n|$| )/g, "$1\n");
+    },
     processingSeries() {
       /*
         Process the series before adding data to the chart
@@ -108,6 +137,7 @@ export default {
       this.options.series.forEach((serie) => {
         // adding a chart type
         if (!serie.type) serie.type = DEFAULT_SERIE_TYPE;
+        serie.name = this.breakLine(serie.name);
         // adding the stacking bar
         if (!serie.stack && this.isStacked) serie.stack = "one";
         // adding the label
@@ -128,5 +158,17 @@ export default {
 .chart__container {
   width: 900px;
   height: 500px;
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .chart__container {
+    width: 740px;
+    height: 350px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .chart__container {
+    width: 80vw;
+    height: 350px;
+  }
 }
 </style>
