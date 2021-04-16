@@ -1,5 +1,5 @@
 <template>
-  <div class="box has-background-info">
+  <div class="box">
     <p>
       Attention, les valeurs des indicateurs ci-dessous ont été générées pour
       donner un aperçu visuel, mais elles n'ont pas été calculées sur les
