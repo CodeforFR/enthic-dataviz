@@ -50,6 +50,7 @@
 <script>
 import CompanyList from "@/components/company/CompanyList.vue";
 import SearchRepository from "@/repositories/search/SearchRepository";
+
 // import SearchRepository from "@/repositories/search/SearchRepository.fake";
 
 export default {
