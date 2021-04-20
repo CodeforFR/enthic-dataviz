@@ -13,7 +13,7 @@
       </div>
       <div v-if="items">
         <h4>Résultats pour la recherche</h4>
-        <h3>{{ text }}</h3>
+        <h3 class="is-3">{{ text }}</h3>
         <h4 class="result-count">
           <span class="result-count-number">
             {{ totalItems }}

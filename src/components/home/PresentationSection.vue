@@ -1,10 +1,6 @@
 <template>
   <section class="container">
     <div class="content-section">
-      <figure class="image img-large is-inline-block">
-        <img src="@/assets/enthic.png" alt="Main logo" class="logo-enthic" />
-      </figure>
-
       <p>
         <a href="/">Enthic DataViz</a> est un outil de data visualisation de la
         base de données <a href="https://www.enthic.fr">Enthic</a> qui contient

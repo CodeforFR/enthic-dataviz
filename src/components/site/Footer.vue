@@ -5,7 +5,7 @@
         <!-- LOOP FOOTER BLOCKS -->
         <div class="column is-5 is-offset-1">
           <!-- BLOCK TITLE -->
-          <h3>Aller plus loin</h3>
+          <h3 class="is-3">Aller plus loin</h3>
           <ul>
             <li>
               <a href="https://www.enthic.fr/"
@@ -24,7 +24,7 @@
 
         <div class="column is-5 is-offset-1">
           <!-- BLOCK TITLE -->
-          <h3>Participer</h3>
+          <h3 class="is-3">Participer</h3>
           <ul>
             <li>
               <a href="https://chat.codefor.fr"
