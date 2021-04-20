@@ -9,7 +9,7 @@
                 type="search"
                 name="text"
                 class="input is-large"
-                placeholder="Cherchez une entreprise par son nom"
+                :placeholder="searchText"
               />
               <span class="icon is-left">
                 <i class="fas fa-search"></i>
@@ -38,7 +38,17 @@
     </div>
   </section>
 </template>
-
+<script>
+export default {
+  props: {
+    searchText: {
+      type: String,
+      default: "Cherchez une entreprise par son nom",
+      required: false,
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 .layout-search-bar {
   margin: 1rem auto;
