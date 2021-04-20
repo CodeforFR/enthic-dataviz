@@ -1211,11 +1211,6 @@ a.back {
   }
 }
 
-.content {
-  h2 {
-    font-weight: bold;
-  }
-}
 .pending {
   text-align: center;
   padding: 9em;

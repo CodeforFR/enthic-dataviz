@@ -6,9 +6,9 @@
       src="@/assets/loading.svg"
       alt=""
     />
-    <h3 v-if="loading">
+    <div v-if="loading">
       recherche en cours de l'entreprise avec le SIREN '{{ siren }}'
-    </h3>
+    </div>
     <div class="error-message" v-if="error">
       Erreur lors de la récuperation des donnés : {{ error }}
     </div>

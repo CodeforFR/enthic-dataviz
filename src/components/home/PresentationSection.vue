@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <div class="content-section">
+    <div class="content-section m-2">
       <p>
         <a href="/">Enthic DataViz</a> est un outil de data visualisation de la
         base de données <a href="https://www.enthic.fr">Enthic</a> qui contient
