@@ -12,16 +12,16 @@
         <div class="columns">
           <div class="column">
             <div class="box has-background-warning">
-              <h1 class="title is-3">
+              <h3 class="title is-3">
                 {{ companyData.denomination.value }}
-              </h1>
+              </h3>
               <ul class="list-company-props">
                 <li v-for="(data, index) in companyData.flatData" :key="index">
                   {{ data.description }} : {{ data.value }}
                 </li>
                 <li>{{ companyData.lastEffectif }}</li>
               </ul>
-              <h3>
+              <h3 class="is-3">
                 Vérifiez les données de cette entreprise directement sur la
                 <a
                   class="inline-link"
@@ -30,7 +30,7 @@
                   page dédiée de l'INPI
                 </a>
               </h3>
-              <h3>
+              <h3 class="is-3">
                 Retrouvez d'autre données de cette entreprise sur le
                 <a
                   class="inline-link"
@@ -90,9 +90,9 @@
             </div>
           </div>
           <div class="box">
-            <h1 class="title is-6 has-background-grey-lighter">
+            <h3 class="title is-3 has-background-grey-lighter">
               Données des bilans comptables présentées de façon arborescente :
-            </h1>
+            </h3>
             <div
               class="tile is-ancestor is-vertical"
               v-if="
@@ -136,7 +136,7 @@
             <div v-else>Aucune données</div>
           </div>
           <div class="box has-background-info" v-if="chartDetails">
-            <h1 class="title is-6">Répartition du chiffre d'affaire</h1>
+            <h3 class="title is-3">Répartition du chiffre d'affaire</h3>
             <p>
               Ce graphique montre la répartition des charges payées par le
               chiffre d'affaire de l'entreprise. La hauteur de chaque colonne
@@ -158,7 +158,7 @@
             </ul>
           </div>
           <div class="box has-background-info" v-if="chartDetails">
-            <h1 class="title is-6">Répartition de la marge de l'entreprise</h1>
+            <h3 class="title is-3">Répartition de la marge de l'entreprise</h3>
             <p>
               Ce graphique montre comment la marge de l'entreprise sur son
               activité principale (résultat d'exploitation) est répartie entre :
@@ -183,9 +183,9 @@
         </template>
         <template v-else>
           <div class="box has-background-info">
-            <h1 class="title is-6">
+            <h3 class="title is-6">
               Aucun compte disponible pour cette entreprise
-            </h1>
+            </h3>
             <p>
               Peut-être pour des raisons de confidentialité ou de problème dans
               la saisie
@@ -197,10 +197,10 @@
           <!-- //// COLUMN LEFT //// -->
           <div class="column">
             <div class="box">
-              <h1 class="tile title is-6">
+              <h3 class="tile title is-3">
                 Autres données présentes dans la base Enthic, mais pas
                 valorisées ici :
-              </h1>
+              </h3>
               <div v-for="(year, index) in companyData.yearData" :key="index">
                 {{ year.year }}
                 <ul>
@@ -395,9 +395,9 @@
           <!-- //// COLUMN RIGHT //// -->
           <div class="column">
             <div class="box has-background-grey-lighter">
-              <h1 class="tile title is-6">
+              <h3 class="tile title is-3">
                 Autre représentation des comptes de résultat
-              </h1>
+              </h3>
               <ul
                 v-for="oneYeardata in companyData.comptesDeResultats"
                 v-bind:key="oneYeardata.year"
@@ -1165,10 +1165,6 @@ a.back {
 }
 
 .description {
-  h1 {
-    font-weight: bold;
-  }
-
   p {
     margin-bottom: 1em;
   }
