@@ -25,7 +25,7 @@
             <figure class="image is-128">
               <a href="https://wexample.com/"
                 ><img
-                  src="https://wexample.com/wp-content/uploads/2019/08/header-site-web-v3.png"
+                  src="https://wexample.com/wp-content/uploads/2021/04/cropped-favicon-wexample-ss-bk-192x192.png"
                   alt="Logo Wexample"
                   class="is-128"
               /></a>
