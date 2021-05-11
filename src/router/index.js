@@ -23,6 +23,10 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "search" */ "../views/Detail.vue"),
   },
+  {
+    path: "/*",
+    redirect: "/"
+  },
 ];
 
 const router = new VueRouter({
