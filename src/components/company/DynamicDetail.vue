@@ -197,7 +197,7 @@
           <!-- //// COLUMN LEFT //// -->
           <div class="column">
             <div class="box">
-              <h3 class="tile title is-3">
+              <h3 class="tile title">
                 Autres données présentes dans la base Enthic, mais pas
                 valorisées ici :
               </h3>
@@ -395,7 +395,7 @@
           <!-- //// COLUMN RIGHT //// -->
           <div class="column">
             <div class="box has-background-grey-lighter">
-              <h3 class="tile title is-3">
+              <h3 class="tile title">
                 Autre représentation des comptes de résultat
               </h3>
               <ul
