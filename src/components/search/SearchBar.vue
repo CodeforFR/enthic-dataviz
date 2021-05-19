@@ -9,7 +9,8 @@
                 type="search"
                 name="text"
                 class="input is-large"
-                :placeholder="searchText"
+                :value="searchText"
+                placeholder="Cherchez une entreprise par son nom"
               />
               <span class="icon is-left">
                 <i class="fas fa-search"></i>
@@ -43,7 +44,6 @@ export default {
   props: {
     searchText: {
       type: String,
-      default: "Cherchez une entreprise par son nom",
       required: false,
     },
   },
