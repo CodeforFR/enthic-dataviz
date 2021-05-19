@@ -288,57 +288,6 @@
                   </span>
                   {{ matchProjectWithConfig("block_post_abstract_3") }}
                 </p>
-
-                <!-- BLOCK WEBSITE / CONTACT -->
-                <div class="columns">
-                  <!-- BLOCK WEBSITE -->
-                  <div
-                    id="block-main-website"
-                    class="column is-5 is-offset-1 link"
-                  >
-                    <a
-                      v-if="matchProjectWithConfig('block_wesite')"
-                      :class="
-                        matchProjectWithConfig('block_wesite') === noData
-                          ? 'disabled has-text-grey'
-                          : ''
-                      "
-                      :href="
-                        matchProjectWithConfig('block_wesite') === noData
-                          ? ''
-                          : matchProjectWithConfig('block_wesite')
-                      "
-                      target="_blank"
-                    >
-                      <!-- {{ seeWebsite }} -->
-                      {{ getDefaultText("see_website") }}
-                    </a>
-                  </div>
-
-                  <!-- BLOCK CONTACT -->
-                  <div
-                    id="block-main-contact"
-                    class="column is-5 is-offset-1 link"
-                  >
-                    <a
-                      v-if="matchProjectWithConfig('block_contact')"
-                      :class="
-                        matchProjectWithConfig('block_contact') === noData
-                          ? 'disabled has-text-grey'
-                          : ''
-                      "
-                      :href="
-                        matchProjectWithConfig('block_wesite') === noData
-                          ? ''
-                          : 'mailto:' + matchProjectWithConfig('block_contact')
-                      "
-                      target="_blank"
-                    >
-                      <!-- {{ seeContact }} -->
-                      {{ getDefaultText("see_contact") }}
-                    </a>
-                  </div>
-                </div>
               </div>
 
               <!-- BLOCK SERVICES -->
