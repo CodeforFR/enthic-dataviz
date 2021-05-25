@@ -8,7 +8,7 @@
           v-bind:key="oneYeardata.year"
         >
           <p>Année {{ oneYeardata.year }}</p>
-          <TreeItem class="item" :item="oneYeardata"></TreeItem>
+          <TreeView class="item" :item="oneYeardata" />
         </ul>
 
         <!-- BLOCK SOURCE -->
@@ -330,7 +330,7 @@ export default {
     };
   },
   components: {
-    TreeItem: TreeView,
+    TreeView,
   },
   methods: {
     isPositionFilled(fieldBlock) {
