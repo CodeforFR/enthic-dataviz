@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="columns" v-if="companyData.comptesDeResultats">
+    <div class="columns" v-if="comptesDeResultats">
       <div class="column">
         <div class="box has-background-info" v-if="chartDetails">
           <h3 class="title is-3">Répartition du chiffre d'affaire</h3>
@@ -27,7 +27,7 @@
       </div>
     </div>
 
-    <div class="columns" v-if="companyData.comptesDeResultats">
+    <div class="columns" v-if="comptesDeResultats">
       <div class="column">
         <div class="box has-background-info" v-if="chartDetails">
           <h3 class="title is-3">Répartition du profit de l'entreprise</h3>
@@ -353,15 +353,13 @@ function calculateChartDetails(comptesDeResultats) {
 }
 export default {
   name: "CompanyCompteDeResultats",
-  props: ["companyData"],
+  props: ["comptesDeResultats"],
   components: {
     BarChart,
   },
   computed: {
     chartDetails() {
-      const chartData = calculateChartDetails(
-        this.companyData.comptesDeResultats
-      );
+      const chartData = calculateChartDetails(this.comptesDeResultats);
       return chartData;
     },
   },
