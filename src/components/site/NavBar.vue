@@ -13,7 +13,6 @@ export default {};
 <style lang="scss" scoped>
 .navbar-layout {
   border-bottom: solid 1px darkgray;
-  margin-bottom: 25px;
 }
 
 .nav {

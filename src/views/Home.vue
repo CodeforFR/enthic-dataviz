@@ -1,6 +1,6 @@
 <template>
-  <div class="container is-fullheight">
-    <div class="columns p-20 m-b-30 has-background-white-bis is-vcentered">
+  <div class="container is-fullheight m-t-30">
+    <div class="columns p-20 m-b-10 has-background-white-bis is-vcentered">
       <div class="column is-half">
         <div class="content">
           <h1 class="is-size-1">Enthic Dataviz</h1>
@@ -30,7 +30,7 @@
         <img src="../assets/img/home/home.svg" alt="" />
       </div>
     </div>
-    <div class="columns p-20 m-b-50 m-t-50 has-background-white-bis">
+    <div class="columns p-20 m-b-30 m-t-30 has-background-white-bis">
       <div class="column">
         <div class="content has-text-centered">
           <h2 class="is-size-2">Démarrer !</h2>
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="columns p-20 m-b-30 has-background-white-bis">
+    <div class="columns p-20 m-b-30 m-t-30 has-background-white-bis">
       <div class="column is-12">
         <div class="content">
           <h2 class="is-size-2">A qui ça sert ?</h2>
@@ -67,7 +67,7 @@
         </div>
       </div>
     </div>
-    <div class="columns p-20 m-b-30 has-background-white-bis">
+    <div class="columns p-20 m-b-30 m-t-30 has-background-white-bis">
       <div class="column is-12">
         <div class="content">
           <h2 class="is-size-2">Qui sommes-nous ?</h2>
