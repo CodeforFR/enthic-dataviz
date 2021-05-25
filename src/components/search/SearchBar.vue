@@ -1,5 +1,5 @@
 <template>
-  <section id="top" class="container layout-search-bar hero primary-bg">
+  <section id="top" class="container search-text primary-bg m-t-30">
     <div class="background columns is-centered top-section">
       <div class="column is-8">
         <form action="/recherche" method="GET" class="columns">
@@ -23,10 +23,7 @@
               style="padding-left: 0"
               type="submit"
             >
-              <span
-                class="search-text is-hidden-touch"
-                style="padding-left: 0.7em"
-              >
+              <span class="is-hidden-touch" style="padding-left: 0.7em">
                 Rechercher
               </span>
               <span class="icon is-hidden-desktop">
@@ -49,11 +46,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.layout-search-bar {
-  margin: 1rem auto;
-}
-.search-text {
-  font-size: 1.2rem;
-}
-</style>
