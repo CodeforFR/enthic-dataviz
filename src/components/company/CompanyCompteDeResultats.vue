@@ -1,6 +1,6 @@
 <template>
-  <div v-if="companyData.comptesDeResultats">
-    <div class="columns">
+  <div>
+    <div class="columns" v-if="companyData.comptesDeResultats">
       <div class="column">
         <div class="box has-background-grey-lighter">
           <h3 class="title is-3">Scoring (version beta)</h3>
@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <div class="columns">
+    <div class="columns" v-if="companyData.comptesDeResultats">
       <div class="column">
         <div class="box has-background-info" v-if="chartDetails">
           <h3 class="title is-3">Répartition du chiffre d'affaire</h3>
@@ -79,7 +79,7 @@
       </div>
     </div>
 
-    <div class="columns">
+    <div class="columns" v-if="companyData.comptesDeResultats">
       <div class="column">
         <div class="box has-background-info" v-if="chartDetails">
           <h3 class="title is-3">Répartition du profit de l'entreprise</h3>
@@ -107,7 +107,7 @@
       </div>
     </div>
 
-    <div class="columns">
+    <div class="columns" v-if="companyData.comptesDeResultats">
       <div class="column">
         <div class="box">
           <h3 class="title is-3">Comptes de résultat détaillés</h3>
@@ -154,15 +154,6 @@
           <div v-else>Aucune données</div>
         </div>
       </div>
-    </div>
-  </div>
-  <div v-else>
-    <div class="box has-background-info">
-      <h3 class="title is-6">Aucun compte disponible pour cette entreprise</h3>
-      <p>
-        Peut-être pour des raisons de confidentialité ou de problème dans la
-        saisie
-      </p>
     </div>
   </div>
 </template>

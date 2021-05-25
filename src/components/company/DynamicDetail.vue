@@ -10,6 +10,7 @@
           <span> Retour aux résultats de recherche </span>
         </a>
         <CompanyIdentity :companyData="companyData" />
+        <CompanyNoCompteDeResultats :companyData="companyData" />
         <CompanyCompteDeResultats :companyData="companyData" />
         <CompanySocialImpactComparison :companyData="companyData" />
         <CompanyOtherData :companyData="companyData" />
@@ -23,6 +24,7 @@
 </template>
 
 <script>
+import CompanyNoCompteDeResultats from "./CompanyNoCompteDeResultats.vue";
 import CompanySocialImpactComparison from "./CompanySocialImpactComparison.vue";
 import CompanyCompteDeResultats from "./CompanyCompteDeResultats.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
@@ -33,6 +35,7 @@ export default {
   name: "DynamicDetail",
   components: {
     CompanyIdentity,
+    CompanyNoCompteDeResultats,
     CompanySocialImpactComparison,
     CompanyOtherData,
     CompanyCompteDeResultats,

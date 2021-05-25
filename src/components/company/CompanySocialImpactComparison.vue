@@ -56,7 +56,7 @@
 
 <script>
 export default {
-  name: "CompanyStatisticsDisplay",
+  name: "CompanySocialImpactComparison",
   template: "#item-template",
   props: {
     companyData: Object,
