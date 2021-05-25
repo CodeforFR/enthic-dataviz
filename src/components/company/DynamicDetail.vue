@@ -162,7 +162,10 @@
         </template>
         <CompanyStatisticsDisplay :companyData="companyData" />
         <CompanyOtherData :companyData="companyData" />
-        <AutreCompteDeResultats v-if="false" :companyData="companyData" />
+        <CompanyOtherCompteDeResultats
+          v-if="false"
+          :companyData="companyData"
+        />
       </div>
     </main>
   </div>
@@ -172,7 +175,7 @@
 import CompanyStatisticsDisplay from "./CompanyStatisticsDisplay.vue";
 import FoldingArray from "./FoldingArray.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
-import AutreCompteDeResultats from "./AutreCompteDeResultats.vue";
+import CompanyOtherCompteDeResultats from "./CompanyOtherCompteDeResultats.vue";
 
 import BarChart from "@/components/charts/BarChart";
 import CompanyIdentity from "./CompanyIdentity.vue";
@@ -185,7 +188,7 @@ export default {
     CompanyStatisticsDisplay,
     FoldingArray,
     CompanyOtherData,
-    AutreCompteDeResultats,
+    CompanyOtherCompteDeResultats,
   },
   props: ["companyData"],
   data() {

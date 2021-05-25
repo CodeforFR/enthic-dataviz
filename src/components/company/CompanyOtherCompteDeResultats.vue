@@ -313,7 +313,7 @@
 import TreeView from "./TreeView.vue";
 
 export default {
-  name: "AutreCompteDeResultats",
+  name: "CompanyOtherCompteDeResultats",
   props: ["companyData"],
   components: {
     TreeItem: TreeView,
