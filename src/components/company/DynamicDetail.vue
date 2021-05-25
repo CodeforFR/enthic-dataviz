@@ -11,7 +11,7 @@
         </a>
         <CompanyIdentity :companyData="companyData" />
         <CompanyCompteDeResultats :companyData="companyData" />
-        <CompanyStatisticsDisplay :companyData="companyData" />
+        <CompanySocialImpactComparison :companyData="companyData" />
         <CompanyOtherData :companyData="companyData" />
         <CompanyOtherCompteDeResultats
           v-if="false"
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import CompanyStatisticsDisplay from "./CompanyStatisticsDisplay.vue";
+import CompanySocialImpactComparison from "./CompanySocialImpactComparison.vue";
 import CompanyCompteDeResultats from "./CompanyCompteDeResultats.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
 import CompanyOtherCompteDeResultats from "./CompanyOtherCompteDeResultats.vue";
@@ -33,7 +33,7 @@ export default {
   name: "DynamicDetail",
   components: {
     CompanyIdentity,
-    CompanyStatisticsDisplay,
+    CompanySocialImpactComparison,
     CompanyOtherData,
     CompanyCompteDeResultats,
     CompanyOtherCompteDeResultats,
