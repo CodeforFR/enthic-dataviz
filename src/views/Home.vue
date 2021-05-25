@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="columns p-10 m-b-30 has-background-white-bis">
-      <div class="column is-6">
+      <div class="column is-12">
         <div class="content">
           <h2 class="is-size-2">A qui ça sert ?</h2>
           <h3 class="is-size-3">Les bénéficiaires du projet sont :</h3>
@@ -70,7 +70,7 @@
       </div>
     </div>
     <div class="columns p-10 m-b-30 has-background-white-bis">
-      <div class="column">
+      <div class="column is-12">
         <div class="content">
           <h2 class="is-size-2">Qui sommes-nous ?</h2>
           <p>
