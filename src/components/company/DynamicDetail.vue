@@ -13,6 +13,7 @@
         <CompanyNoCompteDeResultats :companyData="companyData" />
         <CompanyCompteDeResultats :companyData="companyData" />
         <CompanySocialImpactComparison :companyData="companyData" />
+        <CompanyScoring :companyData="companyData" />
         <CompanyOtherData :companyData="companyData" />
         <CompanyOtherCompteDeResultats
           v-if="false"
@@ -25,6 +26,7 @@
 
 <script>
 import CompanyNoCompteDeResultats from "./CompanyNoCompteDeResultats.vue";
+import CompanyScoring from "./CompanyScoring.vue";
 import CompanySocialImpactComparison from "./CompanySocialImpactComparison.vue";
 import CompanyCompteDeResultats from "./CompanyCompteDeResultats.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
@@ -35,6 +37,7 @@ export default {
   name: "DynamicDetail",
   components: {
     CompanyIdentity,
+    CompanyScoring,
     CompanyNoCompteDeResultats,
     CompanySocialImpactComparison,
     CompanyOtherData,
