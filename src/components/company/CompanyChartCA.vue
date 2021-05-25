@@ -14,8 +14,8 @@
       :options="chartDetails.optionsChartCA"
       :isStacked="true"
     ></BarChart>
-    <p>Listes des problèmes pour afficher le graphique</p>
-    <ul>
+    <p class="title is-6">Listes des problèmes pour afficher le graphique</p>
+    <ul class="m-30">
       <li
         v-for="(item, index) in chartDetails.listOfUndisplayableData"
         :key="index"
