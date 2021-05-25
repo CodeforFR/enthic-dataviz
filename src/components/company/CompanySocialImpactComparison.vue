@@ -1,65 +1,64 @@
 <template>
-  <div class="columns">
-    <div class="column">
-      <div class="box">
-        <h3 class="title is-3">
-          Comparaison de l'impact social (version demo)
-        </h3>
-        <p>
-          Attention, les valeurs des indicateurs ci-dessous ont été générées
-          pour donner un aperçu visuel, mais elles n'ont pas été calculées sur
-          les données réelles. C'est temporaire, le temps qu'on implémente ces
-          calculs au niveau de la base de données
-        </p>
-        <div class="control">
-          <label v-for="ape in apeCodes" v-bind:key="ape" class="radio">
-            <input type="radio" name="answer" />
-            Comparaison avec code APE {{ ape }}
-          </label>
-        </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Indicateur</th>
-              <th
-                v-for="oneYear in companyData.declarations"
-                v-bind:key="oneYear.declaration.value"
-              >
-                {{ oneYear.declaration.value }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="statType in companyData.statistics"
-              v-bind:key="statType.id"
-            >
-              <td>{{ statType.description }}</td>
-              <td
-                v-for="value in statType.values"
-                class="statsValue"
-                v-bind:style="{ color: getColor(value) }"
-                v-bind:key="value.id"
-              >
-                <div class="tooltip">
-                  <span class="tooltiptext">{{ getTooltip(value) }}</span>
-                  {{ value }}
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <Widget
+    title="Comparaison de l'impact social (version demo)"
+    titleColor="#99ff99"
+    v-if="companyData"
+  >
+    <p>
+      Attention, les valeurs des indicateurs ci-dessous ont été générées pour
+      donner un aperçu visuel, mais elles n'ont pas été calculées sur les
+      données réelles. C'est temporaire, le temps qu'on implémente ces calculs
+      au niveau de la base de données
+    </p>
+    <div class="control">
+      <label v-for="ape in apeCodes" v-bind:key="ape" class="radio">
+        <input type="radio" name="answer" />
+        Comparaison avec code APE {{ ape }}
+      </label>
     </div>
-  </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Indicateur</th>
+          <th
+            v-for="oneYear in companyData.declarations"
+            v-bind:key="oneYear.declaration.value"
+          >
+            {{ oneYear.declaration.value }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="statType in companyData.statistics" v-bind:key="statType.id">
+          <td>{{ statType.description }}</td>
+          <td
+            v-for="value in statType.values"
+            class="statsValue"
+            v-bind:style="{ color: getColor(value) }"
+            v-bind:key="value.id"
+          >
+            <div class="tooltip">
+              <span class="tooltiptext">{{ getTooltip(value) }}</span>
+              {{ value }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </Widget>
 </template>
 
 <script>
+import Widget from "./Widget.vue";
+
 export default {
   name: "CompanySocialImpactComparison",
   template: "#item-template",
   props: {
     companyData: Object,
+  },
+  components: {
+    Widget,
   },
   data: function () {
     return {
