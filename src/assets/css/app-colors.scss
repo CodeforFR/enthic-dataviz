@@ -1,0 +1,38 @@
+/* App custom variables */
+
+// primary and secondary colors
+$app-primary: #513085;
+$app-primary-invert: white;
+$app-secondary: #a174ac;
+$app-info: #e89db1;
+$app-link: #4b4d58;
+$app-success: #a174ac;
+$app-warning: #f3bd80;
+$app-danger: #d24745;
+
+// greys / blacks
+$app-grey-light: #40529d;
+$app-grey-dark: #1b1b1b;
+$app-grey-background: #F6F6F6;
+
+// app colors sets
+$app-purple-deep: #513085;
+$app-purple: #a174ac;
+$app-yellow-light: #f3bd80;
+$app-pink-light: #e89db1;
+$app-red: #d24745;
+$app-blue-deep: #21295e;
+$app-blue-dark: #40529d;
+$app-blue-light: #a3b1d7;
+$app-text-color: #3D3A39;
+
+/* Bulma variables */
+$primary: $app-primary;
+$primary-invert: $app-primary-invert;
+$info: $app-info;
+$link: $app-link;
+$success: $app-success;
+$warning: $app-warning;
+$danger: $app-danger;
+$light: $app-grey-light;
+$dark: $app-grey-dark;

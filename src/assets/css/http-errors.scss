@@ -1,7 +1,7 @@
-@import './apiviz-colors.scss';
+@import './app-colors.scss';
 
 .error{
-  background-color: $apiviz-grey-background;
+  background-color: $app-grey-background;
   height: 90vh;
   width: 100%;
 
@@ -19,7 +19,7 @@
   }
 
   h1{
-      color: $apiviz-primary;
+      color: $app-primary;
   }
 
   p{
@@ -29,7 +29,7 @@
   a.button.is-primary.is-outlined{
       background-color: white;
   }
-  
+
   &.no-result{
       height: 70vh;
   }

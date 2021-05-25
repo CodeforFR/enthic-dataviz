@@ -1043,13 +1043,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/css/apiviz-colors.scss";
-@import "../../assets/css/apiviz-misc.scss";
+@import "../../assets/css/app-colors.scss";
+@import "../../assets/css/app-misc.scss";
 
 main {
-  // background-color: $apiviz-blue-deep;
-  background-color: $apiviz-grey-background;
-  margin-top: 0; // $apiviz-navbar-height;
+  // background-color: $app-blue-deep;
+  background-color: $app-grey-background;
+  margin-top: 0; // $app-navbar-height;
   height: 100%;
   padding-bottom: 3em;
 }
@@ -1059,12 +1059,12 @@ ul {
 }
 
 .block-color {
-  background-color: $apiviz-secondary !important;
+  background-color: $app-secondary !important;
   color: white;
 }
 
 .tag {
-  background-color: $apiviz-secondary;
+  background-color: $app-secondary;
   color: white;
   margin-right: 1em;
   margin-bottom: 0.5em;
@@ -1080,7 +1080,7 @@ a.back {
   padding: 1em 0;
   display: block;
 
-  color: $apiviz-text-color;
+  color: $app-text-color;
   // color: white ;
 
   img,
@@ -1106,7 +1106,7 @@ a.back {
 
 .description,
 .added {
-  // background-color: $apiviz-blue-deep;
+  // background-color: $app-blue-deep;
   background-color: white;
   // color: white;
   padding: 1em;
@@ -1119,8 +1119,8 @@ a.back {
   }
 
   a {
-    color: $apiviz-primary;
-    border-bottom: 1px solid $apiviz-primary;
+    color: $app-primary;
+    border-bottom: 1px solid $app-primary;
   }
 }
 
@@ -1155,7 +1155,7 @@ a.back {
   }
 
   a {
-    color: $apiviz-primary;
+    color: $app-primary;
     font-weight: bold;
   }
 }
