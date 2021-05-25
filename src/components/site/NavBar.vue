@@ -11,6 +11,11 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.navbar-layout {
+  border-bottom: solid 1px darkgray;
+  margin-bottom: 25px;
+}
+
 .nav {
   text-align: center;
   padding: 10px;
@@ -29,9 +34,5 @@ export default {};
   margin: 0.3rem 0 0 1rem;
   width: 60px;
   // transform: scale(0.2);
-}
-
-.navbar-layout {
-  border-bottom: solid 1px darkgray;
 }
 </style>
