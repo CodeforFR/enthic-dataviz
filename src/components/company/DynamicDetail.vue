@@ -9,39 +9,7 @@
           </span>
           <span> Retour aux résultats de recherche </span>
         </a>
-        <div class="columns">
-          <div class="column">
-            <div class="box has-background-warning">
-              <h3 class="title is-3">
-                {{ companyData.denomination.value }}
-              </h3>
-              <ul class="list-company-props">
-                <li v-for="(data, index) in companyData.flatData" :key="index">
-                  {{ data.description }} : {{ data.value }}
-                </li>
-                <li>{{ companyData.lastEffectif }}</li>
-              </ul>
-              <h3 class="is-3">
-                Vérifiez les données de cette entreprise directement sur la
-                <a
-                  class="inline-link"
-                  :href="`https://data.inpi.fr/entreprises/${companyData.flatData.siren.value}`"
-                >
-                  page dédiée de l'INPI
-                </a>
-              </h3>
-              <h3 class="is-3">
-                Retrouvez d'autre données de cette entreprise sur le
-                <a
-                  class="inline-link"
-                  :href="`https://entreprise.data.gouv.fr/sirene/${companyData.flatData.siren.value}`"
-                >
-                  portail data.gouv.fr</a
-                >
-              </h3>
-            </div>
-          </div>
-        </div>
+        <CompanyIdentity :companyData="companyData" />
         <template v-if="companyData.comptesDeResultats">
           <div class="box has-background-grey-lighter">
             <div class="tile is-ancestor is-vertical">
@@ -670,10 +638,12 @@ import CompanyStatisticsDisplay from "./CompanyStatisticsDisplay.vue";
 import FoldingArray from "./FoldingArray.vue";
 import TreeView from "./TreeView.vue";
 import BarChart from "@/components/charts/BarChart";
+import CompanyIdentity from "./CompanyIdentity.vue";
 
 export default {
   name: "DynamicDetail",
   components: {
+    CompanyIdentity,
     BarChart,
     CompanyStatisticsDisplay,
     FoldingArray,
@@ -1173,14 +1143,5 @@ path {
   stroke: #76bf8a;
   stroke-width: 3px;
 }
-.inline-link {
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
-}
 
-.list-company-props {
-  padding-left: 1em;
-  line-height: 1.5em;
-  list-style-type: circle;
-}
 </style>
