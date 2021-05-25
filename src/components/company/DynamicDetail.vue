@@ -12,6 +12,7 @@
         <CompanyIdentity :companyData="companyData" />
         <CompanyNoCompteDeResultats :companyData="companyData" />
         <CompanyCompteDeResultats :companyData="companyData" />
+        <CompanyCompteDeResultatsTree :companyData="companyData" />
         <CompanySocialImpactComparison :companyData="companyData" />
         <CompanyScoring :companyData="companyData" />
         <CompanyOtherData :companyData="companyData" />
@@ -25,10 +26,11 @@
 </template>
 
 <script>
-import CompanyNoCompteDeResultats from "./CompanyNoCompteDeResultats.vue";
-import CompanyScoring from "./CompanyScoring.vue";
-import CompanySocialImpactComparison from "./CompanySocialImpactComparison.vue";
 import CompanyCompteDeResultats from "./CompanyCompteDeResultats.vue";
+import CompanyCompteDeResultatsTree from "./CompanyCompteDeResultatsTree.vue";
+import CompanyScoring from "./CompanyScoring.vue";
+import CompanyNoCompteDeResultats from "./CompanyNoCompteDeResultats.vue";
+import CompanySocialImpactComparison from "./CompanySocialImpactComparison.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
 import CompanyOtherCompteDeResultats from "./CompanyOtherCompteDeResultats.vue";
 import CompanyIdentity from "./CompanyIdentity.vue";
@@ -43,6 +45,7 @@ export default {
     CompanyOtherData,
     CompanyCompteDeResultats,
     CompanyOtherCompteDeResultats,
+    CompanyCompteDeResultatsTree,
   },
   props: ["companyData"],
   methods: {
