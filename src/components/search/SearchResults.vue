@@ -163,7 +163,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/css/apiviz-colors.scss";
+@import "../../assets/css/app-colors.scss";
 
 h3 {
   font-size: 130%;
@@ -187,14 +187,14 @@ h4 {
   transform: scale(0.4);
 }
 .error-message {
-  color: $apiviz-danger;
+  color: $app-danger;
 }
 .result-count {
   margin: 1rem;
 }
 .result-count-number {
   font-weight: 600;
-  color: $apiviz-grey-light;
+  color: $app-grey-light;
 }
 .next-results {
   text-align: center;

@@ -1,0 +1,17 @@
+@import './rem.scss';
+
+$app-navbar-height: rem(60px);
+$app-search-bar-height: rem(65px);
+
+$app-navbar-min-height-shrink: rem(25px);
+$app-navbar-height-shrink: rem(36px);
+
+$app-navbar-logo-height: rem(45px);
+$app-navbar-logo-height-shrink: rem(25px);
+
+
+$app-navbar-font-size: rem(16px);
+$app-navbar-font-size-shrink: rem(12px);
+
+$app-discrete-shadow: 0 3px 6px #D6D6D6;
+$app-strong-shadow: 0 6px 12px #AAA;

@@ -1,16 +1,16 @@
 @import './rem.scss';
-@import './apiviz-colors.scss';
-@import './apiviz-misc.scss';
+@import './app-colors.scss';
+@import './app-misc.scss';
 
 main{
     font-family: Candara;
     &#home{
         padding-top: unset !important;
-        margin-top: - $apiviz-spacing_3;
+        margin-top: - $app-spacing_3;
     }
     &#qui-fait-quoi{
         margin-top: unset !important;
-        padding-top: $apiviz-spacing_4;
+        padding-top: $app-spacing_4;
     }
 }
 
@@ -25,18 +25,18 @@ main{
     flex-direction: column;
     align-items: center;
 
-    color: $apiviz-primary-invert;
+    color: $app-primary-invert;
 
     padding: 5em 0;
 
     h1{
-        color: $apiviz-primary-invert;
+        color: $app-primary-invert;
         text-align: center;
         margin-bottom: 1em
     }
 
     .form-cis{
-        background-color: $apiviz-primary-invert;
+        background-color: $app-primary-invert;
         border-radius: 2px;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 
@@ -51,7 +51,7 @@ main{
 
             & > *{
                 border: 0;
-                border-bottom: 2px solid $apiviz-primary;
+                border-bottom: 2px solid $app-primary;
                 height: rem(50px);
             }
 
@@ -78,7 +78,7 @@ main{
 
                 &:focus{
                     border: 0;
-                    border-bottom: 2px solid $apiviz-primary;
+                    border-bottom: 2px solid $app-primary;
 
                     box-shadow: none;
                 }
@@ -99,7 +99,7 @@ main{
 }
 
 .primary-bg-plain{
-    background-color: $apiviz-primary;
+    background-color: $app-primary;
     width: 100%;
 }
 
@@ -114,7 +114,7 @@ main{
 }
 
 .grey-bg-plain{
-    background-color: $apiviz-grey-background;
+    background-color: $app-grey-background;
     width: 100%;
 }
 
@@ -194,11 +194,11 @@ main{
 }
 
 .marg-bot-api3{
-    margin-bottom: $apiviz-spacing_3;
+    margin-bottom: $app-spacing_3;
 }
 
 .marg-bot-api4{
-    margin-bottom: $apiviz-spacing_4;
+    margin-bottom: $app-spacing_4;
 }
 
 .max-w-40{
@@ -245,19 +245,19 @@ iframe{
 ul.is-primary,
 span.is-primary,
 h3.is-primary{
-    color: $apiviz-primary;
+    color: $app-primary;
 }
 
 .title.is-primary-invert,
 p.is-primary-invert,
 div.is-primary-invert{
-    color: $apiviz-primary-invert;
+    color: $app-primary-invert;
 }
 
 .title.is-secondary,
 .counter.is-secondary,
 .text.is-secondary{
-    color: $apiviz-secondary;
+    color: $app-secondary;
 }
 
 .title.is-centered,
@@ -279,7 +279,7 @@ h2.subtitle{
 
 // LINKS
 p a.colored{
-    color: $apiviz-primary;
+    color: $app-primary;
     text-decoration: underline;
 }
 
@@ -294,18 +294,18 @@ a.link-on-primary{
 }
 
 a.link-primary{
-    color: $apiviz-primary;
+    color: $app-primary;
     &:hover{
-        color: $apiviz-primary-invert;
-        background-color: $apiviz-primary;
+        color: $app-primary-invert;
+        background-color: $app-primary;
     }
 }
 
 a.link-on-primary{
-    color: $apiviz-primary-invert;
+    color: $app-primary-invert;
     &:hover{
-        color: $apiviz-primary;
-        background-color: $apiviz-primary-invert;
+        color: $app-primary;
+        background-color: $app-primary-invert;
     }
 }
 
@@ -327,7 +327,7 @@ ul.dashed{
     display: flex;
 
 
-    margin: $apiviz-spacing_4 inherit;
+    margin: $app-spacing_4 inherit;
 
     & > *{
         flex: 1;
@@ -358,7 +358,7 @@ ul.dashed{
     display: flex;
     align-items: center;
 
-    margin-bottom: $apiviz-spacing_4;
+    margin-bottom: $app-spacing_4;
 
     &:nth-child(odd){
         flex-direction: row;
@@ -398,7 +398,7 @@ ul.dashed{
 // PRESS REVIEW
 ul.press-excerpts li{
     display: inline-block;
-    background-color: $apiviz-grey-background;
+    background-color: $app-grey-background;
     $mention-spacing: 1%;
 
     margin: $mention-spacing;
@@ -583,7 +583,7 @@ ul.members{
 
 
         footer{
-            background-color: $apiviz-grey-background;
+            background-color: $app-grey-background;
             position: relative;
 
             font-size: 0.8em;
@@ -615,7 +615,7 @@ ul.members{
             }
 
             .count{
-                color: $apiviz-primary;
+                color: $app-primary;
                 max-width: 9em;
 
                 display: flex;
@@ -644,7 +644,7 @@ ul.members{
 	padding: 0 0.5em;
 	margin-right: 1em;
 	margin-left: 1em;
-	background-color: $apiviz-grey-background;
+	background-color: $app-grey-background;
 	white-space: normal;
 	vertical-align: top;
 	display: inline-flex;
@@ -660,7 +660,7 @@ ul.members{
 	}
 
 	.text h1{
-		color: $apiviz-primary;
+		color: $app-primary;
 		font-weight: bold;
 		margin-bottom: 1em;
 	}
@@ -703,7 +703,7 @@ ul.members{
         height: 1px;
         bottom: 0;
         left: 0;
-        background-color: $apiviz-primary;
+        background-color: $app-primary;
         visibility: hidden;
         -webkit-transform: scaleX(0);
         -webkit-transform-origin: left center;
@@ -724,7 +724,7 @@ html[lang="fr"] nav #navbar-main .navbar-item [lang="fr"],
 html[lang="en"] nav #navbar-main .navbar-item [lang="en"] {
 	font-weight: bold;
 	// padding-bottom: 0.3em;
-	border-bottom: 1px solid $apiviz-primary;
+	border-bottom: 1px solid $app-primary;
 }
 
 
@@ -741,7 +741,7 @@ html[lang="en"] nav #navbar-main .navbar-item [lang="en"] {
 
         h1{
             text-align: center;
-            color: $apiviz-primary;
+            color: $app-primary;
         }
 
         ul li img{
@@ -806,10 +806,10 @@ html[lang="en"] nav #navbar-main .navbar-item [lang="en"] {
                         line-height: 1.2em;
                         background-color: white;
                         padding: 1em;
-                        box-shadow: $apiviz-discrete-shadow;
+                        box-shadow: $app-discrete-shadow;
 
                         h1{
-                            color: $apiviz-primary;
+                            color: $app-primary;
                             font-weight: bold;
                             margin-bottom: 1em;
                         }

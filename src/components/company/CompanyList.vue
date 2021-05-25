@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/css/apiviz-colors.scss";
+@import "../../assets/css/app-colors.scss";
 
 .layout-search-table {
   margin: 0 auto;
@@ -53,10 +53,10 @@ td {
 .result-link {
   font-weight: 600;
   text-decoration: underline;
-  color: $apiviz-grey-light;
+  color: $app-grey-light;
 
   &:hover {
-    color: $apiviz-success;
+    color: $app-success;
   }
 }
 </style>

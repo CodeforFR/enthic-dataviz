@@ -1,10 +1,10 @@
 @import './rem.scss';
-@import './apiviz-colors.scss';
-@import './apiviz-spacing.scss';
-@import './apiviz-misc.scss';
+@import './app-colors.scss';
+@import './app-spacing.scss';
+@import './app-misc.scss';
 
 html {
-  font-size: $apiviz-base-font-size; // base for rem
+  font-size: $app-base-font-size; // base for rem
   scroll-behavior: smooth;
 }
 
@@ -17,14 +17,14 @@ fieldset{
 }
 
 h1{
-  color : $apiviz-primary
+  color : $app-primary
   // font-size: 1.1em;
   // font-weight: bold;
   // padding: 0.5em 0;
 }
 
 main {
-  margin-top: $apiviz-navbar-height;
+  margin-top: $app-navbar-height;
 }
 
 .primary-wave{
@@ -53,7 +53,7 @@ main {
 }
 
 p a.colored {
-  color: $apiviz-primary;
+  color: $app-primary;
   text-decoration: underline;
 }
 p a.white-link {
@@ -65,11 +65,11 @@ p a.white-link {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  
+
   border-bottom-style: none !important;
-  
-  // padding-top: $apiviz-spacing_4;
-  margin-bottom: $apiviz-spacing_3;
+
+  // padding-top: $app-spacing_4;
+  margin-bottom: $app-spacing_3;
 
   li{
     padding: 0 2em;
@@ -79,26 +79,26 @@ p a.white-link {
     }
 
     &:not(:last-child){
-      border-right: 1px solid $apiviz-grey-light;
+      border-right: 1px solid $app-grey-light;
     }
-    
+
     a{
       color: inherit;
     }
-  }	
+  }
 }
 
 // #navbar-main .navbar-item.selected a,
 // .cis-tabs li.selected a{
 // 	font-weight: bold;
 // 	// padding-bottom: 0.3em;
-// 	border-bottom: 1px solid $apiviz-primary;
+// 	border-bottom: 1px solid $app-primary;
 // }
 
 // Animation: bar unter the text, filling itself when hovered
 .navbar:not(.search-bar) .container .navbar-item:not(.selected) a:not(.selected),
 .navbar-item:not(.navbar-item-filter) a,
-.apiviz-tabs li:not(.selected) a{
+.app-tabs li:not(.selected) a{
   color: inherit;
   position: relative;
   text-decoration: none;
@@ -129,7 +129,7 @@ p a.white-link {
   }
 }
 #navbar-main .navbar-item.selected a,
-.apiviz-tabs li.selected a,
+.app-tabs li.selected a,
 html[lang="fr"] nav #navbar-main .navbar-item [lang="fr"],
 html[lang="en"] nav #navbar-main .navbar-item [lang="en"] {
   font-weight: bold;
@@ -169,8 +169,8 @@ div.select {
   bottom: -4px;
   right: 0px;
   z-index : 30;
-  
-  border: 1px solid ; 
+
+  border: 1px solid ;
   border-color : #d9d9d9 ;
 
 }

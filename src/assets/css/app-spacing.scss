@@ -1,7 +1,7 @@
-$apiviz-spacing_1: 0.5em;
-$apiviz-spacing_2: $apiviz-spacing-1*2;
-$apiviz-spacing_3: $apiviz-spacing_2*2;
-$apiviz-spacing_4: $apiviz-spacing_3*2;
+$app-spacing_1: 0.5em;
+$app-spacing_2: $app-spacing-1*2;
+$app-spacing_3: $app-spacing_2*2;
+$app-spacing_4: $app-spacing_3*2;
 
 $spaceamounts: (0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100); // Adjust this to include the pixel amounts you need.
 $sides: (top, bottom, left, right); // Leave this variable alone

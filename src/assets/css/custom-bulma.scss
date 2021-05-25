@@ -2,9 +2,9 @@
 @import "../../../node_modules/bulma/sass/utilities/functions.sass";
 
 @import "./rem.scss";
-@import "./apiviz-colors.scss";
-@import "./apiviz-misc.scss";
-@import "./apiviz-typography.scss";
+@import "./app-colors.scss";
+@import "./app-misc.scss";
+@import "./app-typography.scss";
 
 // Nexa
 @font-face {
@@ -25,7 +25,7 @@
 }
 
 $link: $grey;
-$link-hover: $apiviz-primary;
+$link-hover: $app-primary;
 
 $disabled-opacity: 0.7;
 $button-disabled-opacity: $disabled-opacity;
@@ -76,7 +76,7 @@ $button-disabled-opacity: $disabled-opacity;
 // }
 
 .is-checkradio[type="checkbox"] + label {
-  font-size: $apiviz-navbar-font-size
+  font-size: $app-navbar-font-size
 }
 
 // Bulma default behaviour darkens the button, doesn't fit for CIS
@@ -102,7 +102,7 @@ $button-disabled-opacity: $disabled-opacity;
   margin: 1em;
 
   &:hover {
-    box-shadow: $apiviz-strong-shadow;
+    box-shadow: $app-strong-shadow;
   }
 
 }
