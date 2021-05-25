@@ -364,15 +364,6 @@ ul {
   list-style-type: circle;
 }
 
-.description,
-.added {
-  // background-color: $app-blue-deep;
-  background-color: white;
-  // color: white;
-  padding: 1em;
-  margin-bottom: 1em;
-}
-
 .tag {
   background-color: $app-secondary;
   color: white;
