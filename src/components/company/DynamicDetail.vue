@@ -11,7 +11,9 @@
         </a>
         <CompanyIdentity :companyData="companyData" />
         <CompanyNoCompteDeResultats :companyData="companyData" />
-        <CompanyCompteDeResultats :companyData="companyData" />
+        <CompanyCompteDeResultats
+          :comptesDeResultats="companyData.comptesDeResultats"
+        />
         <CompanyCompteDeResultatsTree :companyData="companyData" />
         <CompanySocialImpactComparison :companyData="companyData" />
         <CompanyScoring :companyData="companyData" />
