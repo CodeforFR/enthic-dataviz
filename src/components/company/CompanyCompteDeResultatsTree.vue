@@ -5,13 +5,13 @@
     v-if="companyData.comptesDeResultats"
   >
     <div
-      class="tile is-ancestor is-vertical"
+      class="is-ancestor is-vertical"
       v-if="
         companyData.comptesDeResultats &&
         companyData.comptesDeResultats.length > 0
       "
     >
-      <p class="subtitle">
+      <p>
         Cliquer sur une ligne permet de découvrir les détails de sa composition
       </p>
       <div class="tile is-parent">
