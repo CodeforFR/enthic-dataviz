@@ -27,30 +27,30 @@
 </template>
 
 <script>
+import ChartDataService from "@/services/companyData/CompteDeResultatsCharts.js";
+
+import CompanyIdentity from "./CompanyIdentity.vue";
+import CompanyNoCompteDeResultats from "./CompanyNoCompteDeResultats.vue";
 import CompanyChartCA from "./CompanyChartCA.vue";
 import CompanyChartMargin from "./CompanyChartMargin.vue";
 import CompanyCompteDeResultatsTree from "./CompanyCompteDeResultatsTree.vue";
-import CompanyScoring from "./CompanyScoring.vue";
-import CompanyNoCompteDeResultats from "./CompanyNoCompteDeResultats.vue";
 import CompanySocialImpactComparison from "./CompanySocialImpactComparison.vue";
+import CompanyScoring from "./CompanyScoring.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
 import CompanyOtherCompteDeResultats from "./CompanyOtherCompteDeResultats.vue";
-import CompanyIdentity from "./CompanyIdentity.vue";
-
-import ChartDataService from "@/services/companyData/CompteDeResultatsCharts.js";
 
 export default {
   name: "DynamicDetail",
   components: {
     CompanyIdentity,
-    CompanyScoring,
     CompanyNoCompteDeResultats,
-    CompanySocialImpactComparison,
-    CompanyOtherData,
     CompanyChartCA,
     CompanyChartMargin,
-    CompanyOtherCompteDeResultats,
     CompanyCompteDeResultatsTree,
+    CompanySocialImpactComparison,
+    CompanyScoring,
+    CompanyOtherData,
+    CompanyOtherCompteDeResultats,
   },
   props: ["companyData"],
   computed: {
