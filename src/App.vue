@@ -33,8 +33,4 @@ hr {
   margin: 1.5rem 0;
   background-color: #f5f5f5;
 }
-
-.container {
-  margin: 0 auto;
-}
 </style>
