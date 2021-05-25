@@ -25,17 +25,17 @@
         </div>
       </div>
       <FoldingArray :rowItem="companyData.comptesDeResultats"></FoldingArray>
-      <div class="tile is-parent">
-        <p class="tile" style="color: #194">
+      <div>
+        <p style="color: #194">
           Une valeur en vert est une valeur officielle et qui peut être
           retrouvée avec les autres valeurs fournies (erreur de maximum 0,5% ou
           10€ tolérée)
         </p>
-        <p class="tile" style="color: #419">
+        <p style="color: #419">
           Une valeur en bleu est une valeur non fournie mais qui peut être
           retrouvée avec les autres valeurs
         </p>
-        <p class="tile" style="color: #941">
+        <p style="color: #941">
           Une valeur en rouge est une valeur non fournie, ou officielle mais ne
           correspondant pas aux autres valeurs
         </p>
