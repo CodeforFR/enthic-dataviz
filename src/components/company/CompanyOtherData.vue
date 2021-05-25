@@ -139,6 +139,20 @@
 export default {
   name: "CompanyOtherData",
   props: ["companyData"],
+  data() {
+    return {
+      contentFields: [
+        {
+          custom_title: null,
+          field: "Name",
+          field_format: { retrieve: [0], trim: null, type: "object" },
+          is_visible: true,
+          locale: "fr",
+          position: "block_title",
+        },
+      ],
+    };
+  },
   methods: {
     isPositionFilled(fieldBlock) {
       console.log("isPositionFilled", fieldBlock);
