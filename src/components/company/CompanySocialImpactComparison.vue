@@ -128,6 +128,12 @@ export default {
   font-weight: bold;
 }
 
+.tooltip:focus::before,
+.tooltip:hover::before,
+.tooltip.is-tooltip-active::before {
+  z-index: 1;
+}
+
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
@@ -147,7 +153,6 @@ export default {
 
   /* Fade in tooltip */
   opacity: 0;
-  transition: opacity 0.3s;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
