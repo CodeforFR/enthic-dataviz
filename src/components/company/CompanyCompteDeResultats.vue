@@ -17,7 +17,7 @@
           <p>Listes des problèmes pour afficher le graphique</p>
           <ul>
             <li
-              v-for="(item, index) in chartDetails.undisplayables"
+              v-for="(item, index) in chartDetails.listOfUndisplayableData"
               :key="index"
             >
               {{ item }}
@@ -346,11 +346,12 @@ function calculateChartDetails(comptesDeResultats) {
     },
   };
   return {
-    optionsChartMargin: optionsChartMargin,
-    optionsChartCA: optionsChartCA,
-    undisplayables: listOfUndisplayableData,
+    optionsChartMargin,
+    optionsChartCA,
+    listOfUndisplayableData,
   };
 }
+
 export default {
   name: "CompanyCompteDeResultats",
   props: ["comptesDeResultats"],
