@@ -2,6 +2,9 @@
   <div class="columns">
     <div class="column">
       <div class="box">
+        <h3 class="title is-3">
+          Comparaison de l'impact social (version demo)
+        </h3>
         <p>
           Attention, les valeurs des indicateurs ci-dessous ont été générées
           pour donner un aperçu visuel, mais elles n'ont pas été calculées sur
