@@ -2,9 +2,7 @@
   <div class="columns">
     <div class="column">
       <div class="box">
-        <h3 class="tile title">
-          Autres données présentes dans la base Enthic (mais pas valorisées ici)
-        </h3>
+        <h3 class="tile title">Autres données</h3>
         <div v-for="(year, index) in companyData.yearData" :key="index">
           {{ year.year }}
           <ul>
