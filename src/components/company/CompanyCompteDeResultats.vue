@@ -1,136 +1,160 @@
 <template>
   <div v-if="companyData.comptesDeResultats">
-    <div class="box has-background-grey-lighter">
-      <div class="tile is-ancestor is-vertical">
-        <div class="tile is-parent">
-          <div class="tile"></div>
-          <div
-            class="tile"
-            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
-            :key="index"
-          >
-            Année {{ oneYeardata.year }}
-          </div>
-        </div>
-        <div class="tile is-parent">
-          <div class="tile">score de transparence (sur 100)</div>
-          <div
-            class="tile"
-            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
-            :key="index"
-          >
-            {{ oneYeardata.scores.transparencyScore }}
-          </div>
-        </div>
-        <div class="tile is-parent">
-          <div class="tile">score de partage (sur 100)</div>
-          <div
-            class="tile"
-            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
-            :key="index"
-          >
-            {{ oneYeardata.scores.sharingScore }}
-          </div>
-        </div>
-        <div class="tile is-parent">
-          <div class="tile">
-            score d'ancrage dans l'économie réelle (sur 100)
-          </div>
-          <div
-            class="tile"
-            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
-            :key="index"
-          >
-            {{ oneYeardata.scores.realEconomyScore }}
+    <div class="columns">
+      <div class="column">
+        <div class="box has-background-grey-lighter">
+          <div class="tile is-ancestor is-vertical">
+            <div class="tile is-parent">
+              <div class="tile"></div>
+              <div
+                class="tile"
+                v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+                :key="index"
+              >
+                Année {{ oneYeardata.year }}
+              </div>
+            </div>
+            <div class="tile is-parent">
+              <div class="tile">score de transparence (sur 100)</div>
+              <div
+                class="tile"
+                v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+                :key="index"
+              >
+                {{ oneYeardata.scores.transparencyScore }}
+              </div>
+            </div>
+            <div class="tile is-parent">
+              <div class="tile">score de partage (sur 100)</div>
+              <div
+                class="tile"
+                v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+                :key="index"
+              >
+                {{ oneYeardata.scores.sharingScore }}
+              </div>
+            </div>
+            <div class="tile is-parent">
+              <div class="tile">
+                score d'ancrage dans l'économie réelle (sur 100)
+              </div>
+              <div
+                class="tile"
+                v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+                :key="index"
+              >
+                {{ oneYeardata.scores.realEconomyScore }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="box">
-      <h3 class="title is-3 has-background-grey-lighter">
-        Données des bilans comptables présentées de façon arborescente :
-      </h3>
-      <div
-        class="tile is-ancestor is-vertical"
-        v-if="
-          companyData.comptesDeResultats &&
-          companyData.comptesDeResultats.length > 0
-        "
-      >
-        <p class="subtitle">
-          Cliquer sur une ligne permet de découvrir les détails de sa
-          composition
-        </p>
-        <div class="tile is-parent">
-          <div class="tile is-6"></div>
+
+    <div class="columns">
+      <div class="column">
+        <div class="box">
+          <h3 class="title is-3 has-background-grey-lighter">
+            Données des bilans comptables présentées de façon arborescente :
+          </h3>
           <div
-            class="tile"
-            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
-            :key="index"
+            class="tile is-ancestor is-vertical"
+            v-if="
+              companyData.comptesDeResultats &&
+              companyData.comptesDeResultats.length > 0
+            "
           >
-            Année {{ oneYeardata.year }}
+            <p class="subtitle">
+              Cliquer sur une ligne permet de découvrir les détails de sa
+              composition
+            </p>
+            <div class="tile is-parent">
+              <div class="tile is-6"></div>
+              <div
+                class="tile"
+                v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+                :key="index"
+              >
+                Année {{ oneYeardata.year }}
+              </div>
+            </div>
+            <FoldingArray
+              :rowItem="companyData.comptesDeResultats"
+            ></FoldingArray>
+            <div class="tile is-parent">
+              <p class="tile" style="color: #194">
+                Une valeur en vert est une valeur officielle et qui peut être
+                retrouvée avec les autres valeurs fournies (erreur de maximum
+                0,5% ou 10€ tolérée)
+              </p>
+              <p class="tile" style="color: #419">
+                Une valeur en bleu est une valeur non fournie mais qui peut être
+                retrouvée avec les autres valeurs
+              </p>
+              <p class="tile" style="color: #941">
+                Une valeur en rouge est une valeur non fournie, ou officielle
+                mais ne correspondant pas aux autres valeurs
+              </p>
+            </div>
           </div>
+          <div v-else>Aucune données</div>
         </div>
-        <FoldingArray :rowItem="companyData.comptesDeResultats"></FoldingArray>
-        <div class="tile is-parent">
-          <p class="tile" style="color: #194">
-            Une valeur en vert est une valeur officielle et qui peut être
-            retrouvée avec les autres valeurs fournies (erreur de maximum 0,5%
-            ou 10€ tolérée)
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column">
+        <div class="box has-background-info" v-if="chartDetails">
+          <h3 class="title is-3">Répartition du chiffre d'affaire</h3>
+          <p>
+            Ce graphique montre la répartition des charges payées par le chiffre
+            d'affaire de l'entreprise. La hauteur de chaque colonne correspond
+            au chiffre d'affaire.
           </p>
-          <p class="tile" style="color: #419">
-            Une valeur en bleu est une valeur non fournie mais qui peut être
-            retrouvée avec les autres valeurs
+
+          <BarChart
+            :options="chartDetails.optionsChartCA"
+            :isStacked="true"
+          ></BarChart>
+          <p>Listes des problèmes pour afficher le graphique</p>
+          <ul>
+            <li
+              v-for="(item, index) in chartDetails.undisplayables"
+              :key="index"
+            >
+              {{ item }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns">
+      <div class="column">
+        <div class="box has-background-info" v-if="chartDetails">
+          <h3 class="title is-3">Répartition de la marge de l'entreprise</h3>
+          <p>
+            Ce graphique montre comment la marge de l'entreprise sur son
+            activité principale (résultat d'exploitation) est répartie entre :
           </p>
-          <p class="tile" style="color: #941">
-            Une valeur en rouge est une valeur non fournie, ou officielle mais
-            ne correspondant pas aux autres valeurs
+          <ul>
+            <li>les salarié⋅es (participation)</li>
+            <li>la collectivité (impôts)</li>
+            <li>l'entreprise (bénéfices)</li>
+            <li>
+              les créanciers, les marchés, etc... (Résultats financier et
+              exceptionnel)
+            </li>
+          </ul>
+          <BarChart :options="chartDetails.optionsChartMargin"></BarChart>
+
+          <p>
+            Un montant positif signifie que l'entreprise a donné de l'argent à
+            l'acteur économique en question, un montant négatif signifie que
+            l'acteur économique donne de l'argent à l'entreprise.
           </p>
         </div>
       </div>
-      <div v-else>Aucune données</div>
-    </div>
-    <div class="box has-background-info" v-if="chartDetails">
-      <h3 class="title is-3">Répartition du chiffre d'affaire</h3>
-      <p>
-        Ce graphique montre la répartition des charges payées par le chiffre
-        d'affaire de l'entreprise. La hauteur de chaque colonne correspond au
-        chiffre d'affaire.
-      </p>
-
-      <BarChart
-        :options="chartDetails.optionsChartCA"
-        :isStacked="true"
-      ></BarChart>
-      <p>Listes des problèmes pour afficher le graphique</p>
-      <ul>
-        <li v-for="(item, index) in chartDetails.undisplayables" :key="index">
-          {{ item }}
-        </li>
-      </ul>
-    </div>
-    <div class="box has-background-info" v-if="chartDetails">
-      <h3 class="title is-3">Répartition de la marge de l'entreprise</h3>
-      <p>
-        Ce graphique montre comment la marge de l'entreprise sur son activité
-        principale (résultat d'exploitation) est répartie entre :
-      </p>
-      <ul>
-        <li>les salarié⋅es (participation)</li>
-        <li>la collectivité (impôts)</li>
-        <li>l'entreprise (bénéfices)</li>
-        <li>
-          les créanciers, les marchés, etc... (Résultats financier et
-          exceptionnel)
-        </li>
-      </ul>
-      <BarChart :options="chartDetails.optionsChartMargin"></BarChart>
-
-      <p>
-        Un montant positif signifie que l'entreprise a donné de l'argent à
-        l'acteur économique en question, un montant négatif signifie que
-        l'acteur économique donne de l'argent à l'entreprise.
-      </p>
     </div>
   </div>
   <div v-else>
