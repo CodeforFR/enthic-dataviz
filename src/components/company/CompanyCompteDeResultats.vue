@@ -1,68 +1,161 @@
 <template>
-  <div>
-    <main v-if="companyData">
-      <div class="container">
-        <!-- BACK TO RESULTS -->
-        <a class="back" @click="goBack">
-          <span class="icon">
-            <i class="fas fa-arrow-left"></i>
-          </span>
-          <span> Retour aux résultats de recherche </span>
-        </a>
-        <CompanyIdentity :companyData="companyData" />
-        <CompanyCompteDeResultats :companyData="companyData" />
-
-        <CompanyStatisticsDisplay :companyData="companyData" />
-        <CompanyOtherData :companyData="companyData" />
-        <CompanyOtherCompteDeResultats
-          v-if="false"
-          :companyData="companyData"
-        />
+  <div v-if="companyData.comptesDeResultats">
+    <div class="box has-background-grey-lighter">
+      <div class="tile is-ancestor is-vertical">
+        <div class="tile is-parent">
+          <div class="tile"></div>
+          <div
+            class="tile"
+            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+            :key="index"
+          >
+            Année {{ oneYeardata.year }}
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <div class="tile">score de transparence (sur 100)</div>
+          <div
+            class="tile"
+            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+            :key="index"
+          >
+            {{ oneYeardata.scores.transparencyScore }}
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <div class="tile">score de partage (sur 100)</div>
+          <div
+            class="tile"
+            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+            :key="index"
+          >
+            {{ oneYeardata.scores.sharingScore }}
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <div class="tile">
+            score d'ancrage dans l'économie réelle (sur 100)
+          </div>
+          <div
+            class="tile"
+            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+            :key="index"
+          >
+            {{ oneYeardata.scores.realEconomyScore }}
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
+    <div class="box">
+      <h3 class="title is-3 has-background-grey-lighter">
+        Données des bilans comptables présentées de façon arborescente :
+      </h3>
+      <div
+        class="tile is-ancestor is-vertical"
+        v-if="
+          companyData.comptesDeResultats &&
+          companyData.comptesDeResultats.length > 0
+        "
+      >
+        <p class="subtitle">
+          Cliquer sur une ligne permet de découvrir les détails de sa
+          composition
+        </p>
+        <div class="tile is-parent">
+          <div class="tile is-6"></div>
+          <div
+            class="tile"
+            v-for="(oneYeardata, index) in companyData.comptesDeResultats"
+            :key="index"
+          >
+            Année {{ oneYeardata.year }}
+          </div>
+        </div>
+        <FoldingArray :rowItem="companyData.comptesDeResultats"></FoldingArray>
+        <div class="tile is-parent">
+          <p class="tile" style="color: #194">
+            Une valeur en vert est une valeur officielle et qui peut être
+            retrouvée avec les autres valeurs fournies (erreur de maximum 0,5%
+            ou 10€ tolérée)
+          </p>
+          <p class="tile" style="color: #419">
+            Une valeur en bleu est une valeur non fournie mais qui peut être
+            retrouvée avec les autres valeurs
+          </p>
+          <p class="tile" style="color: #941">
+            Une valeur en rouge est une valeur non fournie, ou officielle mais
+            ne correspondant pas aux autres valeurs
+          </p>
+        </div>
+      </div>
+      <div v-else>Aucune données</div>
+    </div>
+    <div class="box has-background-info" v-if="chartDetails">
+      <h3 class="title is-3">Répartition du chiffre d'affaire</h3>
+      <p>
+        Ce graphique montre la répartition des charges payées par le chiffre
+        d'affaire de l'entreprise. La hauteur de chaque colonne correspond au
+        chiffre d'affaire.
+      </p>
+
+      <BarChart
+        :options="chartDetails.optionsChartCA"
+        :isStacked="true"
+      ></BarChart>
+      <p>Listes des problèmes pour afficher le graphique</p>
+      <ul>
+        <li v-for="(item, index) in chartDetails.undisplayables" :key="index">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+    <div class="box has-background-info" v-if="chartDetails">
+      <h3 class="title is-3">Répartition de la marge de l'entreprise</h3>
+      <p>
+        Ce graphique montre comment la marge de l'entreprise sur son activité
+        principale (résultat d'exploitation) est répartie entre :
+      </p>
+      <ul>
+        <li>les salarié⋅es (participation)</li>
+        <li>la collectivité (impôts)</li>
+        <li>l'entreprise (bénéfices)</li>
+        <li>
+          les créanciers, les marchés, etc... (Résultats financier et
+          exceptionnel)
+        </li>
+      </ul>
+      <BarChart :options="chartDetails.optionsChartMargin"></BarChart>
+
+      <p>
+        Un montant positif signifie que l'entreprise a donné de l'argent à
+        l'acteur économique en question, un montant négatif signifie que
+        l'acteur économique donne de l'argent à l'entreprise.
+      </p>
+    </div>
+  </div>
+  <div v-else>
+    <div class="box has-background-info">
+      <h3 class="title is-6">Aucun compte disponible pour cette entreprise</h3>
+      <p>
+        Peut-être pour des raisons de confidentialité ou de problème dans la
+        saisie
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
-import CompanyStatisticsDisplay from "./CompanyStatisticsDisplay.vue";
-
-import CompanyCompteDeResultats from "./CompanyCompteDeResultats.vue";
-import CompanyOtherData from "./CompanyOtherData.vue";
-import CompanyOtherCompteDeResultats from "./CompanyOtherCompteDeResultats.vue";
-
-
-import CompanyIdentity from "./CompanyIdentity.vue";
+import BarChart from "@/components/charts/BarChart";
+import FoldingArray from "./FoldingArray.vue";
 
 export default {
-  name: "DynamicDetail",
-  components: {
-    CompanyIdentity,
-    CompanyStatisticsDisplay,
-    CompanyOtherData,
-    CompanyCompteDeResultats,
-    CompanyOtherCompteDeResultats,
-  },
+  name: "CompanyCompteDeResultats",
   props: ["companyData"],
-  data() {
-    return {
-      contentFields: [
-        {
-          custom_title: null,
-          field: "Name",
-          field_format: { retrieve: [0], trim: null, type: "object" },
-          is_visible: true,
-          locale: "fr",
-          position: "block_title",
-        },
-      ],
-    };
+  components: {
+    BarChart,
+    FoldingArray,
   },
   computed: {
-    // TEXT TRANSLATORS - NO DATA
-    noData() {
-      return "Pas de données";
-    },
-
     chartDetails() {
       // Find perfect unit for CA graphic (€, k€ or M€)
       let beneficeItem = this.companyData.comptesDeResultats[0];
@@ -361,45 +454,8 @@ export default {
       }
       return item.data.value;
     },
-
-    getDefaultText(txt_code) {
-      console.log("default text for ", txt_code);
-      return txt_code;
-    },
-
-    isPositionFilled(fieldBlock) {
-      console.log("isPositionFilled", fieldBlock);
-      // console.log("isPositionFilled /  fieldBlock :", fieldBlock)
-      return false; // this.listOfPositions.indexOf(fieldBlock) !== -1;
-    },
-
     computeRatio(value, factor) {
       return Math.round((1000 * value) / factor) / 1000;
-    },
-
-    matchProjectWithConfig(fieldBlock) {
-      console.log("matchProjectWithConfig fieldBlock =", fieldBlock);
-      return this.noData;
-    },
-
-    getCustomBlockTitle(fieldBlock) {
-      let customBlockTitle = undefined;
-      const contentField = this.contentFields.find(
-        (f) => f.position === fieldBlock
-      );
-      if (contentField) {
-        customBlockTitle = contentField.custom_title;
-      }
-      return customBlockTitle;
-    },
-
-    projectId() {
-      return this.matchProjectWithConfig("block_id");
-    },
-
-    goBack(e) {
-      e.preventDefault();
-      this.$router.back();
     },
   },
 };
