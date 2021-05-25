@@ -11,9 +11,8 @@
         </a>
         <CompanyIdentity :companyData="companyData" />
         <CompanyNoCompteDeResultats :companyData="companyData" />
-        <CompanyCompteDeResultats
-          :comptesDeResultats="companyData.comptesDeResultats"
-        />
+        <CompanyChartCA :chartDetails="chartDetails" />
+        <CompanyChartMargin :chartDetails="chartDetails" />
         <CompanyCompteDeResultatsTree :companyData="companyData" />
         <CompanySocialImpactComparison :companyData="companyData" />
         <CompanyScoring :companyData="companyData" />
@@ -28,7 +27,8 @@
 </template>
 
 <script>
-import CompanyCompteDeResultats from "./CompanyCompteDeResultats.vue";
+import CompanyChartCA from "./CompanyChartCA.vue";
+import CompanyChartMargin from "./CompanyChartMargin.vue";
 import CompanyCompteDeResultatsTree from "./CompanyCompteDeResultatsTree.vue";
 import CompanyScoring from "./CompanyScoring.vue";
 import CompanyNoCompteDeResultats from "./CompanyNoCompteDeResultats.vue";
@@ -36,6 +36,8 @@ import CompanySocialImpactComparison from "./CompanySocialImpactComparison.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
 import CompanyOtherCompteDeResultats from "./CompanyOtherCompteDeResultats.vue";
 import CompanyIdentity from "./CompanyIdentity.vue";
+
+import ChartDataService from "@/services/companyData/CompteDeResultatsCharts.js";
 
 export default {
   name: "DynamicDetail",
@@ -45,11 +47,20 @@ export default {
     CompanyNoCompteDeResultats,
     CompanySocialImpactComparison,
     CompanyOtherData,
-    CompanyCompteDeResultats,
+    CompanyChartCA,
+    CompanyChartMargin,
     CompanyOtherCompteDeResultats,
     CompanyCompteDeResultatsTree,
   },
   props: ["companyData"],
+  computed: {
+    chartDetails() {
+      const chartData = ChartDataService.calculateChartDetails(
+        this.companyData.comptesDeResultats
+      );
+      return chartData;
+    },
+  },
   methods: {
     goBack(e) {
       e.preventDefault();
