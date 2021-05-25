@@ -1,6 +1,6 @@
 <template>
   <Widget :title="companyData.denomination.value" titleColor="#9999ff">
-    <ul class="list-company-props">
+    <ul class="list-company-props m-30">
       <li v-for="(data, index) in companyData.flatData" :key="index">
         {{ data.description }} : {{ data.value }}
       </li>
@@ -39,8 +39,6 @@ export default {
 
 <style lang="scss" scoped>
 .list-company-props {
-  padding-left: 1em;
-  line-height: 1.5em;
   list-style-type: circle;
 }
 

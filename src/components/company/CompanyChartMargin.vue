@@ -8,7 +8,7 @@
       Ce graphique montre comment la marge de l'entreprise sur son activité
       principale (résultat d'exploitation) est répartie entre :
     </p>
-    <ul>
+    <ul class="m-l-30">
       <li>les salarié⋅es (participation)</li>
       <li>la collectivité (impôts)</li>
       <li>l'entreprise (bénéfices)</li>

@@ -10,10 +10,11 @@
       données réelles. C'est temporaire, le temps qu'on implémente ces calculs
       au niveau de la base de données
     </p>
-    <div class="control">
+    <div class="control-bar">
+      <div class="title is-6 m-r-30">Comparaison avec code APE :</div>
       <label v-for="ape in apeCodes" v-bind:key="ape" class="radio">
         <input type="radio" name="answer" />
-        Comparaison avec code APE {{ ape }}
+        {{ ape }}
       </label>
     </div>
     <table class="table">
@@ -113,27 +114,18 @@ export default {
 };
 </script>
 
-<style>
-body {
-  color: #444;
-}
-
-li {
-  cursor: auto;
-}
-
-.item {
-  cursor: pointer;
+<style lang="scss">
+.control-bar {
+  margin: 0.5rem 0;
+  border: solid 0px #aaa;
+  border-radius: 8px;
+  display: flex;
+  justify-content: flex-start;
+  line-height: 1rem;
 }
 
 .statsValue {
   font-weight: bold;
-}
-
-ul {
-  padding-left: 1em;
-  line-height: 1.5em;
-  list-style-type: dot;
 }
 
 /* Tooltip text */
