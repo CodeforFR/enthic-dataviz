@@ -3,6 +3,7 @@
     <div class="columns">
       <div class="column">
         <div class="box has-background-grey-lighter">
+          <h3 class="title is-3">Scoring (version beta)</h3>
           <div class="tile is-ancestor is-vertical">
             <div class="tile is-parent">
               <div class="tile"></div>
@@ -54,8 +55,8 @@
     <div class="columns">
       <div class="column">
         <div class="box">
-          <h3 class="title is-3 has-background-grey-lighter">
-            Données des bilans comptables présentées de façon arborescente :
+          <h3 class="title is-3">
+            Données des bilans comptables présentées de façon arborescente
           </h3>
           <div
             class="tile is-ancestor is-vertical"
