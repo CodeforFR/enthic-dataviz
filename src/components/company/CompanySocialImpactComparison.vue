@@ -13,7 +13,7 @@
     <div class="control-bar">
       <div class="title is-6 m-r-30">Comparaison avec code APE :</div>
       <label v-for="ape in apeCodes" v-bind:key="ape" class="radio">
-        <input type="radio" name="answer" />
+        <input type="radio" name="answer" v-bind:value="ape" v-model="APEToCompare" @change="updateAPEComparison" />
         {{ ape }}
       </label>
     </div>
@@ -30,16 +30,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="statType in companyData.statistics" v-bind:key="statType.id">
+        <tr v-for="(statType, statTypeId) in statistics" v-bind:key="statType.id">
           <td>{{ statType.description }}</td>
           <td
-            v-for="value in statType.values"
+            v-for="(value, year) in statType.values"
             class="statsValue"
-            v-bind:style="{ color: getColor(value) }"
+            v-bind:style="{ color: getColor(statTypeId, year, value) }"
             v-bind:key="value.id"
           >
             <div class="tooltip">
-              <span class="tooltiptext">{{ getTooltip(value) }}</span>
+              <span class="tooltiptext">{{ getTooltip(statTypeId, year, value) }}</span>
               {{ value }}
             </div>
           </td>
@@ -51,6 +51,8 @@
 
 <script>
 import Widget from "./Widget.vue";
+import CompaniesRepository from "@/repositories/company/CompanyRepository";
+import APERepository from "@/repositories/ape/APERepository";
 
 export default {
   name: "CompanySocialImpactComparison",
@@ -63,36 +65,86 @@ export default {
   },
   data: function () {
     return {
-      apeSelected: null,
+      percentiles: {},
+      APEToCompare: this.companyData.ape.code,
     };
   },
+  created() {
+    this.updateAPEComparison();
+  },
   computed: {
-    deciles: function () {
-      var result = [];
-      for (var i = 0; i < 10; i++) {
-        result.push(Math.random());
+    statistics: function () {
+      var result = {
+        1: {
+          description: "Pourcentage du résultat d'exploitation distribué en participation et impôts",
+          values: {},
+        },
+        2: {
+          description: "Pourcentage de la masse salariale dans le total des charges d'exploitation",
+          values: {},
+        },
+        3: {
+          description: "Ratio entre les cotisation sociales et les salaires",
+          values: {},
+        },
+      };
+
+      for (var year in this.companyData.declarations) {
+        var serverComputationNeeded = false;
+        var yearData = this.companyData.declarations[year];
+        for (var statType in result) {
+          if ("statistics" in yearData && statType in yearData["statistics"]) {
+            result[statType].values[year] = yearData["statistics"][statType].value.toPrecision(2);
+          } else {
+            result[statType].values[year] = "XXX";
+            serverComputationNeeded = true;
+          }
+        }
+        if (serverComputationNeeded) {
+          console.log("trigger server computation for company ", this.companyData.denomination.value, " and year ", year);
+          CompaniesRepository.triggerServerComputation(this.companyData.denomination.value, year);
+        }
       }
-      result.sort();
+      console.log(" - - CompanySocialImpactComparison statistics :", result);
       return result;
     },
     apeCodes: function () {
-      var randomApe = Math.floor(Math.random() * 9999).toString();
-      while (randomApe.length < 4) {
-        randomApe = "0" + randomApe;
+      var companyApe = this.companyData.ape.code;
+      while (companyApe.length < 4) {
+        companyApe = "0" + companyApe;
       }
-      return [randomApe, randomApe.substring(0, 3), randomApe.substring(0, 2)];
+      return [companyApe, companyApe.substring(0, 3), companyApe.substring(0, 2)];
     },
   },
   methods: {
-    getDecile: function (value) {
-      for (var i = 0; i < 10; i++) {
-        if (value < this.deciles[i]) {
-          return i;
+    updateAPEComparison: function () {
+      if (this.percentiles[this.APEToCompare] === undefined) {
+        var asyncRequest = APERepository.getAPEScores(this.APEToCompare);
+        const vm = this;
+        asyncRequest.then((response) => {
+          var newPercentile = { ...vm.percentiles,
+            [vm.APEToCompare]: response.statistics,
+          };
+          vm.percentiles = newPercentile;
+        });
+      }
+    },
+    getDecile: function (statType, year, value) {
+      if (this.percentiles[this.APEToCompare] === undefined ||
+        this.percentiles[this.APEToCompare][year] === undefined ||
+        this.percentiles[this.APEToCompare][year][statType] === undefined) {
+        return -1;
+      }
+      var percentiles = this.percentiles[this.APEToCompare][year][statType].percentiles;
+      for (var percentile in percentiles) {
+        if (value < percentiles[percentile]) {
+          console.log(value, percentile, percentiles);
+          return Math.round((percentile * 10) / 100);
         }
       }
       return 9;
     },
-    getColor: function (value) {
+    getColor: function (statType, year, value) {
       var colorsGradient = [
         "#f80d01",
         "#f73302",
@@ -105,10 +157,14 @@ export default {
         "#63EC0D",
         "#37EA0E",
       ];
-      return colorsGradient[this.getDecile(value)];
+      var decile = this.getDecile(statType, year, value);
+      if (decile == -1) {
+        return "#111111";
+      }
+      return colorsGradient[decile];
     },
-    getTooltip: function (value) {
-      return "dans le décile " + this.getDecile(value);
+    getTooltip: function (statType, year, value) {
+      return "dans le décile " + this.getDecile(statType, year, value);
     },
   },
 };
