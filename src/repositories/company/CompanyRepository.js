@@ -19,7 +19,17 @@ export default {
       if (error.response && error.response.status === 404) {
         return null;
       }
-      console.log("Error", error);
+      console.log("getCompanyDataBySiren Error", error);
+    }
+    return results ? results.data : null;
+  },
+  async triggerServerComputation(denomination, year) {
+    const url = `/compute/${denomination}/${year}`;
+    let results = null;
+    try {
+      await apiClient.get(url);
+    } catch (error) {
+      console.log("triggerServerComputation Error", error);
     }
     return results ? results.data : null;
   },
