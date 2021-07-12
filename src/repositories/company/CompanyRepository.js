@@ -24,7 +24,7 @@ export default {
     return results ? results.data : null;
   },
   async triggerServerComputation(denomination, year) {
-    const url = `/compute/${denomination}/${year}`;
+    const url = `/compute/company/${denomination}/${year}`;
     let results = null;
     try {
       await apiClient.get(url);

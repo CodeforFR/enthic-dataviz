@@ -18,9 +18,7 @@ export default {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         console.log("getAPEScores trigger computation from server because error :", error);
-        apiClient.get(`/compute_ape/${ape}/2018/1`);
-        apiClient.get(`/compute_ape/${ape}/2018/2`);
-        return await apiClient.get(`/compute_ape/${ape}/2018/3`);
+        return apiClient.get(`/compute/ape/${ape}`);
       }
       console.log("getAPEScores Error", error);
     }
