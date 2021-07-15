@@ -20,13 +20,12 @@
           <div class="column is-3 is-hidden-mobile">
             <button
               class="button is-fullwidth is-primary is-primary-b is-outlined is-large"
-              style="padding-left: 0"
               type="submit"
             >
-              <span class="is-hidden-touch" style="padding-left: 0.7em">
+              <span class="is-hidden-touch search-btn-as-text">
                 Rechercher
               </span>
-              <span class="icon is-hidden-desktop">
+              <span class="icon is-hidden-desktop search-btn-as-icon">
                 <i class="fas fa-search"></i>
               </span>
             </button>
@@ -46,3 +45,12 @@ export default {
   },
 };
 </script>
+<style scoped>
+.search-btn-as-icon {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.search-btn-as-text {
+  font-size: large;
+}
+</style>
