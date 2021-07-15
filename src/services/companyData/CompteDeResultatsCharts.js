@@ -10,7 +10,7 @@ function computeRatio(value, factor) {
   return Math.round((1000 * value) / factor) / 1000;
 }
 
-const calculateChartDetails = (comptesDeResultats) => {
+const calculateChartUnits = (comptesDeResultats) => {
   // Find perfect unit for CA graphic (€, k€ or M€)
   let beneficeItem = comptesDeResultats[0];
   if (!beneficeItem) {
@@ -21,6 +21,11 @@ const calculateChartDetails = (comptesDeResultats) => {
   let CADeReference =
     beneficeItem.children.ResultatAvantImpot.children.ResultatExploitation
       .children.ProduitsExploitation.children.ChiffresAffairesNet.data.value;
+  if (CADeReference == 0) {
+    CADeReference =
+      beneficeItem.children.ResultatAvantImpot.children.ResultatExploitation
+        .children.ProduitsExploitation.data.value;
+  }
   if (CADeReference > 10000000) {
     factorCA = 1000000;
     unitCA = "millions d'€";
@@ -30,7 +35,7 @@ const calculateChartDetails = (comptesDeResultats) => {
   }
 
   // Find perfect unit for margin graphic (€, k€ or M€)
-  let factor = 1;
+  let factorMargin = 1;
   let unitMargin = "€";
   let resultatDeReference =
     beneficeItem.children.ResultatAvantImpot.children.ResultatExploitation.data
@@ -39,12 +44,22 @@ const calculateChartDetails = (comptesDeResultats) => {
     resultatDeReference = beneficeItem.data.value;
   }
   if (resultatDeReference > 3000000 || resultatDeReference < -3000000) {
-    factor = 1000000;
+    factorMargin = 1000000;
     unitMargin = "millions d'€";
   } else if (resultatDeReference > 30000 || resultatDeReference < -100000) {
-    factor = 1000;
+    factorMargin = 1000;
     unitMargin = "milliers d'€";
   }
+  return {
+    factorCA: factorCA,
+    unitCA: unitCA,
+    factorMargin: factorMargin,
+    unitMargin: unitMargin,
+  };
+};
+
+const calculateChartDetails = (comptesDeResultats) => {
+  let units = calculateChartUnits(comptesDeResultats);
 
   let xLabels = [];
 
@@ -160,8 +175,19 @@ const calculateChartDetails = (comptesDeResultats) => {
         achatMatierePremiere +
         variationMatierePremiere
     );
+    var yearGrandTotal = produits.children.ChiffresAffairesNet.data.value;
+    if (yearGrandTotal == 0) {
+      yearGrandTotal = produits.data.value;
+      listOfUndisplayableData.push(
+        produits.children.ChiffresAffairesNet.name +
+          " nul (0) pour l'année " +
+          xLabels[i] +
+          " remplacé par " +
+          produits.name
+      );
+    }
     dataSeriesCA.autreChargesMoinsAutresProduitsAffiches.push(
-      produits.children.ChiffresAffairesNet.data.value -
+      yearGrandTotal -
         salaire -
         cotisation -
         dataSeriesCA.taxesMoinsSubventions[i] -
@@ -170,22 +196,24 @@ const calculateChartDetails = (comptesDeResultats) => {
     );
 
     // Application du ratio pour l'affichage du graphe sur le CA
-    dataSeriesCA.salaires.push(computeRatio(salaire, factorCA));
-    dataSeriesCA.cotisationSociale.push(computeRatio(cotisation, factorCA));
+    dataSeriesCA.salaires.push(computeRatio(salaire, units.factorCA));
+    dataSeriesCA.cotisationSociale.push(
+      computeRatio(cotisation, units.factorCA)
+    );
     dataSeriesCA.taxesMoinsSubventions[i] = computeRatio(
       dataSeriesCA.taxesMoinsSubventions[i],
-      factorCA
+      units.factorCA
     );
     dataSeriesCA.marchandisesTotalAfficher[i] = computeRatio(
       dataSeriesCA.marchandisesTotalAfficher[i],
-      factorCA
+      units.factorCA
     );
     dataSeriesCA.autreChargesMoinsAutresProduitsAffiches[i] = computeRatio(
       dataSeriesCA.autreChargesMoinsAutresProduitsAffiches[i],
-      factorCA
+      units.factorCA
     );
     dataSeriesCA.resultatExploitation.push(
-      computeRatio(resultatExploitation, factorCA)
+      computeRatio(resultatExploitation, units.factorCA)
     );
 
     // Application du ratio pour l'affichage du graphe sur le résultat d'exploitation
@@ -193,14 +221,17 @@ const calculateChartDetails = (comptesDeResultats) => {
       Math.round(
         (1000 *
           rootItem.children.ParticipationSalariesAuxResultats.data.value) /
-          factor
+          units.factorMargin
       ) / 1000
     );
     dataSeriesMargin.ImpotsSurLesSocietes.push(
-      computeRatio(rootItem.children.ImpotsSurLesBenefices.data.value, factor)
+      computeRatio(
+        rootItem.children.ImpotsSurLesBenefices.data.value,
+        units.factorMargin
+      )
     );
     dataSeriesMargin.resultatPourProprietaire.push(
-      computeRatio(rootItem.data.value, factor)
+      computeRatio(rootItem.data.value, units.factorMargin)
     );
     dataSeriesMargin.resultatExceptionnelEtFinancier.push(
       Math.round(
@@ -208,7 +239,7 @@ const calculateChartDetails = (comptesDeResultats) => {
           (-rootItem.children.ResultatExceptionnel.data.value -
             rootItem.children.ResultatAvantImpot.children.ResultatFinancier.data
               .value)) /
-          factor
+          units.factorMargin
       ) / 1000
     );
   }
@@ -234,7 +265,6 @@ const calculateChartDetails = (comptesDeResultats) => {
     },
   ];
   if (showTaxeVsSubvention) {
-    console.log("showing taxe and sub");
     seriesCA.push({
       name: "Taxes diverses retranchées des subventions",
       data: dataSeriesCA.taxesMoinsSubventions,
@@ -253,7 +283,7 @@ const calculateChartDetails = (comptesDeResultats) => {
       data: xLabels,
     },
     yAxis: {
-      name: unitCA,
+      name: units.unitCA,
     },
   };
   let optionsChartMargin = {
@@ -279,7 +309,7 @@ const calculateChartDetails = (comptesDeResultats) => {
       data: xLabels,
     },
     yAxis: {
-      name: unitMargin,
+      name: units.unitMargin,
     },
   };
   return {
