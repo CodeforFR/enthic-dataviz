@@ -35,6 +35,12 @@
         <div class="content has-text-centered">
           <h2 class="is-size-2">Démarrer !</h2>
           <SearchBar />
+          <div class="m-t-20">
+            par exemple l'entreprise
+            <router-link class="result-link" to="/entreprises/443061841">
+              "Google France"</router-link
+            >
+          </div>
         </div>
       </div>
     </div>
