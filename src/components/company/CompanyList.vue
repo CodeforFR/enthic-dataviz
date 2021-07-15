@@ -46,9 +46,10 @@ export default {
   margin: 0 auto;
 }
 
-th,
-td {
+table th,
+table td {
   padding: 0 0.5rem;
+  text-align: left;
 }
 .result-link {
   font-weight: 600;
