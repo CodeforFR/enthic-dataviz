@@ -1,13 +1,4 @@
-import axios from "axios";
-
-const apiClient = axios.create({
-  baseURL: "https://test.enthic.fr",
-  withCredentials: false,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-});
+import { apiClient } from "../ServerConfiguration";
 
 export default {
   async getAPEScores(ape) {
