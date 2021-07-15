@@ -10,7 +10,7 @@
                 name="text"
                 class="input is-large search-box"
                 :value="searchText"
-                placeholder="Cherchez une entreprise par son nom"
+                placeholder="nom de l'entreprise"
               />
               <span class="icon is-left">
                 <i class="fas fa-search"></i>
@@ -49,6 +49,9 @@ export default {
 .search-box {
   width: 98%;
   margin: 0 1vh;
+}
+.search-box::placeholder {
+  font-style: italic;
 }
 .search-btn-as-icon {
   padding: 0 !important;
