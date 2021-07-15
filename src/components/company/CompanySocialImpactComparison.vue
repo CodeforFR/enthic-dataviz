@@ -1,15 +1,9 @@
 <template>
   <Widget
-    title="Comparaison de l'impact social (version demo)"
+    title="Comparaison de l'impact social"
     titleColor="#99ff99"
     v-if="companyData"
   >
-    <p>
-      Attention, les valeurs des indicateurs ci-dessous ont été générées pour
-      donner un aperçu visuel, mais elles n'ont pas été calculées sur les
-      données réelles. C'est temporaire, le temps qu'on implémente ces calculs
-      au niveau de la base de données
-    </p>
     <div class="control-bar">
       <div class="title is-6 m-r-30">Comparaison avec code APE :</div>
       <label v-for="ape in apeCodes" v-bind:key="ape" class="radio">
@@ -53,6 +47,7 @@
 import Widget from "./Widget.vue";
 import CompaniesRepository from "@/repositories/company/CompanyRepository";
 import APERepository from "@/repositories/ape/APERepository";
+import OntologyRepository from "@/repositories/ontology/OntologyRepository";
 
 export default {
   name: "CompanySocialImpactComparison",
@@ -67,47 +62,14 @@ export default {
     return {
       percentiles: {},
       APEToCompare: this.companyData.ape.code,
+      statistics: null,
     };
   },
   created() {
+    this.initializeStatistics();
     this.updateAPEComparison();
   },
   computed: {
-    statistics: function () {
-      var result = {
-        1: {
-          description: "Pourcentage du résultat d'exploitation distribué en participation et impôts",
-          values: {},
-        },
-        2: {
-          description: "Pourcentage de la masse salariale dans le total des charges d'exploitation",
-          values: {},
-        },
-        3: {
-          description: "Ratio entre les cotisation sociales et les salaires",
-          values: {},
-        },
-      };
-
-      for (var year in this.companyData.declarations) {
-        var serverComputationNeeded = false;
-        var yearData = this.companyData.declarations[year];
-        for (var statType in result) {
-          if ("statistics" in yearData && statType in yearData["statistics"]) {
-            result[statType].values[year] = yearData["statistics"][statType].value.toPrecision(2);
-          } else {
-            result[statType].values[year] = "XXX";
-            serverComputationNeeded = true;
-          }
-        }
-        if (serverComputationNeeded) {
-          console.log("trigger server computation for company ", this.companyData.denomination.value, " and year ", year);
-          CompaniesRepository.triggerServerComputation(this.companyData.denomination.value, year);
-        }
-      }
-      console.log(" - - CompanySocialImpactComparison statistics :", result);
-      return result;
-    },
     apeCodes: function () {
       var companyApe = this.companyData.ape.code;
       while (companyApe.length < 4) {
@@ -117,12 +79,41 @@ export default {
     },
   },
   methods: {
+    fillStatistics: function (statistics) {
+      // Fill scores description with company's values
+      for (var year in this.companyData.declarations) {
+        var serverComputationNeeded = false;
+        var yearData = this.companyData.declarations[year];
+        for (var statType in statistics) {
+          if ("statistics" in yearData && statType in yearData["statistics"]) {
+            statistics[statType].values[year] = yearData["statistics"][statType].value.toPrecision(2);
+          } else {
+            statistics[statType].values[year] = "XXX";
+            serverComputationNeeded = true;
+          }
+        }
+        if (serverComputationNeeded) {
+          console.log("trigger server computation for company ", this.companyData.denomination.value, " and year ", year);
+          CompaniesRepository.triggerServerComputation(this.companyData.denomination.value, year);
+        }
+      }
+      return statistics;
+    },
+    initializeStatistics: async function () {
+      // Get scores description
+      let result = await OntologyRepository.getScores();
+      for (var statType in result) {
+        result[statType].values = {};
+      }
+      this.statistics = this.fillStatistics(result);
+    },
     updateAPEComparison: function () {
       if (this.percentiles[this.APEToCompare] === undefined) {
         var asyncRequest = APERepository.getAPEScores(this.APEToCompare);
         const vm = this;
         asyncRequest.then((response) => {
-          var newPercentile = { ...vm.percentiles,
+          var newPercentile = {
+            ...vm.percentiles,
             [vm.APEToCompare]: response.statistics,
           };
           vm.percentiles = newPercentile;
@@ -130,15 +121,17 @@ export default {
       }
     },
     getDecile: function (statType, year, value) {
-      if (this.percentiles[this.APEToCompare] === undefined ||
+      if (
+        this.percentiles[this.APEToCompare] === undefined ||
         this.percentiles[this.APEToCompare][year] === undefined ||
-        this.percentiles[this.APEToCompare][year][statType] === undefined) {
+        this.percentiles[this.APEToCompare][year][statType] === undefined ||
+        value == "XXX"
+      ) {
         return -1;
       }
       var percentiles = this.percentiles[this.APEToCompare][year][statType].percentiles;
       for (var percentile in percentiles) {
         if (value < percentiles[percentile]) {
-          console.log(value, percentile, percentiles);
           return Math.round((percentile * 10) / 100);
         }
       }
@@ -164,7 +157,14 @@ export default {
       return colorsGradient[decile];
     },
     getTooltip: function (statType, year, value) {
-      return "dans le décile " + this.getDecile(statType, year, value);
+      var decile = this.getDecile(statType, year, value);
+      if (decile >= 0) {
+        return "dans le décile " + decile + " parmis " + this.percentiles[this.APEToCompare][year][statType].total_count + " sociétés";
+      }
+      else if (value == "XXX") {
+        return "Calcul impossible";
+      }
+      return "Déciles pas (encore) calculés";
     },
   },
 };
