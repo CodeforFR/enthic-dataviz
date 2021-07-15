@@ -8,7 +8,7 @@
               <input
                 type="search"
                 name="text"
-                class="input is-large"
+                class="input is-large search-box"
                 :value="searchText"
                 placeholder="Cherchez une entreprise par son nom"
               />
@@ -46,6 +46,10 @@ export default {
 };
 </script>
 <style scoped>
+.search-box {
+  width: 98%;
+  margin: 0 1vh;
+}
 .search-btn-as-icon {
   padding: 0 !important;
   margin: 0 !important;
