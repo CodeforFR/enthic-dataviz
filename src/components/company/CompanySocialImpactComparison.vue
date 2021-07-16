@@ -7,7 +7,13 @@
     <div class="control-bar">
       <div class="title is-6 m-r-30">Comparaison avec code APE :</div>
       <label v-for="ape in apeCodes" v-bind:key="ape" class="radio">
-        <input type="radio" name="answer" v-bind:value="ape" v-model="APEToCompare" @change="updateAPEComparison" />
+        <input
+          type="radio"
+          name="answer"
+          v-bind:value="ape"
+          v-model="APEToCompare"
+          @change="updateAPEComparison"
+        />
         {{ ape }}
       </label>
     </div>
@@ -24,7 +30,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(statType, statTypeId) in statistics" v-bind:key="statType.id">
+        <tr
+          v-for="(statType, statTypeId) in statistics"
+          v-bind:key="statType.id"
+        >
           <td>{{ statType.description }}</td>
           <td
             v-for="(value, year) in statType.values"
@@ -33,7 +42,9 @@
             v-bind:key="value.id"
           >
             <div class="tooltip">
-              <span class="tooltiptext">{{ getTooltip(statTypeId, year, value) }}</span>
+              <span class="tooltiptext">{{
+                getTooltip(statTypeId, year, value)
+              }}</span>
               {{ value }}
             </div>
           </td>
@@ -75,7 +86,11 @@ export default {
       while (companyApe.length < 4) {
         companyApe = "0" + companyApe;
       }
-      return [companyApe, companyApe.substring(0, 3), companyApe.substring(0, 2)];
+      return [
+        companyApe,
+        companyApe.substring(0, 3),
+        companyApe.substring(0, 2),
+      ];
     },
   },
   methods: {
@@ -86,15 +101,24 @@ export default {
         var yearData = this.companyData.declarations[year];
         for (var statType in statistics) {
           if ("statistics" in yearData && statType in yearData["statistics"]) {
-            statistics[statType].values[year] = yearData["statistics"][statType].value.toPrecision(2);
+            statistics[statType].values[year] =
+              yearData["statistics"][statType].value.toPrecision(2);
           } else {
             statistics[statType].values[year] = "XXX";
             serverComputationNeeded = true;
           }
         }
         if (serverComputationNeeded) {
-          console.log("trigger server computation for company ", this.companyData.denomination.value, " and year ", year);
-          CompaniesRepository.triggerServerComputation(this.companyData.denomination.value, year);
+          console.log(
+            "trigger server computation for company ",
+            this.companyData.denomination.value,
+            " and year ",
+            year
+          );
+          CompaniesRepository.triggerServerComputation(
+            this.companyData.denomination.value,
+            year
+          );
         }
       }
       return statistics;
@@ -129,7 +153,8 @@ export default {
       ) {
         return -1;
       }
-      var percentiles = this.percentiles[this.APEToCompare][year][statType].percentiles;
+      var percentiles =
+        this.percentiles[this.APEToCompare][year][statType].percentiles;
       for (var percentile in percentiles) {
         if (value < percentiles[percentile]) {
           return Math.round((percentile * 10) / 100);
@@ -159,9 +184,14 @@ export default {
     getTooltip: function (statType, year, value) {
       var decile = this.getDecile(statType, year, value);
       if (decile >= 0) {
-        return "dans le décile " + decile + " parmis " + this.percentiles[this.APEToCompare][year][statType].total_count + " sociétés";
-      }
-      else if (value == "XXX") {
+        return (
+          "dans le décile " +
+          decile +
+          " parmis " +
+          this.percentiles[this.APEToCompare][year][statType].total_count +
+          " sociétés"
+        );
+      } else if (value == "XXX") {
         return "Calcul impossible";
       }
       return "Déciles pas (encore) calculés";
