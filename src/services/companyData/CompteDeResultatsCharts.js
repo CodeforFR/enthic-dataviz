@@ -259,8 +259,7 @@ const calculateChartDetails = (comptesDeResultats) => {
       data: dataSeriesCA.cotisationSociale,
     },
     {
-      name:
-        "Achat de marchandises, matières premières et autre approvisionnement",
+      name: "Achat de marchandises, matières premières et autre approvisionnement",
       data: dataSeriesCA.marchandisesTotalAfficher,
     },
   ];

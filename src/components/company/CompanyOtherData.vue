@@ -91,7 +91,9 @@
         <div class="column is-12">
           <div>
             <span
-              class="has-text-weight-semibold has-text-primary has-text-primary-c"
+              class="
+                has-text-weight-semibold has-text-primary has-text-primary-c
+              "
             >
               <!-- {{ servicesData }}  -->
               {{ getDefaultText("services") }}
@@ -116,7 +118,9 @@
           <div>
             <span
               v-if="getCustomBlockTitle('block_left_bottom_2')"
-              class="has-text-weight-semibold has-text-primary has-text-primary-c"
+              class="
+                has-text-weight-semibold has-text-primary has-text-primary-c
+              "
             >
               {{ getCustomBlockTitle("block_left_bottom_2") }}
               <br /><br />

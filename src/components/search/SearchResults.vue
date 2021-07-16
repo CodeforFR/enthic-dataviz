@@ -122,8 +122,8 @@ export default {
         )
           return;
         const { clientHeight } = document.documentElement;
-        const endOfContentHeight = this.$refs.searchBox.getBoundingClientRect()
-          .bottom;
+        const endOfContentHeight =
+          this.$refs.searchBox.getBoundingClientRect().bottom;
         const screenRatio = 1.3;
         const shouldTriggerMoreData =
           endOfContentHeight < clientHeight * screenRatio;
