@@ -17,7 +17,9 @@
             <div class="column is-12">
               <div>
                 <span
-                  class="has-text-weight-semibold has-text-primary has-text-primary-c"
+                  class="
+                    has-text-weight-semibold has-text-primary has-text-primary-c
+                  "
                 >
                   <!-- {{ sourceData }}  -->
                   {{ getDefaultText("source") }}
@@ -45,7 +47,9 @@
               <div>
                 <span
                   v-if="getCustomBlockTitle('block_scale_tags')"
-                  class="has-text-weight-semibold has-text-primary has-text-primary-c"
+                  class="
+                    has-text-weight-semibold has-text-primary has-text-primary-c
+                  "
                 >
                   {{ getCustomBlockTitle("block_scale_tags") }}
                 </span>
@@ -61,7 +65,9 @@
               <div id="block-scale-2">
                 <span
                   v-if="getCustomBlockTitle('block_scale_2')"
-                  class="has-text-weight-semibold has-text-primary has-text-primary-c"
+                  class="
+                    has-text-weight-semibold has-text-primary has-text-primary-c
+                  "
                 >
                   {{ getCustomBlockTitle("block_scale_2") }}
                 </span>
@@ -96,7 +102,9 @@
             <div class="column is-12">
               <div>
                 <span
-                  class="has-text-weight-semibold has-text-primary has-text-primary-c"
+                  class="
+                    has-text-weight-semibold has-text-primary has-text-primary-c
+                  "
                 >
                   <!-- {{ periodData }}  -->
                   {{ getDefaultText("period") }}
@@ -185,7 +193,9 @@
             <div class="column is-12">
               <div>
                 <span
-                  class="has-text-weight-semibold has-text-primary has-text-primary-c"
+                  class="
+                    has-text-weight-semibold has-text-primary has-text-primary-c
+                  "
                 >
                   <!-- {{ infosData }}  -->
                   {{ getDefaultText("infos") }}
@@ -257,7 +267,9 @@
               >
                 <span
                   v-if="getCustomBlockTitle('block_rb1_tags')"
-                  class="has-text-weight-semibold has-text-primary has-text-primary-c"
+                  class="
+                    has-text-weight-semibold has-text-primary has-text-primary-c
+                  "
                 >
                   {{ getCustomBlockTitle("block_rb1_tags") }}
                 </span>
@@ -275,7 +287,9 @@
               <div>
                 <span
                   v-if="getCustomBlockTitle('block_right_bottom_1')"
-                  class="has-text-weight-semibold has-text-primary has-text-primary-c"
+                  class="
+                    has-text-weight-semibold has-text-primary has-text-primary-c
+                  "
                 >
                   {{ getCustomBlockTitle("block_right_bottom_1") }}
                   <br /><br />
@@ -291,7 +305,9 @@
 
                 <span
                   v-if="getCustomBlockTitle('block_right_bottom_2')"
-                  class="has-text-weight-semibold has-text-primary has-text-primary-c"
+                  class="
+                    has-text-weight-semibold has-text-primary has-text-primary-c
+                  "
                 >
                   {{ getCustomBlockTitle("block_right_bottom_2") }}
                   <br /><br />
