@@ -23,7 +23,6 @@
                 button
                 is-fullwidth is-primary is-primary-b is-outlined is-large
               "
-              style="padding-left: 0"
               type="submit"
             >
               <span class="is-hidden-touch search-btn-as-text">
