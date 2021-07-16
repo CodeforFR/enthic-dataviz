@@ -37,8 +37,8 @@
           <SearchBar />
           <div class="m-t-20">
             par exemple l'entreprise
-            <router-link class="result-link" to="/entreprises/443061841">
-              "Google France"</router-link
+            <router-link class="result-link" to="/recherche?text=enercoop">
+              "Enercoop"</router-link
             >
           </div>
         </div>
