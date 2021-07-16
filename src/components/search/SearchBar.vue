@@ -8,9 +8,9 @@
               <input
                 type="search"
                 name="text"
-                class="input is-large"
+                class="input is-large search-box"
                 :value="searchText"
-                placeholder="Cherchez une entreprise par son nom"
+                placeholder="nom de l'entreprise"
               />
               <span class="icon is-left">
                 <i class="fas fa-search"></i>
@@ -23,13 +23,12 @@
                 button
                 is-fullwidth is-primary is-primary-b is-outlined is-large
               "
-              style="padding-left: 0"
               type="submit"
             >
-              <span class="is-hidden-touch" style="padding-left: 0.7em">
+              <span class="is-hidden-touch search-btn-as-text">
                 Rechercher
               </span>
-              <span class="icon is-hidden-desktop">
+              <span class="icon is-hidden-desktop search-btn-as-icon">
                 <i class="fas fa-search"></i>
               </span>
             </button>
@@ -49,3 +48,19 @@ export default {
   },
 };
 </script>
+<style scoped>
+.search-box {
+  width: 98%;
+  margin: 0 1vh;
+}
+.search-box::placeholder {
+  font-style: italic;
+}
+.search-btn-as-icon {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.search-btn-as-text {
+  font-size: large;
+}
+</style>

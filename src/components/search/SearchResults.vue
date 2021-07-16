@@ -73,6 +73,9 @@ export default {
   mounted() {
     this.registerOnScroll();
   },
+  beforeDestroy() {
+    this.unregisterOnScroll();
+  },
   computed: {
     text() {
       return this.$route.query.text;
@@ -100,6 +103,10 @@ export default {
         this.checkScrollPosition();
       };
     },
+    unregisterOnScroll() {
+      window.onscroll = null;
+      window.onresize = null;
+    },
     checkScrollPosition() {
       try {
         if (
@@ -109,7 +116,9 @@ export default {
           !this.lastResults ||
           !this.lastResults.view ||
           !this.lastResults.view.next ||
-          !this.items
+          !this.items ||
+          !window.onscroll ||
+          !window.onresize
         )
           return;
         const { clientHeight } = document.documentElement;
