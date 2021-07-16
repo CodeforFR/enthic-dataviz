@@ -37,6 +37,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "resolutions": {
-    "ssri": "^7.1.1"
+    "ssri": "^7.1.1",
+    "glob-parent": ">5.1.2"
   }
 }
