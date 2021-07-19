@@ -7,14 +7,10 @@ const calculateComptesDeResultats = (declarations) => {
     return null;
   }
 
-  const comptesDeRésultats = [];
-  for (var year in declarations) {
-    comptesDeRésultats.push(declarationToTree(declarations[year], year));
-  }
-  return comptesDeRésultats;
+  return Object.entries(declarations).map(declarationToTree);
 };
 
-const declarationToTree = (declaration, year) => {
+const declarationToTree = ([year, declaration]) => {
   var yearTree = convertDataToTree(declaration.financial_data);
   checkTreeData(yearTree);
   yearTree.scores = computeScore(yearTree);
