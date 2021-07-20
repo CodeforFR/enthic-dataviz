@@ -24,16 +24,34 @@
         portail data.gouv.fr</a
       >
     </h3>
+    <p>Télécharger les données en csv</p>
+    <a class="button is-primary" :href="`${CsvCompanyUrl}`">
+      De l'entreprise {{ companyData.denomination.value }}
+    </a>
+    <a class="button is-primary" :href="`${CsvApeUrl}`">
+      Du secteur {{ companyData.ape.value }}
+    </a>
   </Widget>
 </template>
 
 <script>
 import Widget from "./Widget.vue";
+import CSVRepository from "@/repositories/csv/CSVRepository";
 
 export default {
   name: "CompanyIdentity",
   props: ["companyData"],
   components: { Widget },
+  computed: {
+    CsvCompanyUrl: function () {
+      let url = CSVRepository.getCompanyFinancialDataUrl(this.companyData.siren.value);
+      return url;
+    },
+    CsvApeUrl: function () {
+      let url = CSVRepository.getApeFinancialDataUrl(this.companyData.ape.code);
+      return url;
+    },
+  },
 };
 </script>
 
