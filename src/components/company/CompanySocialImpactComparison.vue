@@ -45,7 +45,7 @@
               <span class="tooltiptext">{{
                 getTooltip(statTypeId, year, value)
               }}</span>
-              {{ value }}
+              {{ value.toLocaleString() }}
             </div>
           </td>
         </tr>
@@ -102,7 +102,7 @@ export default {
         for (var statType in statistics) {
           if ("statistics" in yearData && statType in yearData["statistics"]) {
             statistics[statType].values[year] =
-              yearData["statistics"][statType].value.toPrecision(2);
+              yearData["statistics"][statType].value;
           } else {
             statistics[statType].values[year] = "XXX";
             serverComputationNeeded = true;
