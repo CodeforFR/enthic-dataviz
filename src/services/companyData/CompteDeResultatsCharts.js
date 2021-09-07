@@ -247,10 +247,6 @@ const calculateChartDetails = (comptesDeResultats) => {
   // Build data series to pass to graphical plugin
   let seriesCA = [
     {
-      name: "Autres charges retranchées des autres produits",
-      data: dataSeriesCA.autreChargesMoinsAutresProduitsAffiches,
-    },
-    {
       name: "Salaires Bruts",
       data: dataSeriesCA.salaires,
     },
@@ -258,17 +254,21 @@ const calculateChartDetails = (comptesDeResultats) => {
       name: "Cotisations Sociales",
       data: dataSeriesCA.cotisationSociale,
     },
-    {
-      name: "Achat de marchandises, matières premières et autre approvisionnement",
-      data: dataSeriesCA.marchandisesTotalAfficher,
-    },
   ];
   if (showTaxeVsSubvention) {
     seriesCA.push({
-      name: "Taxes diverses retranchées des subventions",
+      name: "Impôts de production moins subventions",
       data: dataSeriesCA.taxesMoinsSubventions,
     });
   }
+  seriesCA.push({
+    name: "Achats intermédiaires",
+    data: dataSeriesCA.marchandisesTotalAfficher,
+  });
+  seriesCA.push({
+    name: "Autres charges",
+    data: dataSeriesCA.autreChargesMoinsAutresProduitsAffiches,
+  });
   if (showResultatExploitation) {
     seriesCA.push({
       name: "Résultat d'exploitation (marge de l'entreprise)",
