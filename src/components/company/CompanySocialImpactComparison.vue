@@ -153,8 +153,8 @@ export default {
       ) {
         return -1;
       }
-      var percentiles =
-        this.percentiles[this.APEToCompare][year][statType].percentiles;
+      var percentiles = this.percentiles[this.APEToCompare][year][statType]
+        .percentiles;
       for (var percentile in percentiles) {
         if (value < percentiles[percentile]) {
           return Math.round((percentile * 10) / 100);
