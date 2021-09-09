@@ -14,15 +14,18 @@
       :options="chartDetails.optionsChartCA"
       :isStacked="true"
     ></BarChart>
-    <p class="title is-6">Listes des problèmes pour afficher le graphique</p>
-    <ul class="m-30">
-      <li
-        v-for="(item, index) in chartDetails.listOfUndisplayableData"
-        :key="index"
-      >
-        {{ item }}
-      </li>
-    </ul>
+    <div v-if="chartDetails.listOfUndisplayableData.length > 0">
+      <p class="title is-6">Listes des problèmes pour afficher le graphique</p>
+      <p>{{ chartDetails.listOfUndisplayableData }}</p>
+      <ul class="m-30">
+        <li
+          v-for="(item, index) in chartDetails.listOfUndisplayableData"
+          :key="index"
+        >
+          {{ item }}
+        </li>
+      </ul>
+    </div>
   </Widget>
 </template>
 
