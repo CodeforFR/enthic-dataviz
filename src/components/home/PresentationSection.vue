@@ -1,40 +1,35 @@
 <template>
-  <section class="container">
-    <div class="content-section m-2">
-      <p>
-        <a href="/">Enthic DataViz</a> est un outil de data visualisation de la
-        base de données <a href="https://www.enthic.fr">Enthic</a> qui contient
-        des données sur plus de 1,6 millions d'entreprises françaises :
-        bénéfice, chiffre d'affaires, salaire, cotisations sociales, prime
-        participation, effectif, impôt, et plus encore (tous les détails d'un
-        compte de résultat en fait).
-      </p>
-      <p>
-        Nous avons monté ce projet libre et ouvert, et nous le réalisons
-        bénévolement sur notre temps libre, car nous pensons que ces données
-        doivent être facilement accessible et compréhensible par tous, pour
-        mieux comprendre qui crée la richesse en France, qui touche des
-        subventions de la France, qui paye des impôts en France, et d'autres
-        question de ce genre que plein de citoyen⋅nes et consommateur/rices
-        français⋅ses se posent.
-      </p>
+  <div class="columns p-20 m-b-10 has-background-white-bis is-vcentered">
+    <div class="column is-half">
+      <div class="content">
+        <h1 class="is-size-1">Enthic Dataviz : c'est quoi?</h1>
+        <p>
+          Enthic DataViz est un outil de data visualisation de la base de
+          données <a href="https://www.enthic.fr">Enthic</a> qui contient des
+          données sur plus de 1,6 millions d'entreprises françaises : bénéfice,
+          chiffre d'affaires, salaire, impôt, et plein d'autres informations que
+          seuls les comptables comprennent (tous les détails d'un compte de
+          résultat en fait).
+        </p>
+        <p>
+          Le but est de rendre les données compréhensible au plus grand nombre,
+          à l'aide de graphiques, d'indicateurs, de comparaisons et
+          d'explications.
+        </p>
+        <p>
+          Nous avons monté ce projet car nous pensons que ces données doivent
+          être facilement accessible et compréhensible par tous, pour mieux
+          comprendre
+          <b
+            >qui, en France, crée la richesse, paye bien ses salarié⋅es, paye
+            des impôts</b
+          >, et d'autres question de ce genre que plein de citoyen⋅nes et
+          consommateur/rices français⋅ses se posent.
+        </p>
+      </div>
     </div>
-  </section>
+    <div class="column is-half">
+      <img src="../../assets/img/home/CA_Graphic_example.png" alt="" />
+    </div>
+  </div>
 </template>
-
-<style lang="scss" scoped>
-.logo-enthic {
-  width: 100px;
-  margin-bottom: 1rem;
-}
-
-.content-section {
-  margin: 1rem auto;
-  width: 90%;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: justify;
-}
-</style>
