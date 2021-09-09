@@ -19,10 +19,7 @@
           </div>
           <div class="column is-3 is-hidden-mobile">
             <button
-              class="
-                button
-                is-fullwidth is-primary is-primary-b is-outlined is-large
-              "
+              class="button is-fullwidth is-primary is-primary-b is-outlined is-large"
               type="submit"
             >
               <span class="is-hidden-touch search-btn-as-text">

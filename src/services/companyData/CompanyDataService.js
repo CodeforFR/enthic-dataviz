@@ -4,8 +4,9 @@ import AccountingService from "@/services/accounting/AccountingService";
 
 const getCompanyDataBySiren = async (siren) => {
   const companyData1 = await CompaniesRepository.getCompanyDataBySiren(siren);
-  const companyData2 =
-    AccountingService.addAccountingCalculations(companyData1);
+  const companyData2 = AccountingService.addAccountingCalculations(
+    companyData1
+  );
   return companyData2;
 };
 
