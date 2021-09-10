@@ -50,9 +50,9 @@
           </p>
         </div>
       </div>
-      <div class="column"></div>
     </div>
     <PartnersSection />
+    <iframe src="https://framaforms.org/le-projet-vous-interesse-laissez-nous-un-message-1631199316" style="width:100%;height:656px;" border="0"></iframe>
   </div>
 </template>
 
