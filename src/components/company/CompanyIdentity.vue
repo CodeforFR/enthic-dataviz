@@ -3,16 +3,16 @@
     <div class="tile is-parent">
       <div classe="tile is-child">
         <ul class="list-company-props m-30">
-          <li v-for="(data, index) in companyData.flatData" :key="index">
+          <li v-for="(data, index) in flatData" :key="index">
             {{ data.description }} : {{ data.value }}
           </li>
-          <li>{{ companyData.lastEffectif }}</li>
+          <li>{{ lastEffectif }}</li>
         </ul>
         <h3 class="is-3">
           Source officielle des données :
           <a
             class="inline-link"
-            :href="`https://data.inpi.fr/entreprises/${companyData.flatData.siren.value}`"
+            :href="`https://data.inpi.fr/entreprises/${flatData.siren.value}`"
           >
             data.inpi.fr
           </a>
@@ -21,7 +21,7 @@
           D'autres sources officielles :
           <a
             class="inline-link"
-            :href="`https://entreprise.data.gouv.fr/sirene/${companyData.flatData.siren.value}`"
+            :href="`https://entreprise.data.gouv.fr/sirene/${flatData.siren.value}`"
           >
             data.gouv.fr</a
           >
@@ -31,7 +31,7 @@
           <li>
             <a
               class="inline-link"
-              :href="`https://societe.ninja/data.php?siren=${companyData.flatData.siren.value}`"
+              :href="`https://societe.ninja/data.php?siren=${flatData.siren.value}`"
             >
               sur societe.ninja</a
             >
@@ -39,7 +39,7 @@
           <li>
             <a
               class="inline-link"
-              :href="`https://www.legaltile.com/search?q=${companyData.flatData.siren.value}`"
+              :href="`https://www.legaltile.com/search?q=${flatData.siren.value}`"
             >
               sur legaltile.com</a
             >
@@ -47,7 +47,7 @@
           <li>
             <a
               class="inline-link"
-              :href="`https://www.pappers.fr/recherche?q=${companyData.flatData.siren.value}`"
+              :href="`https://www.pappers.fr/recherche?q=${flatData.siren.value}`"
             >
               sur pappers.fr</a
             >
@@ -84,6 +84,34 @@ export default {
     CsvApeUrl: function () {
       let url = CSVRepository.getApeFinancialDataUrl(this.companyData.ape.code);
       return url;
+    },
+    lastEffectif: function () {
+      var lastEffectif = "Nombre de salarié⋅es non déclaré :-(";
+      var lastYear = 0;
+      for (var year in this.companyData.declarations) {
+        var yearData = this.companyData.declarations[year];
+        if (
+          year > lastYear &&
+          yearData.financial_data &&
+          yearData.financial_data.YP
+        ) {
+          lastYear = year;
+          lastEffectif =
+            yearData.financial_data.YP.value +
+            " salarié⋅es en moyenne sur " +
+            year;
+        }
+      }
+      return lastEffectif;
+    },
+    flatData: function () {
+      const flatData = {};
+      for (var property in this.companyData) {
+        if (["siren", "ape", "postal_code", "town"].includes(property)) {
+          flatData[property] = this.companyData[property];
+        }
+      }
+      return flatData;
     },
   },
 };
