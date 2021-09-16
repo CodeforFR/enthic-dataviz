@@ -1,5 +1,5 @@
 <template>
-  <div class="container is-fullheight m-t-30">
+  <div>
     <TitleSection />
     <PresentationSection />
     <div class="columns p-20 m-b-30 m-t-30 has-background-white-bis">

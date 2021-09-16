@@ -1,18 +1,27 @@
 <template>
-  <div class="columns p-20 m-b-30 m-t-30 has-background-white-bis">
-    <div class="column">
-      <div class="content has-text-centered">
-        <h2 class="is-size-2">
-          Explorez les données financières des entreprises françaises!
-        </h2>
-        <SearchBar />
-        <div class="m-t-20">
-          par exemple l'entreprise
-          <router-link class="result-link" to="/recherche?text=enercoop">
-            "Enercoop"</router-link
-          >
+  <div class="banner-and-search">
+    <div class="banner">
+      <div class="column is-10 is-offset-1 banner-flex">
+        <div class="banner-text">
+          <h2>Explorez les données financières des entreprises françaises !</h2>
+          <p>
+            Du mal à vous y retrouver avec toutes ces données et comprendre
+            comment les interprêter ? Enthic est fait pour vous !
+          </p>
         </div>
+        <img
+          src="@/assets/img/home/banner_illustration.png"
+          alt="banner illustration"
+        />
       </div>
+    </div>
+
+    <SearchBar />
+    <div class="m-t-20">
+      par exemple l'entreprise
+      <router-link class="result-link" to="/recherche?text=enercoop">
+        "Enercoop"</router-link
+      >
     </div>
   </div>
 </template>
