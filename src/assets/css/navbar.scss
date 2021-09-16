@@ -3,7 +3,9 @@
 @import './app-misc.scss';
 
 .navbar-layout {
-  border-bottom: solid 1px darkgray;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 25px;
 }
 
 .logo-enthic {
