@@ -19,12 +19,24 @@ $fa-font-path : "@/../../node_modules/@fortawesome/fontawesome-free/webfonts";
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
 
-$family-Nexa: "Nexa";
-$family-BonvenoCF: "BonvenoCF";
+// Define fonts for body and headers
+body {
+  font-family: 'Open Sans', "Nunito", "Work Sans", "Helvetica", "sans-serif"!important;
+}
 
-$family-sans-serif: "Nexa", sans-serif;
-$family-primary: $family-sans-serif;
-$family-secondary: $family-BonvenoCF;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', "Nunito", "Helvetica", "sans-serif"!important;
+}
+
+
+
+
+// $family-Nexa: "Nexa";
+// $family-BonvenoCF: "BonvenoCF";
+
+// $family-sans-serif: "Nexa", sans-serif;
+// $family-primary: $family-sans-serif;
+// $family-secondary: $family-BonvenoCF;
 $text: $app-text-color;
 $body-size: $app-base-font-size;
 
