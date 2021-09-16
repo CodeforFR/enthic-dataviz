@@ -6,13 +6,21 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 25px;
+  background-color: $light-orange;
+
+  .logo-enthic {
+    margin: 0.3rem 0 0 1rem;
+    width: 60px;
+    // transform: scale(0.2);
+  }
+
+  .burger-menu {
+    font-size: 25px;
+    color: $purple!important;
+  }
+
 }
 
-.logo-enthic {
-  margin: 0.3rem 0 0 1rem;
-  width: 60px;
-  // transform: scale(0.2);
-}
 
 
 
