@@ -11,8 +11,8 @@
         </a>
         <CompanyIdentity :companyData="companyData" />
         <CompanyNoCompteDeResultats :companyData="companyData" />
-        <CompanyChartCA :chartDetails="chartDetails" />
-        <CompanyChartMargin :chartDetails="chartDetails" />
+        <CompanyChartCA :chartDetails="chartCADetails" />
+        <CompanyChartMargin :chartDetails="chartMarginDetails" />
         <CompanyCompteDeResultatsTree :companyData="companyData" />
         <CompanySocialImpactComparison :companyData="companyData" />
         <CompanyScoring :companyData="companyData" />
@@ -54,11 +54,15 @@ export default {
   },
   props: ["companyData"],
   computed: {
-    chartDetails() {
-      const chartData = ChartDataService.calculateChartDetails(
+    chartCADetails() {
+      return ChartDataService.calculateCAChartDetails(
         this.companyData.comptesDeResultats
       );
-      return chartData;
+    },
+    chartMarginDetails() {
+      return ChartDataService.calculateMarginChartDetails(
+        this.companyData.comptesDeResultats
+      );
     },
   },
   methods: {

@@ -10,7 +10,7 @@ function computeRatio(value, factor) {
   return Math.round((1000 * value) / factor) / 1000;
 }
 
-const calculateChartUnits = (comptesDeResultats) => {
+const calculateCAChartUnits = (comptesDeResultats) => {
   // Find perfect unit for CA graphic (€, k€ or M€)
   let beneficeItem = comptesDeResultats[0];
   if (!beneficeItem) {
@@ -34,6 +34,18 @@ const calculateChartUnits = (comptesDeResultats) => {
     unitCA = "milliers d'€";
   }
 
+  return {
+    factorCA: factorCA,
+    unitCA: unitCA,
+  };
+};
+
+const calculateMarginChartUnits = (comptesDeResultats) => {
+  let beneficeItem = comptesDeResultats[0];
+  if (!beneficeItem) {
+    return null;
+  }
+
   // Find perfect unit for margin graphic (€, k€ or M€)
   let factorMargin = 1;
   let unitMargin = "€";
@@ -51,24 +63,15 @@ const calculateChartUnits = (comptesDeResultats) => {
     unitMargin = "milliers d'€";
   }
   return {
-    factorCA: factorCA,
-    unitCA: unitCA,
     factorMargin: factorMargin,
     unitMargin: unitMargin,
   };
 };
 
-const calculateChartDetails = (comptesDeResultats) => {
-  let units = calculateChartUnits(comptesDeResultats);
+const calculateCAChartDetails = (comptesDeResultats) => {
+  let units = calculateCAChartUnits(comptesDeResultats);
 
   let xLabels = [];
-
-  let dataSeriesMargin = {
-    resultatExceptionnelEtFinancier: [],
-    Participation: [],
-    ImpotsSurLesSocietes: [],
-    resultatPourProprietaire: [],
-  };
 
   let dataSeriesCA = {
     salaires: [],
@@ -84,7 +87,7 @@ const calculateChartDetails = (comptesDeResultats) => {
     minimumFractionDigits: 0,
   });
   let listOfUndisplayableData = [];
-  let showResultatExploitation = true;
+  let showResultatExploitation = false;
   let showTaxeVsSubvention = true;
   for (let i = 0; i < comptesDeResultats.length; i++) {
     xLabels.push(comptesDeResultats[i].year);
@@ -161,11 +164,12 @@ const calculateChartDetails = (comptesDeResultats) => {
 
     // Display only if positive
     if (resultatExploitation < 0) {
-      showResultatExploitation = false;
       resultatExploitation = 0;
       listOfUndisplayableData.push(
         "Résultat d'exploitation négatif en " + xLabels[i]
       );
+    } else {
+      showResultatExploitation = true;
     }
 
     // Compute other complexe data to display
@@ -215,33 +219,6 @@ const calculateChartDetails = (comptesDeResultats) => {
     dataSeriesCA.resultatExploitation.push(
       computeRatio(resultatExploitation, units.factorCA)
     );
-
-    // Application du ratio pour l'affichage du graphe sur le résultat d'exploitation
-    dataSeriesMargin.Participation.push(
-      Math.round(
-        (1000 *
-          rootItem.children.ParticipationSalariesAuxResultats.data.value) /
-          units.factorMargin
-      ) / 1000
-    );
-    dataSeriesMargin.ImpotsSurLesSocietes.push(
-      computeRatio(
-        rootItem.children.ImpotsSurLesBenefices.data.value,
-        units.factorMargin
-      )
-    );
-    dataSeriesMargin.resultatPourProprietaire.push(
-      computeRatio(rootItem.data.value, units.factorMargin)
-    );
-    dataSeriesMargin.resultatExceptionnelEtFinancier.push(
-      Math.round(
-        (1000 *
-          (-rootItem.children.ResultatExceptionnel.data.value -
-            rootItem.children.ResultatAvantImpot.children.ResultatFinancier.data
-              .value)) /
-          units.factorMargin
-      ) / 1000
-    );
   }
 
   // Build data series to pass to graphical plugin
@@ -285,6 +262,58 @@ const calculateChartDetails = (comptesDeResultats) => {
       name: units.unitCA,
     },
   };
+  return {
+    optionsChartCA,
+    listOfUndisplayableData,
+  };
+};
+
+const calculateMarginChartDetails = (comptesDeResultats) => {
+  let marginUnits = calculateMarginChartUnits(comptesDeResultats);
+
+  let xLabels = [];
+
+  let dataSeriesMargin = {
+    resultatExceptionnelEtFinancier: [],
+    Participation: [],
+    ImpotsSurLesSocietes: [],
+    resultatPourProprietaire: [],
+  };
+
+  for (let i = 0; i < comptesDeResultats.length; i++) {
+    xLabels.push(comptesDeResultats[i].year);
+
+    // Local variables for code visibility
+    let rootItem = comptesDeResultats[i];
+
+    // Application du ratio pour l'affichage du graphe sur le résultat d'exploitation
+    dataSeriesMargin.Participation.push(
+      computeRatio(
+        rootItem.children.ParticipationSalariesAuxResultats.data.value,
+        marginUnits.factorMargin
+      )
+    );
+    dataSeriesMargin.ImpotsSurLesSocietes.push(
+      computeRatio(
+        rootItem.children.ImpotsSurLesBenefices.data.value,
+        marginUnits.factorMargin
+      )
+    );
+    dataSeriesMargin.resultatPourProprietaire.push(
+      computeRatio(rootItem.data.value, marginUnits.factorMargin)
+    );
+    dataSeriesMargin.resultatExceptionnelEtFinancier.push(
+      Math.round(
+        (1000 *
+          (-rootItem.children.ResultatExceptionnel.data.value -
+            rootItem.children.ResultatAvantImpot.children.ResultatFinancier.data
+              .value)) /
+          marginUnits.factorMargin
+      ) / 1000
+    );
+  }
+
+  // Build data series to pass to graphical plugin
   let optionsChartMargin = {
     series: [
       {
@@ -308,16 +337,13 @@ const calculateChartDetails = (comptesDeResultats) => {
       data: xLabels,
     },
     yAxis: {
-      name: units.unitMargin,
+      name: marginUnits.unitMargin,
     },
   };
-  return {
-    optionsChartMargin,
-    optionsChartCA,
-    listOfUndisplayableData,
-  };
+  return { optionsChartMargin };
 };
 
 export default {
-  calculateChartDetails,
+  calculateCAChartDetails,
+  calculateMarginChartDetails,
 };
