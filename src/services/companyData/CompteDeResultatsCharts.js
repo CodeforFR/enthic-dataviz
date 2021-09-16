@@ -166,7 +166,7 @@ const calculateCAChartDetails = (comptesDeResultats) => {
     if (resultatExploitation < 0) {
       resultatExploitation = 0;
       listOfUndisplayableData.push(
-        "Résultat d'exploitation négatif en " + xLabels[i]
+        "Résultat d'exploitation négatif en " + xLabels[i] + ". Mis à zéro sur le graphique"
       );
     } else {
       showResultatExploitation = true;
