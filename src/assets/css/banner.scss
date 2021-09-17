@@ -1,33 +1,56 @@
-.banner {
-  background-color: $light-orange;
-  width: 100vw;
+.banner-and-search {
+  .banner {
+    background-color: $light-orange;
+    width: 100vw;
 
-  .banner-flex {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .banner-text {
-    width: 45%;
-    margin-right: 20px;
-
-    h2 {
-      color: $dark-blue;
-      font-size: 40px;
-      font-weight: bold;
-      margin-bottom: 20px;
+    .banner-flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    p {
-      line-height: 40px;
-      font-weight: 25px;
-      width: 80%;
+    .banner-text {
+      width: 45%;
+      margin-right: 20px;
+
+      h2 {
+        color: $dark-blue;
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      p {
+        line-height: 40px;
+        font-weight: 25px;
+        width: 80%;
+      }
+    }
+
+    img {
+      width: 580px;
     }
   }
+}
 
+.banner-and-search {
+  position: relative;
+  .custom-shape-divider-top-1631883689 {
+    position: absolute;
+    top: 470px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .custom-shape-divider-top-1631883689 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 140px;
+  }
 
-  img {
-    width: 580px;
+  .custom-shape-divider-top-1631883689 .shape-fill {
+    fill: #FFE9E4;
   }
 }
