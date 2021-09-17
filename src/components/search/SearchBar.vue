@@ -2,7 +2,7 @@
   <section id="top" class="container search-text primary-bg m-t-30">
     <div class="background columns is-centered top-section">
       <div class="column is-8">
-        <form action="/recherche" method="GET" class="columns">
+        <form action="/recherche" method="GET" class="columns search-bar">
           <div class="column is-9">
             <div class="control has-icons-left is-large">
               <input
@@ -10,24 +10,21 @@
                 name="text"
                 class="input is-large search-box"
                 :value="searchText"
-                placeholder="nom de l'entreprise"
+                placeholder="Saisissez le nom d'une entreprise (ex: enercoop)"
               />
-              <span class="icon is-left">
+              <span class="icon is-left" id="search-icon">
                 <i class="fas fa-search"></i>
               </span>
             </div>
           </div>
-          <div class="column is-3 is-hidden-mobile">
-            <button
-              class="button is-fullwidth is-primary is-primary-b is-outlined is-large"
-              type="submit"
-            >
+          <div class="column is-3 is-hidden-mobile has-text-centered">
+            <button class="search-btn" type="submit">
               <span class="is-hidden-touch search-btn-as-text">
-                Rechercher
+                C'est parti 🚀
               </span>
-              <span class="icon is-hidden-desktop search-btn-as-icon">
+              <!-- <span class="icon is-hidden-desktop search-btn-as-icon">
                 <i class="fas fa-search"></i>
-              </span>
+              </span> -->
             </button>
           </div>
         </form>
@@ -35,6 +32,7 @@
     </div>
   </section>
 </template>
+
 <script>
 export default {
   props: {
@@ -45,19 +43,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.search-box {
-  width: 98%;
-  margin: 0 1vh;
-}
-.search-box::placeholder {
-  font-style: italic;
-}
-.search-btn-as-icon {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-.search-btn-as-text {
-  font-size: large;
-}
-</style>
