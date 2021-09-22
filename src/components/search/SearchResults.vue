@@ -124,12 +124,38 @@ export default {
       return this.totalItems - this.items.length;
     },
     nextSearchUrl() {
+      if (this.SearchEngine !== "Enthic") return null;
       if (!this.lastResults || !this.lastResults.view) return null;
       return this.lastResults.view.next;
     },
     sortOption() {
-      if (this.$route.query.sort) {
+      if (this.SearchEngine === "OpenDataSoft" && this.$route.query.sort) {
         return this.$route.query.sort;
+      }
+      return null;
+    },
+    searchOptions() {
+      switch (this.SearchEngine) {
+        case "OpenDataSoft":
+          return {
+            text: this.text,
+            sort: this.sortOption,
+            offset: this.items ? this.items.length : 0,
+          };
+        case "Enthic":
+          return {
+            text: this.text,
+            nextSearchUrl: this.nextSearchUrl,
+          };
+      }
+      return null;
+    },
+    searchRepository() {
+      switch (this.SearchEngine) {
+        case "OpenDataSoft":
+          return OpenDataSoftSearchRepository;
+        case "Enthic":
+          return EnthicSearchRepository;
       }
       return null;
     },
@@ -173,21 +199,12 @@ export default {
       }
     },
     async searchInitial() {
-      // console.log("search with ", this.SearchEngine);
       try {
         this.loading = true;
         this.lastResults = null;
-        var firstResults = null;
-        if (this.SearchEngine == "OpenDataSoft") {
-          firstResults = await OpenDataSoftSearchRepository.searchFirstPage({
-            text: this.text,
-            sort: this.sortOption,
-          });
-        } else if (this.SearchEngine == "Enthic") {
-          firstResults = await EnthicSearchRepository.searchFirstPage({
-            text: this.text,
-          });
-        }
+        const firstResults = await this.searchRepository.searchFirstPage(
+          this.searchOptions
+        );
         this.error = null;
         this.lastResults = firstResults;
         this.items = firstResults.items;
@@ -200,18 +217,9 @@ export default {
     async searchNext() {
       try {
         this.loadingNext = true;
-        var nextResults = null;
-        if (this.SearchEngine == "OpenDataSoft") {
-          nextResults = await OpenDataSoftSearchRepository.searchNextPage({
-            text: this.text,
-            offset: this.items.length,
-            sort: this.sortOption,
-          });
-        } else if (this.SearchEngine == "Enthic") {
-          nextResults = await EnthicSearchRepository.searchNextPage({
-            nextSearchUrl: this.nextSearchUrl,
-          });
-        }
+        const nextResults = await this.searchRepository.searchNextPage(
+          this.searchOptions
+        );
         this.lastResults = nextResults;
         this.items.push(...nextResults.items);
         this.loadingNext = false;
