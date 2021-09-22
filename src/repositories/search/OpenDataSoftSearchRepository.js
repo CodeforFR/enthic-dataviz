@@ -16,6 +16,14 @@ export default {
       url += "&sort=" + sort;
     }
     const results = await opendatasoftApiClient.get(url);
-    return results ? results.data : null;
+
+    return this.formatResult(results);
+  },
+
+  formatResult(results) {
+    console.log("results from OpenDataSoft:", results.data.records);
+    return results
+      ? { ...results.data, records: null, items: results.data.records }
+      : null;
   },
 };
