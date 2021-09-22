@@ -8,14 +8,17 @@
         alt=""
       />
       <h3 v-if="loading">recherche en cours pour '{{ text }}'</h3>
+      <h3 v-if="!loading && !error" class="is-size-3">
+        Résultats pour la recherche
+        <span class="is-3 is-italic">"{{ text }}"</span>
+      </h3>
+
       <div class="error-message" v-if="error">
         Erreur lors de la recherche '{{ text }}' : {{ error }}
       </div>
       <div v-if="items">
-        <h3 class="is-size-3">Résultats pour la recherche</h3>
-        <h3 class="is-3">{{ text }}</h3>
-        <p>via</p>
-        <div class="control">
+        <span>via </span>
+        <span class="control">
           <label class="radio">
             <input
               type="radio"
@@ -36,8 +39,8 @@
             />
             Enthic
           </label>
-        </div>
-        <h4 class="result-count">
+        </span>
+        <h4 v-if="!loading && !error" class="result-count">
           <span class="result-count-number">
             {{ totalItems }}
           </span>
