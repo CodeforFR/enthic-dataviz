@@ -179,16 +179,14 @@ export default {
         this.lastResults = null;
         var firstResults = null;
         if (this.SearchEngine == "OpenDataSoft") {
-          firstResults =
-            await OpenDataSoftSearchRepository.searchCompaniesFromText(
-              this.text,
-              0,
-              this.sortOption
-            );
+          firstResults = await OpenDataSoftSearchRepository.searchFirstPage({
+            text: this.text,
+            sort: this.sortOption,
+          });
         } else if (this.SearchEngine == "Enthic") {
-          firstResults = await EnthicSearchRepository.searchCompaniesFromText(
-            this.text
-          );
+          firstResults = await EnthicSearchRepository.searchFirstPage({
+            text: this.text,
+          });
         }
         this.error = null;
         this.lastResults = firstResults;
@@ -204,16 +202,15 @@ export default {
         this.loadingNext = true;
         var nextResults = null;
         if (this.SearchEngine == "OpenDataSoft") {
-          nextResults =
-            await OpenDataSoftSearchRepository.searchCompaniesFromText(
-              this.text,
-              this.items.length,
-              this.sortOption
-            );
+          nextResults = await OpenDataSoftSearchRepository.searchNextPage({
+            text: this.text,
+            offset: this.items.length,
+            sort: this.sortOption,
+          });
         } else if (this.SearchEngine == "Enthic") {
-          nextResults = await EnthicSearchRepository.searchCompaniesFromUrl(
-            this.nextSearchUrl
-          );
+          nextResults = await EnthicSearchRepository.searchNextPage({
+            nextSearchUrl: this.nextSearchUrl,
+          });
         }
         this.lastResults = nextResults;
         this.items.push(...nextResults.items);

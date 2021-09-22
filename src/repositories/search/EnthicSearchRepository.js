@@ -1,6 +1,16 @@
 import { apiClient } from "../ServerConfiguration";
 
 export default {
+  async searchFirstPage(enthicSearchOptions) {
+    const { text } = enthicSearchOptions;
+    if (!text) return null;
+    return this.searchCompaniesFromText(text);
+  },
+  async searchNextPage(enthicSearchOptions) {
+    const { nextSearchUrl } = enthicSearchOptions;
+    if (!nextSearchUrl) return null;
+    return this.searchCompaniesFromUrl(nextSearchUrl);
+  },
   async searchCompaniesFromText(text) {
     const url = `/company/search/page?page=1&per_page=30&probe=${text}`;
     return this.searchCompaniesFromUrl(url);
