@@ -21,7 +21,7 @@
               type="radio"
               name="answer"
               v-model="SearchEngine"
-              v-bind:value="OpenDataSoft"
+              value="OpenDataSoft"
               @change="searchInitial"
             />
             OpenDataSoft
@@ -31,7 +31,7 @@
               type="radio"
               name="answer"
               v-model="SearchEngine"
-              v-bind:value="Enthic"
+              value="Enthic"
               @change="searchInitial"
             />
             Enthic
@@ -157,8 +157,8 @@ export default {
         )
           return;
         const { clientHeight } = document.documentElement;
-        const endOfContentHeight = this.$refs.searchBox.getBoundingClientRect()
-          .bottom;
+        const endOfContentHeight =
+          this.$refs.searchBox.getBoundingClientRect().bottom;
         const screenRatio = 1.3;
         const shouldTriggerMoreData =
           endOfContentHeight < clientHeight * screenRatio;
@@ -170,16 +170,18 @@ export default {
       }
     },
     async searchInitial() {
+      // console.log("search with ", this.SearchEngine);
       try {
         this.loading = true;
         this.lastResults = null;
         var firstResults = null;
         if (this.SearchEngine == "OpenDataSoft") {
-          firstResults = await OpenDataSoftSearchRepository.searchCompaniesFromText(
-            this.text,
-            0,
-            this.sortOption
-          );
+          firstResults =
+            await OpenDataSoftSearchRepository.searchCompaniesFromText(
+              this.text,
+              0,
+              this.sortOption
+            );
         } else if (this.SearchEngine == "Enthic") {
           firstResults = await EnthicSearchRepository.searchCompaniesFromText(
             this.text
@@ -203,11 +205,12 @@ export default {
         this.loadingNext = true;
         var nextResults = null;
         if (this.SearchEngine == "OpenDataSoft") {
-          nextResults = await OpenDataSoftSearchRepository.searchCompaniesFromText(
-            this.text,
-            this.items.length,
-            this.sortOption
-          );
+          nextResults =
+            await OpenDataSoftSearchRepository.searchCompaniesFromText(
+              this.text,
+              this.items.length,
+              this.sortOption
+            );
         } else if (this.SearchEngine == "Enthic") {
           nextResults = await EnthicSearchRepository.searchCompaniesFromUrl(
             this.nextSearchUrl
