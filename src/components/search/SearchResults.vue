@@ -189,11 +189,7 @@ export default {
         }
         this.error = null;
         this.lastResults = firstResults;
-        if (this.SearchEngine == "OpenDataSoft") {
-          this.items = firstResults.records;
-        } else if (this.SearchEngine == "Enthic") {
-          this.items = firstResults.member;
-        }
+        this.items = firstResults.items;
       } catch (e) {
         this.error = e;
       } finally {
@@ -217,11 +213,7 @@ export default {
           );
         }
         this.lastResults = nextResults;
-        if (this.SearchEngine == "OpenDataSoft") {
-          this.items.push(...nextResults.records);
-        } else if (this.SearchEngine == "Enthic") {
-          this.items.push(...nextResults.member);
-        }
+        this.items.push(...nextResults.items);
         this.loadingNext = false;
       } catch (e) {
         console.log("Error Next...", e);
