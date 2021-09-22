@@ -14,16 +14,43 @@
       <div v-if="items">
         <h3 class="is-size-3">Résultats pour la recherche</h3>
         <h3 class="is-3">{{ text }}</h3>
+        <p>via</p>
+        <div class="control">
+          <label class="radio">
+            <input
+              type="radio"
+              name="answer"
+              v-model="SearchEngine"
+              v-bind:value="OpenDataSoft"
+              @change="searchInitial"
+            />
+            OpenDataSoft
+          </label>
+          <label class="radio">
+            <input
+              type="radio"
+              name="answer"
+              v-model="SearchEngine"
+              v-bind:value="Enthic"
+              @change="searchInitial"
+            />
+            Enthic
+          </label>
+        </div>
         <h4 class="result-count">
           <span class="result-count-number">
             {{ totalItems }}
           </span>
           sociétés trouvées
         </h4>
-        <CompanyList :companies="items" />
+        <OpenDataSoftResultList
+          v-if="SearchEngine == 'OpenDataSoft'"
+          :companies="items"
+        />
+        <EnthicResultList v-if="SearchEngine == 'Enthic'" :companies="items" />
       </div>
     </div>
-    <div v-if="nextSearchUrl" class="next-results-plachodler">
+    <div v-if="remainingResultsCount > 0" class="next-results-plachodler">
       <div class="error-message" v-if="errorNext">
         Erreur lors de la recherche des pages suivante : {{ errorNext }}
       </div>
@@ -48,14 +75,17 @@
 </template>
 
 <script>
-import CompanyList from "@/components/company/CompanyList.vue";
-import SearchRepository from "@/repositories/search/SearchRepository";
+import EnthicResultList from "./EnthicResultList.vue";
+import OpenDataSoftResultList from "./OpenDataSoftResultList.vue";
+import EnthicSearchRepository from "@/repositories/search/EnthicSearchRepository";
+import OpenDataSoftSearchRepository from "@/repositories/search/OpenDataSoftSearchRepository";
 
 // import SearchRepository from "@/repositories/search/SearchRepository.fake";
 
 export default {
   components: {
-    CompanyList,
+    OpenDataSoftResultList,
+    EnthicResultList,
   },
   data() {
     return {
@@ -65,6 +95,7 @@ export default {
       loadingNext: false,
       error: null,
       errorNext: null,
+      SearchEngine: "OpenDataSoft",
     };
   },
   created() {
@@ -82,6 +113,7 @@ export default {
     },
     totalItems() {
       if (!this.lastResults) return null;
+      if (this.lastResults.nhits) return this.lastResults.nhits;
       return this.lastResults.totalItems;
     },
     remainingResultsCount() {
@@ -91,6 +123,12 @@ export default {
     nextSearchUrl() {
       if (!this.lastResults || !this.lastResults.view) return null;
       return this.lastResults.view.next;
+    },
+    sortOption() {
+      if (this.$route.query.sort) {
+        return this.$route.query.sort;
+      }
+      return null;
     },
   },
   methods: {
@@ -113,10 +151,7 @@ export default {
           this.loading ||
           this.loadingNext ||
           this.error ||
-          !this.lastResults ||
-          !this.lastResults.view ||
-          !this.lastResults.view.next ||
-          !this.items ||
+          this.remainingResultsCount <= 0 ||
           !window.onscroll ||
           !window.onresize
         )
@@ -138,12 +173,25 @@ export default {
       try {
         this.loading = true;
         this.lastResults = null;
-        const firstResults = await SearchRepository.searchCompaniesFromText(
-          this.text
-        );
+        var firstResults = null;
+        if (this.SearchEngine == "OpenDataSoft") {
+          firstResults = await OpenDataSoftSearchRepository.searchCompaniesFromText(
+            this.text,
+            0,
+            this.sortOption
+          );
+        } else if (this.SearchEngine == "Enthic") {
+          firstResults = await EnthicSearchRepository.searchCompaniesFromText(
+            this.text
+          );
+        }
         this.error = null;
         this.lastResults = firstResults;
-        this.items = firstResults.member;
+        if (this.SearchEngine == "OpenDataSoft") {
+          this.items = firstResults.records;
+        } else if (this.SearchEngine == "Enthic") {
+          this.items = firstResults.member;
+        }
       } catch (e) {
         this.error = e;
       } finally {
@@ -153,11 +201,24 @@ export default {
     async searchNext() {
       try {
         this.loadingNext = true;
-        const nextResults = await SearchRepository.searchCompaniesFromUrl(
-          this.nextSearchUrl
-        );
+        var nextResults = null;
+        if (this.SearchEngine == "OpenDataSoft") {
+          nextResults = await OpenDataSoftSearchRepository.searchCompaniesFromText(
+            this.text,
+            this.items.length,
+            this.sortOption
+          );
+        } else if (this.SearchEngine == "Enthic") {
+          nextResults = await EnthicSearchRepository.searchCompaniesFromUrl(
+            this.nextSearchUrl
+          );
+        }
         this.lastResults = nextResults;
-        this.items.push(...nextResults.member);
+        if (this.SearchEngine == "OpenDataSoft") {
+          this.items.push(...nextResults.records);
+        } else if (this.SearchEngine == "Enthic") {
+          this.items.push(...nextResults.member);
+        }
         this.loadingNext = false;
       } catch (e) {
         console.log("Error Next...", e);
