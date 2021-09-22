@@ -10,6 +10,18 @@ export const opendatasoftApiClient = axios.create({
 });
 
 export default {
+  async searchFirstPage(openDataSoftSearchOptions) {
+    const { text, sort } = openDataSoftSearchOptions;
+    if (!text) return null;
+    const offset = 0;
+    return this.searchCompaniesFromText(text, offset, sort);
+  },
+  async searchNextPage(openDataSoftSearchOptions) {
+    const { text, offset, sort } = openDataSoftSearchOptions;
+    if (!text) return null;
+    if (!offset) throw Error("offset can't be empty for next page");
+    return this.searchCompaniesFromText(text, offset, sort);
+  },
   async searchCompaniesFromText(text, offset = 0, sort = null) {
     var url = `/api/records/1.0/search/?dataset=economicref-france-sirene-v3%40public&q=${text}&rows=30&refine.etablissementsiege=oui&refine.etatadministratifunitelegale=Active&start=${offset}`;
     if (sort) {
