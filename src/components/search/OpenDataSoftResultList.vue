@@ -4,9 +4,13 @@
       <thead>
         <tr>
           <th>Dénomination</th>
-          <th>Effectif</th>
+          <router-link class="result-link" :to="effectifSortRoute()">
+            <th>Effectif</th>
+          </router-link>
           <th>Secteur (code APE)</th>
-          <th>Dates</th>
+          <router-link class="result-link" :to="dateCreationSortRoute()">
+            <th>Dates</th>
+          </router-link>
           <th>SIREN</th>
         </tr>
       </thead>
@@ -48,6 +52,11 @@ export default {
     effectifSortRoute() {
       var route = { ...this.$route };
       route.query["sort"] = "trancheeffectifsunitelegaletriable";
+      return route;
+    },
+    dateCreationSortRoute() {
+      var route = { ...this.$route };
+      route.query["sort"] = "datecreationunitelegale";
       return route;
     },
     getEffectif(company) {
