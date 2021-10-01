@@ -6,16 +6,21 @@
           <th>Dénomination</th>
           <th>
             <SortArrowTitle
-              :sort="sortEffectif"
-              @sortChanged="handleSortEffectifChange"
+              :sortOrder="sortOrderForField(FIELD_TRI_EFFECTIF)"
+              @sortOrderChanged="
+                (order) =>
+                  handleSortOrderChangeForField(FIELD_TRI_EFFECTIF)(order)
+              "
               name="Effectif"
             />
           </th>
           <th>Secteur (code APE)</th>
           <th>
             <SortArrowTitle
-              :sort="sortDate"
-              @sortChanged="handleSortDateChange"
+              :sortOrder="sortOrderForField(FIELD_TRI_DATE)"
+              @sortOrderChanged="
+                (order) => handleSortOrderChangeForField(FIELD_TRI_DATE)(order)
+              "
               name="Dates"
             />
           </th>
@@ -62,27 +67,33 @@ export default {
       type: Array,
       required: true,
     },
-    sortEffectif: {
-      type: Boolean,
-      default: null,
-      required: false,
-    },
-    sortDate: {
-      type: Boolean,
+    sort: {
+      type: Object,
       default: null,
       required: false,
     },
   },
+  data() {
+    return {
+      FIELD_TRI_EFFECTIF,
+      FIELD_TRI_DATE,
+    };
+  },
   methods: {
+    sortOrderForField(field) {
+      if (this.sort?.field === field) return this.sort?.order;
+      return null;
+    },
     companyDetailRoute: (company) => ({
       name: "Detail",
       params: { siren: company.fields.siren },
     }),
-    handleSortEffectifChange(order) {
-      this.$emit("sortChanged", { field: FIELD_TRI_EFFECTIF, order });
-    },
-    handleSortDateChange(order) {
-      this.$emit("sortChanged", { field: FIELD_TRI_DATE, order });
+
+    handleSortOrderChangeForField(field) {
+      return (order) => {
+        // console.log("EMIT sortChanged", { field, order });
+        this.$emit("sortChanged", { field, order });
+      };
     },
     rollSortValue(val) {
       if (val === null || val === "") return true;

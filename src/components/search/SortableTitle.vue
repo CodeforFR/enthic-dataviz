@@ -3,12 +3,12 @@
     <span>
       {{ name }}
     </span>
-    <span v-if="sort === false">
+    <span v-if="sortOrder === false">
       <span class="icon icon-1">
         <i class="fas fa-caret-down"></i>
       </span>
     </span>
-    <span v-else-if="sort === true">
+    <span v-else-if="sortOrder === true">
       <span class="icon icon-1">
         <i class="fas fa-caret-up"></i>
       </span>
@@ -23,7 +23,7 @@ export default {
       type: String,
       required: true,
     },
-    sort: {
+    sortOrder: {
       type: Boolean,
       default: null,
       required: false,
@@ -31,8 +31,8 @@ export default {
   },
   methods: {
     toggleSort() {
-      const sort = this.rollSortValue(this.sort);
-      this.$emit("sortChanged", sort);
+      const newSortOrder = this.rollSortValue(this.sortOrder);
+      this.$emit("sortOrderChanged", newSortOrder);
     },
     rollSortValue(currentValue) {
       if (currentValue === null || currentValue === "") return true;
