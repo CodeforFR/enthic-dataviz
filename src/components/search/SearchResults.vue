@@ -49,9 +49,8 @@
         <OpenDataSoftResultList
           v-if="SearchEngine == 'OpenDataSoft'"
           :companies="items"
-          :sortEffectif="sortEffectif"
-          :sortDate="sortDate"
-          @sortChanged="handleSortChanged"
+          :sort="sortData"
+          @sortChanged="handleSortChange"
         />
         <EnthicResultList v-if="SearchEngine == 'Enthic'" :companies="items" />
       </div>
@@ -146,12 +145,16 @@ export default {
     sortEffectif() {
       if (this.SearchEngine !== "OpenDataSoft") return null;
       const sort = this.readSortQuery(this.$route.query.sort);
-      return sort?.field === "effectif" ? sort.order : null;
+      return sort?.field === FIELD_TRI_EFFECTIF ? sort.order : null;
     },
     sortDate() {
       if (this.SearchEngine !== "OpenDataSoft") return null;
       const sort = this.readSortQuery(this.$route.query.sort);
-      return sort?.field === "date" ? sort.order : null;
+      return sort?.field === FIELD_TRI_DATE ? sort.order : null;
+    },
+    sortData() {
+      const data = this.readSortQuery(this.$route.query.sort);
+      return data;
     },
     searchOptions() {
       switch (this.SearchEngine) {
@@ -250,7 +253,7 @@ export default {
         this.checkScrollPosition();
       }
     },
-    handleSortChanged({ field, order }) {
+    handleSortChange({ field, order }) {
       const sort = this.buildSortQuery(field, order);
       this.$router.replace({
         query: {
@@ -273,8 +276,7 @@ export default {
         const match = regexSort.exec(sortQuery);
         if (!match) return null;
         return {
-          field:
-            match.groups.field === FIELD_TRI_EFFECTIF ? "effectif" : "date",
+          field: match.groups.field,
           order: match.groups.order === "-" ? false : true,
         };
       } catch (error) {
