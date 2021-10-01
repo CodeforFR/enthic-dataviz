@@ -18,10 +18,6 @@
 
 <script>
 export default {
-  model: {
-    prop: "sortOrder",
-    event: "sortOrderChanged",
-  },
   props: {
     name: {
       type: String,
