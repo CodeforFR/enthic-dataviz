@@ -10,6 +10,28 @@ export const opendatasoftApiClient = axios.create({
 });
 
 export default {
+  fields: {
+    FIELD_TRI_EFFECTIF: "trancheeffectifsunitelegaletriable",
+    FIELD_TRI_DATE: "datecreationunitelegale",
+  },
+  readSortQuery(sortQuery) {
+    if (!sortQuery) return null;
+    try {
+      const regexSort = new RegExp(
+        `(?<order>-?)(?<field>${this.fields.FIELD_TRI_EFFECTIF}|${this.fields.FIELD_TRI_DATE})`
+      );
+      const match = regexSort.exec(sortQuery);
+      if (!match) return null;
+      return {
+        field: match.groups.field,
+        order: match.groups.order === "-" ? false : true,
+      };
+    } catch (error) {
+      console.log("url regEx error", error);
+    }
+
+    return null;
+  },
   async searchFirstPage(openDataSoftSearchOptions) {
     const { text, sort } = openDataSoftSearchOptions;
     if (!text) return null;
@@ -33,7 +55,7 @@ export default {
   },
 
   formatResult(results) {
-    console.log("results from OpenDataSoft:", results.data.records);
+    // console.log("results from OpenDataSoft:", results.data.records);
     return results
       ? { ...results.data, records: null, items: results.data.records }
       : null;

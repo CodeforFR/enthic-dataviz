@@ -1,6 +1,11 @@
 import { apiClient } from "../ServerConfiguration";
 
 export default {
+  fields: {},
+  readSortQuery(sortQuery) {
+    if (!sortQuery) return null;
+    return null;
+  },
   async searchFirstPage(enthicSearchOptions) {
     const { text } = enthicSearchOptions;
     if (!text) return null;

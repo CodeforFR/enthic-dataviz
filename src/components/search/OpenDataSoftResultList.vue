@@ -43,9 +43,10 @@
 
 <script>
 import SortableTitle from "./SortableTitle.vue";
+import OpenDataSoftSearchRepository from "@/repositories/search/OpenDataSoftSearchRepository";
 
-const FIELD_TRI_EFFECTIF = "trancheeffectifsunitelegaletriable";
-const FIELD_TRI_DATE = "datecreationunitelegale";
+const { FIELD_TRI_EFFECTIF, FIELD_TRI_DATE } =
+  OpenDataSoftSearchRepository.fields;
 
 export default {
   components: { SortableTitle },
@@ -67,6 +68,10 @@ export default {
     };
   },
   watch: {
+    sort() {
+      this.sortOrderDate = this.getSortOrder(FIELD_TRI_DATE);
+      this.sortOrderEffectif = this.getSortOrder(FIELD_TRI_EFFECTIF);
+    },
     sortOrderDate(order) {
       this.emitSortOrderChange(FIELD_TRI_DATE, order);
     },
@@ -80,6 +85,11 @@ export default {
       params: { siren: company.fields.siren },
     }),
     getSortOrder(field) {
+      console.log("getSortOrder", {
+        sort: this.sort,
+        field,
+        order: this.sort?.order,
+      });
       if (this.sort?.field === field) return this.sort?.order;
       return null;
     },
