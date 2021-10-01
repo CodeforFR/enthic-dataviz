@@ -49,6 +49,9 @@
         <OpenDataSoftResultList
           v-if="SearchEngine == 'OpenDataSoft'"
           :companies="items"
+          :sortEffectif="sortEffectif"
+          :sortDate="sortDate"
+          @sortChanged="handleSortChanged"
         />
         <EnthicResultList v-if="SearchEngine == 'Enthic'" :companies="items" />
       </div>
@@ -85,6 +88,9 @@ import OpenDataSoftSearchRepository from "@/repositories/search/OpenDataSoftSear
 
 // import SearchRepository from "@/repositories/search/SearchRepository.fake";
 
+const FIELD_TRI_EFFECTIF = "trancheeffectifsunitelegaletriable";
+const FIELD_TRI_DATE = "datecreationunitelegale";
+
 export default {
   components: {
     OpenDataSoftResultList,
@@ -110,6 +116,11 @@ export default {
   beforeDestroy() {
     this.unregisterOnScroll();
   },
+  watch: {
+    $route() {
+      this.searchInitial();
+    },
+  },
   computed: {
     text() {
       return this.$route.query.text;
@@ -129,10 +140,18 @@ export default {
       return this.lastResults.view.next;
     },
     sortOption() {
-      if (this.SearchEngine === "OpenDataSoft" && this.$route.query.sort) {
-        return this.$route.query.sort;
-      }
-      return null;
+      if (this.SearchEngine !== "OpenDataSoft") return null;
+      return this.$route.query.sort;
+    },
+    sortEffectif() {
+      if (this.SearchEngine !== "OpenDataSoft") return null;
+      const sort = this.readSortQuery(this.$route.query.sort);
+      return sort?.field === "effectif" ? sort.order : null;
+    },
+    sortDate() {
+      if (this.SearchEngine !== "OpenDataSoft") return null;
+      const sort = this.readSortQuery(this.$route.query.sort);
+      return sort?.field === "date" ? sort.order : null;
     },
     searchOptions() {
       switch (this.SearchEngine) {
@@ -230,6 +249,39 @@ export default {
         this.loadingNext = false;
         this.checkScrollPosition();
       }
+    },
+    handleSortChanged({ field, order }) {
+      const sort = this.buildSortQuery(field, order);
+      this.$router.replace({
+        query: {
+          text: this.$route.query.text,
+          sort,
+        },
+      });
+    },
+    buildSortQuery(sortField, sortOrder) {
+      if (sortOrder === true) return sortField;
+      if (sortOrder === false) return "-" + sortField;
+      return null;
+    },
+    readSortQuery(sortQuery) {
+      if (!sortQuery) return null;
+      try {
+        const regexSort = new RegExp(
+          `(?<order>-?)(?<field>${FIELD_TRI_EFFECTIF}|${FIELD_TRI_DATE})`
+        );
+        const match = regexSort.exec(sortQuery);
+        if (!match) return null;
+        return {
+          field:
+            match.groups.field === FIELD_TRI_EFFECTIF ? "effectif" : "date",
+          order: match.groups.order === "-" ? false : true,
+        };
+      } catch (error) {
+        console.log("url regEx error", error);
+      }
+
+      return null;
     },
   },
 };
