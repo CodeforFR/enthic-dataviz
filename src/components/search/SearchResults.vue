@@ -49,7 +49,7 @@
         <OpenDataSoftResultList
           v-if="SearchEngine == 'OpenDataSoft'"
           :companies="items"
-          :sort="sortData"
+          :sort="sortDataForDisplay"
           @sortChanged="handleSortChange"
         />
         <EnthicResultList v-if="SearchEngine == 'Enthic'" :companies="items" />
@@ -86,9 +86,6 @@ import EnthicSearchRepository from "@/repositories/search/EnthicSearchRepository
 import OpenDataSoftSearchRepository from "@/repositories/search/OpenDataSoftSearchRepository";
 
 // import SearchRepository from "@/repositories/search/SearchRepository.fake";
-
-const FIELD_TRI_EFFECTIF = "trancheeffectifsunitelegaletriable";
-const FIELD_TRI_DATE = "datecreationunitelegale";
 
 export default {
   components: {
@@ -138,22 +135,13 @@ export default {
       if (!this.lastResults || !this.lastResults.view) return null;
       return this.lastResults.view.next;
     },
-    sortOption() {
+    sortStringForSearch() {
       if (this.SearchEngine !== "OpenDataSoft") return null;
       return this.$route.query.sort;
     },
-    sortEffectif() {
-      if (this.SearchEngine !== "OpenDataSoft") return null;
-      const sort = this.readSortQuery(this.$route.query.sort);
-      return sort?.field === FIELD_TRI_EFFECTIF ? sort.order : null;
-    },
-    sortDate() {
-      if (this.SearchEngine !== "OpenDataSoft") return null;
-      const sort = this.readSortQuery(this.$route.query.sort);
-      return sort?.field === FIELD_TRI_DATE ? sort.order : null;
-    },
-    sortData() {
-      const data = this.readSortQuery(this.$route.query.sort);
+    sortDataForDisplay() {
+      const data = this.searchRepository.readSortQuery(this.$route.query.sort);
+      console.log("Sort Query", data);
       return data;
     },
     searchOptions() {
@@ -161,7 +149,7 @@ export default {
         case "OpenDataSoft":
           return {
             text: this.text,
-            sort: this.sortOption,
+            sort: this.sortStringForSearch,
             offset: this.items ? this.items.length : 0,
           };
         case "Enthic":
@@ -265,24 +253,6 @@ export default {
     buildSortQuery(sortField, sortOrder) {
       if (sortOrder === true) return sortField;
       if (sortOrder === false) return "-" + sortField;
-      return null;
-    },
-    readSortQuery(sortQuery) {
-      if (!sortQuery) return null;
-      try {
-        const regexSort = new RegExp(
-          `(?<order>-?)(?<field>${FIELD_TRI_EFFECTIF}|${FIELD_TRI_DATE})`
-        );
-        const match = regexSort.exec(sortQuery);
-        if (!match) return null;
-        return {
-          field: match.groups.field,
-          order: match.groups.order === "-" ? false : true,
-        };
-      } catch (error) {
-        console.log("url regEx error", error);
-      }
-
       return null;
     },
   },
