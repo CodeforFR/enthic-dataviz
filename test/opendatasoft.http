@@ -1,0 +1,3 @@
+
+### sort by datecreationunitelegale
+https://data.opendatasoft.com/api/records/1.0/search/?dataset=economicref-france-sirene-v3@public&q=enercoop&rows=30&refine.etablissementsiege=oui&refine.etatadministratifunitelegale=Active&start=0&sort=datecreationunitelegale
