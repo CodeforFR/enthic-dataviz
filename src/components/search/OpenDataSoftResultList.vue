@@ -5,24 +5,11 @@
         <tr>
           <th>Dénomination</th>
           <th>
-            <SortArrowTitle
-              :sortOrder="sortOrderForField(FIELD_TRI_EFFECTIF)"
-              @sortOrderChanged="
-                (order) =>
-                  handleSortOrderChangeForField(FIELD_TRI_EFFECTIF)(order)
-              "
-              name="Effectif"
-            />
+            <SortableTitle v-model="sortOrderEffectif" name="Effectif" />
           </th>
           <th>Secteur (code APE)</th>
           <th>
-            <SortArrowTitle
-              :sortOrder="sortOrderForField(FIELD_TRI_DATE)"
-              @sortOrderChanged="
-                (order) => handleSortOrderChangeForField(FIELD_TRI_DATE)(order)
-              "
-              name="Dates"
-            />
+            <SortableTitle v-model="sortOrderDate" name="Dates" />
           </th>
           <th>SIREN</th>
         </tr>
@@ -55,13 +42,13 @@
 </template>
 
 <script>
-import SortArrowTitle from "./SortableTitle.vue";
+import SortableTitle from "./SortableTitle.vue";
 
 const FIELD_TRI_EFFECTIF = "trancheeffectifsunitelegaletriable";
 const FIELD_TRI_DATE = "datecreationunitelegale";
 
 export default {
-  components: { SortArrowTitle },
+  components: { SortableTitle },
   props: {
     companies: {
       type: Array,
@@ -75,30 +62,29 @@ export default {
   },
   data() {
     return {
-      FIELD_TRI_EFFECTIF,
-      FIELD_TRI_DATE,
+      sortOrderDate: this.getSortOrder(FIELD_TRI_DATE),
+      sortOrderEffectif: this.getSortOrder(FIELD_TRI_EFFECTIF),
     };
   },
-  methods: {
-    sortOrderForField(field) {
-      if (this.sort?.field === field) return this.sort?.order;
-      return null;
+  watch: {
+    sortOrderDate(order) {
+      this.emitSortOrderChange(FIELD_TRI_DATE, order);
     },
+    sortOrderEffectif(order) {
+      this.emitSortOrderChange(FIELD_TRI_EFFECTIF, order);
+    },
+  },
+  methods: {
     companyDetailRoute: (company) => ({
       name: "Detail",
       params: { siren: company.fields.siren },
     }),
-
-    handleSortOrderChangeForField(field) {
-      return (order) => {
-        // console.log("EMIT sortChanged", { field, order });
-        this.$emit("sortChanged", { field, order });
-      };
-    },
-    rollSortValue(val) {
-      if (val === null || val === "") return true;
-      if (val === true) return false;
+    getSortOrder(field) {
+      if (this.sort?.field === field) return this.sort?.order;
       return null;
+    },
+    emitSortOrderChange(field, order) {
+      this.$emit("sortChanged", { field, order });
     },
     getEffectif(company) {
       if (!company.fields.trancheeffectifsunitelegale) {
