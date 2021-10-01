@@ -4,13 +4,21 @@
       <thead>
         <tr>
           <th>Dénomination</th>
-          <router-link class="result-link" :to="effectifSortRoute()">
-            <th>Effectif</th>
-          </router-link>
+          <th>
+            <SortArrowTitle
+              :sort="sortEffectif"
+              @sortChanged="handleSortEffectifChange"
+              name="Effectif"
+            />
+          </th>
           <th>Secteur (code APE)</th>
-          <router-link class="result-link" :to="dateCreationSortRoute()">
-            <th>Dates</th>
-          </router-link>
+          <th>
+            <SortArrowTitle
+              :sort="sortDate"
+              @sortChanged="handleSortDateChange"
+              name="Dates"
+            />
+          </th>
           <th>SIREN</th>
         </tr>
       </thead>
@@ -42,22 +50,44 @@
 </template>
 
 <script>
+import SortArrowTitle from "./SortableTitle.vue";
+
+const FIELD_TRI_EFFECTIF = "trancheeffectifsunitelegaletriable";
+const FIELD_TRI_DATE = "datecreationunitelegale";
+
 export default {
-  props: ["companies"],
+  components: { SortArrowTitle },
+  props: {
+    companies: {
+      type: Array,
+      required: true,
+    },
+    sortEffectif: {
+      type: Boolean,
+      default: null,
+      required: false,
+    },
+    sortDate: {
+      type: Boolean,
+      default: null,
+      required: false,
+    },
+  },
   methods: {
     companyDetailRoute: (company) => ({
       name: "Detail",
       params: { siren: company.fields.siren },
     }),
-    effectifSortRoute() {
-      var route = { ...this.$route };
-      route.query["sort"] = "trancheeffectifsunitelegaletriable";
-      return route;
+    handleSortEffectifChange(order) {
+      this.$emit("sortChanged", { field: FIELD_TRI_EFFECTIF, order });
     },
-    dateCreationSortRoute() {
-      var route = { ...this.$route };
-      route.query["sort"] = "datecreationunitelegale";
-      return route;
+    handleSortDateChange(order) {
+      this.$emit("sortChanged", { field: FIELD_TRI_DATE, order });
+    },
+    rollSortValue(val) {
+      if (val === null || val === "") return true;
+      if (val === true) return false;
+      return null;
     },
     getEffectif(company) {
       if (!company.fields.trancheeffectifsunitelegale) {
