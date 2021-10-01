@@ -141,7 +141,7 @@ export default {
     },
     sortDataForDisplay() {
       const data = this.searchRepository.readSortQuery(this.$route.query.sort);
-      console.log("Sort Query", data);
+      // console.log("Sort Query", data);
       return data;
     },
     searchOptions() {

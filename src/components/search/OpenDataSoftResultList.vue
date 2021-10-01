@@ -5,11 +5,24 @@
         <tr>
           <th>Dénomination</th>
           <th>
-            <SortableTitle v-model="sortOrderEffectif" name="Effectif" />
+            <SortableTitle
+              :sortOrder="sortOrderForField(FIELD_TRI_EFFECTIF)"
+              @sortOrderChanged="
+                (order) =>
+                  handleSortOrderChangeForField(FIELD_TRI_EFFECTIF)(order)
+              "
+              name="Effectif"
+            />
           </th>
           <th>Secteur (code APE)</th>
           <th>
-            <SortableTitle v-model="sortOrderDate" name="Dates" />
+            <SortableTitle
+              :sortOrder="sortOrderForField(FIELD_TRI_DATE)"
+              @sortOrderChanged="
+                (order) => handleSortOrderChangeForField(FIELD_TRI_DATE)(order)
+              "
+              name="Dates"
+            />
           </th>
           <th>SIREN</th>
         </tr>
@@ -63,27 +76,25 @@ export default {
   },
   data() {
     return {
-      sortOrderDate: this.getSortOrder(FIELD_TRI_DATE),
-      sortOrderEffectif: this.getSortOrder(FIELD_TRI_EFFECTIF),
+      FIELD_TRI_EFFECTIF,
+      FIELD_TRI_DATE,
     };
   },
-  watch: {
-    sort() {
-      this.sortOrderDate = this.getSortOrder(FIELD_TRI_DATE);
-      this.sortOrderEffectif = this.getSortOrder(FIELD_TRI_EFFECTIF);
-    },
-    sortOrderDate(order) {
-      this.emitSortOrderChange(FIELD_TRI_DATE, order);
-    },
-    sortOrderEffectif(order) {
-      this.emitSortOrderChange(FIELD_TRI_EFFECTIF, order);
-    },
-  },
   methods: {
+    sortOrderForField(field) {
+      if (this.sort?.field === field) return this.sort?.order;
+      return null;
+    },
     companyDetailRoute: (company) => ({
       name: "Detail",
       params: { siren: company.fields.siren },
     }),
+    handleSortOrderChangeForField(field) {
+      return (order) => {
+        // console.log("EMIT sortChanged", { field, order });
+        this.$emit("sortChanged", { field, order });
+      };
+    },
     getSortOrder(field) {
       console.log("getSortOrder", {
         sort: this.sort,
