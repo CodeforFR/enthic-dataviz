@@ -32,12 +32,12 @@
       </svg>
     </div>
     <SearchBar />
-    <div class="m-t-20">
+    <!-- <div class="m-t-20">
       par exemple l'entreprise
       <router-link class="result-link" to="/recherche?text=enercoop">
         "Enercoop"</router-link
       >
-    </div>
+    </div> -->
   </div>
 </template>
 
