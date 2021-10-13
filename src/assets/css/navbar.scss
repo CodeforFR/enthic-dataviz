@@ -14,6 +14,7 @@
   #navMenu {
     .navbar-item {
       color: $purple;
+      font-size: 17px;
 
       &:hover {
         color: #3d3a39;
@@ -22,7 +23,7 @@
   }
 }
 
-@media only screen and (max-device-width: 1024px) {
+@media (max-width: 1024px) {
   .navbar {
     position: relative;
 
