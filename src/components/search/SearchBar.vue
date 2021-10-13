@@ -1,5 +1,5 @@
 <template>
-  <section id="top" class="search-text primary-bg m-t-30">
+  <section id="top" class="search-text primary-bg">
     <form action="/recherche" method="GET" class="search-bar">
       <div class="control has-icons-left">
         <input
