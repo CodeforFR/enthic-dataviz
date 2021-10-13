@@ -1,9 +1,14 @@
 <template>
   <div class="banner-and-search">
     <div class="banner">
-      <div class="column is-10 is-offset-1 banner-flex">
+      <div class="banner-flex">
         <div class="banner-text">
           <h2>Explorez les données financières des entreprises françaises !</h2>
+          <img
+            src="@/assets/img/home/banner_illustration.png"
+            alt="banner illustration"
+            class="banner-img-mobile"
+          />
           <p>
             Du mal à vous y retrouver avec toutes ces données et comprendre
             comment les interprêter ? Enthic est fait pour vous !
@@ -12,6 +17,7 @@
         <img
           src="@/assets/img/home/banner_illustration.png"
           alt="banner illustration"
+          class="banner-img-laptop"
         />
       </div>
     </div>
