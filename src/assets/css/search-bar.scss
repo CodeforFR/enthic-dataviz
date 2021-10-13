@@ -1,52 +1,87 @@
 .search-bar{
+  display: flex;
   flex-direction: column;
   align-items: center;
 
-    .search-box {
-      width: 98%;
-      margin: 0 1vh;
-      background-color: $light-blue;
-      border: none;
-      box-shadow: none;
-      text-align: center;
-      padding: 0!important;
-      border-radius: 10px;
-      font-size: 16px;
+  .control {
+    width: 40%;
+    margin: 0 auto 20px auto;
+  }
+
+  .search-mobile {
+    display: none;
+  }
+
+  .search-box {
+    width: 100%;
+    // margin: auto;
+    background-color: $light-blue;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    padding: 0!important;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+
+  #search-icon {
+    color: $dark-blue;
+    padding-left: 25px;
+    font-size: 16px;
+  }
+
+  .search-box::placeholder {
+    font-family: 'Open Sans';
+    color: $dark-blue;
+  }
+
+  .search-btn {
+    background-color: $orange;
+    opacity: 0.8;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
     }
 
-    #search-icon {
-      color: $dark-blue;
-      padding-left: 25px;
-      font-size: 16px;
-    }
+    // .search-btn-as-icon {
+    //   padding: 0 !important;
+    //   margin: 0 !important;
+    // }
 
-    .search-box::placeholder {
+    .search-btn-as-text {
+      font-size: 16px;
+      color: white;
       font-family: 'Open Sans';
-      color: $dark-blue;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .search-bar {
+    .control {
+      width: 95%;
     }
 
-    .search-btn {
-      background-color: $orange;
-      opacity: 0.8;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      // .search-btn-as-icon {
-      //   padding: 0 !important;
-      //   margin: 0 !important;
-      // }
-
-      .search-btn-as-text {
-        font-size: 16px;
-        color: white;
-        font-family: 'Open Sans';
-      }
+    .search-mobile {
+      display: block;
     }
 
+    .search-laptop {
+      display: none;
+    }
+  }
+
+
+}
+
+@media (min-width: 768px) and (max-width: 1150px) {
+  .search-bar {
+    .control {
+      width: 70%;
+    }
+  }
 }
