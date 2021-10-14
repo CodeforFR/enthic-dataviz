@@ -51,6 +51,12 @@
         </tr>
       </tbody>
     </table>
+    <p>
+      <a
+        href="https://github.com/phe-sto/enthic/blob/AllLeoChanges/python/enthic/scoring/scoring_functions.py"
+        >Lien pour accéder au code source qui calcul les indicateurs</a
+      >
+    </p>
   </Widget>
 </template>
 
