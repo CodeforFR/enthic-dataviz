@@ -102,7 +102,8 @@
   }
 }
 
-.banner-and-search {
+.banner-and-search,
+.partner {
   .custom-shape-divider-top-1631883689 {
     width: 100%;
     overflow: hidden;
@@ -117,5 +118,11 @@
 
   .custom-shape-divider-top-1631883689 .shape-fill {
     fill: #FFE9E4;
+  }
+}
+
+.partner {
+  .custom-shape-divider-top-1631883689 {
+    transform: rotate(180deg);
   }
 }
