@@ -2,7 +2,7 @@
   <div>
     <TitleSection />
     <PresentationSection />
-    <div class="columns p-20 m-b-30 m-t-30 has-background-white-bis">
+    <!-- <div class="columns p-20 m-b-30 m-t-30 has-background-white-bis">
       <div class="column is-12">
         <div class="content">
           <h2 class="is-size-2">À qui ça sert ?</h2>
@@ -50,7 +50,7 @@
           </p>
         </div>
       </div>
-    </div>
+    </div> -->
     <PartnersSection />
     <iframe
       src="https://framaforms.org/le-projet-vous-interesse-laissez-nous-un-message-1631199316"
