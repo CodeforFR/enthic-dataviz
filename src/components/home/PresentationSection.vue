@@ -37,7 +37,8 @@
     autoplay="true"
     loop="true"
     autoplayTimeout="5000"
-    paginationActiveColor="#4039F6"
+    paginationActiveColor="#19117A"
+    paginationColor="#E1E6FF"
     class="carousel"
   >
     <slide class="slide">
