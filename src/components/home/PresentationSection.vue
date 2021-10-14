@@ -32,10 +32,45 @@
       <img src="../../assets/img/home/CA_Graphic_example.png" alt="" />
     </div>
   </div> -->
-  <carousel>
-    <slide>Slide 1 Content</slide>
-    <slide>Slide 2 Content</slide>
-    <slide>Slide 3 Content</slide>
+  <carousel
+    per-page="1"
+    autoplay="true"
+    loop="true"
+    autoplayTimeout="5000"
+    paginationActiveColor="#4039F6"
+    class="carousel"
+  >
+    <slide class="slide">
+      <h1>Enthic c'est quoi?</h1>
+      <p class="text">
+        Enthic DataViz est un outil de data visualisation de la base de données
+        <a href="https://www.enthic.fr">Enthic</a> qui contient de données sur
+        plus de 1,6 millions d'entreprises françaises : bénéfice, chiffre
+        d'affaires, salaire, impôt, et plein d'autres informations que seuls les
+        comptables comprennent (tous les détails d'un compte de résultat en
+        fait).
+      </p>
+      <a class="more" href="#">En savoir +</a>
+    </slide>
+    <slide class="slide">
+      <h1>À qui ça sert ?</h1>
+      <p class="text">
+        Les consommateur/trices, les salarié⋅es, les data-journalistes,
+        scientifiques et associations, les syndicats et représentant⋅es du
+        personnel, n'importe qui sachant utiliser un tableur et voulant explorer
+        ces données.
+      </p>
+      <a class="more" href="#">En savoir +</a>
+    </slide>
+    <slide class="slide">
+      <h1>Qui sommes-nous ?</h1>
+      <p class="text">
+        Nous sommes une poignée de citoyen⋅nes français⋅es qui croyons en ce
+        projet libre et ouvert, et nous y contribuons bénévolement sur notre
+        temps libre.
+      </p>
+      <a class="more" href="#">En savoir +</a>
+    </slide>
   </carousel>
 </template>
 
