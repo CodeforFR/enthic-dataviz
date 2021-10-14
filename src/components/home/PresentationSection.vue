@@ -32,16 +32,19 @@
       <img src="../../assets/img/home/CA_Graphic_example.png" alt="" />
     </div>
   </div> -->
-
-  <div class="">
-    <h1>Enthic Dataviz : c'est quoi?</h1>
-    <p>
-      Enthic DataViz est un outil de data visualisation de la base de
-      données <a href="https://www.enthic.fr">Enthic</a> qui contient des
-      données sur plus de 1,6 millions d'entreprises françaises : bénéfice,
-      chiffre d'affaires, salaire, impôt, et plein d'autres informations que
-      seuls les comptables comprennent (tous les détails d'un compte de
-      résultat en fait).
-    </p>
-  </div>
+  <carousel>
+    <slide>Slide 1 Content</slide>
+    <slide>Slide 2 Content</slide>
+    <slide>Slide 3 Content</slide>
+  </carousel>
 </template>
+
+<script>
+import { Carousel, Slide } from "vue-carousel";
+export default {
+  components: {
+    Carousel,
+    Slide,
+  },
+};
+</script>
