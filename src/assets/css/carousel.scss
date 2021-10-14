@@ -1,0 +1,48 @@
+.carousel {
+  margin-top: 30px;
+  height: fit-content!important;
+
+  .slide {
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      color: $dark-blue;
+      text-align: center;
+      letter-spacing: 1px;
+      margin-bottom: 65px;
+    }
+
+    .text {
+      width: 80%;
+      margin: auto;
+      text-align: justify;
+      color: $app-text-color;
+      margin-bottom: 20px;
+
+      a {
+        color: $dark-blue;
+        font-weight: 700;
+      }
+    }
+
+    .more {
+      text-align: center;
+      color: $orange;
+      border: $orange 2px solid;
+      padding: 5px 15px;
+      border-radius: 10px;
+      display: block;
+      width: fit-content;
+      margin: auto;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel .slide {
+    .text {
+      width: 90%;
+    }
+  }
+}
