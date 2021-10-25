@@ -126,3 +126,37 @@
     transform: rotate(180deg);
   }
 }
+
+.partner {
+  .partner-bckg {
+    background-color: $light-orange;
+  }
+
+  .partner-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: $dark-blue;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 65px;
+  }
+
+  .logo-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 90px;
+  }
+}
+
+@media (max-width: 650px) {
+  .partner .logo-container {
+    flex-direction: column;
+    justify-content: space-between;
+
+    .logo {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+  }
+}
