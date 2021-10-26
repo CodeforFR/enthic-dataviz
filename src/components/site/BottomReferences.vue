@@ -1,21 +1,19 @@
 <template>
-  <footer class="footer extra-footer" style="padding: 0px 0px 0px 0px">
-    <div
-      class="content has-text-centered has-text-white has-background-grey-dark"
-      style="padding: 7px 0px 7px 0px"
-    >
+  <footer class="bottom-footer">
+    <div class="content has-text-centered border-top">
       <p>
         Propulsé par
         <strong>
           <a
             href="https://www.enthic.fr/"
+            target="_blank"
             style="text-decoration: underline; color: white"
           >
             Enthic
           </a></strong
         >
-        <SiteVersion />
       </p>
+      <SiteVersion />
     </div>
   </footer>
 </template>
