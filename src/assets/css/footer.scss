@@ -49,5 +49,21 @@
       margin-bottom: 0;
     }
   }
+}
+
+@media (max-width: 650px) {
+  .top-footer,
+  .bottom-footer .border-top {
+    flex-direction: column;
+
+    .more,
+    .icons {
+      margin-bottom: 40px;
+    }
+
+    .propulse {
+      margin-bottom: 10px;
+    }
+  }
 
 }
