@@ -578,53 +578,53 @@ ul.members{
         }
 
 
-        footer{
-            background-color: $app-grey-background;
-            position: relative;
+        // footer{
+        //     background-color: $app-grey-background;
+        //     position: relative;
 
-            font-size: 0.8em;
+        //     font-size: 0.8em;
 
-            margin-top: 3em;
-            padding-top: 1em;
+        //     margin-top: 3em;
+        //     padding-top: 1em;
 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        //     display: flex;
+        //     justify-content: space-between;
+        //     align-items: center;
 
-            img{
-                position: absolute;
+        //     img{
+        //         position: absolute;
 
-                width: 5em;
-                height: 5em;
+        //         width: 5em;
+        //         height: 5em;
 
-                object-fit: cover;
-                object-position: center;
+        //         object-fit: cover;
+        //         object-position: center;
 
-                left: 2em;
-                top: -2em;
+        //         left: 2em;
+        //         top: -2em;
 
-                border-radius: 50%;
-            }
+        //         border-radius: 50%;
+        //     }
 
-            .person{
-                margin-left: 8em;
-            }
+        //     .person{
+        //         margin-left: 8em;
+        //     }
 
-            .count{
-                color: $app-primary;
-                max-width: 9em;
+        //     .count{
+        //         color: $app-primary;
+        //         max-width: 9em;
 
-                display: flex;
-                align-items: center;
+        //         display: flex;
+        //         align-items: center;
 
-                .nb{
-                    font-size: 3em;
+        //         .nb{
+        //             font-size: 3em;
 
-                    margin-right: 0.1em;
-                    font-weight: bold;
-                }
-            }
-        }
+        //             margin-right: 0.1em;
+        //             font-weight: bold;
+        //         }
+        //     }
+        // }
     }
 }
 
