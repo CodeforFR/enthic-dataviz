@@ -1,7 +1,7 @@
 <template>
   <footer class="bottom-footer">
     <div class="content has-text-centered border-top">
-      <p>
+      <p class="propulse">
         Propulsé par
         <strong>
           <a
