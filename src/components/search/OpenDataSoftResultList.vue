@@ -3,7 +3,7 @@
     <table v-if="companies" class="layout-search-table">
       <thead>
         <tr>
-          <th>Dénomination</th>
+          <th>Dénomination (n°SIREN)</th>
           <th>
             <SortableTitle
               :sortOrder="sortOrderForField(FIELD_TRI_EFFECTIF)"
@@ -24,13 +24,13 @@
               name="Dates"
             />
           </th>
-          <th>SIREN</th>
+          <th>Nature juridique</th>
         </tr>
       </thead>
       <tr v-for="(company, index) in companies" :key="index">
         <td>
           <router-link class="result-link" :to="companyDetailRoute(company)">
-            {{ getDenomination(company) }}
+            {{ getDenomination(company) }} ({{ company.fields.siren }})
           </router-link>
         </td>
         <td>
@@ -45,9 +45,7 @@
           {{ getDates(company) }}
         </td>
         <td>
-          <router-link class="result-link" :to="companyDetailRoute(company)">
-            {{ company.fields.siren }}
-          </router-link>
+            {{ company.fields.naturejuridiqueunitelegale }}
         </td>
       </tr>
     </table>
