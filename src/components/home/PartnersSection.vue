@@ -36,7 +36,7 @@
 
         <a href="https://dataforgood.fr">
           <img
-            src="https://dataforgood.fr/img/logo-white.png"
+            src="https://dataforgood.fr/img/logo-dfg-new.png"
             class="is-128 logo"
             alt="logo Data For Good"
           />
