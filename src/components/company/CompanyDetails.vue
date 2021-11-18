@@ -10,13 +10,14 @@
           <span> Retour aux résultats de recherche </span>
         </a>
         <CompanyIdentity :companyData="companyData" />
-        <CompanyNoCompteDeResultats :companyData="companyData" />
-        <CompanyChartCA :chartDetails="chartCADetails" />
-        <CompanyChartMargin :chartDetails="chartMarginDetails" />
-        <CompanyCompteDeResultatsTree :companyData="companyData" />
-        <CompanySocialImpactComparison :companyData="companyData" />
-        <CompanyScoring :companyData="companyData" />
-        <CompanyOtherData :companyData="companyData" />
+        <CompanyChartCA :chartDetails="chartCADetails" v-if="thereIsFinancialData"/>
+        <CompanyChartMargin :chartDetails="chartMarginDetails" v-if="thereIsFinancialData"/>
+        <CompanyCompteDeResultatsTree :companyData="companyData" v-if="thereIsFinancialData"/>
+        <CompanySocialImpactComparison :companyData="companyData" v-if="thereIsFinancialData"/>
+        <CompanyAccountMetadata :companyData="companyData" />
+        <CompanyNoCompteDeResultats :companyData="companyData" v-if="!thereIsFinancialData"/>
+        <CompanyScoring :companyData="companyData" v-if="thereIsFinancialData"/>
+        <CompanyOtherData :companyData="companyData" v-if="thereIsFinancialData" />
         <CompanyOtherCompteDeResultats
           v-if="false"
           :companyData="companyData"
@@ -38,6 +39,7 @@ import CompanySocialImpactComparison from "./CompanySocialImpactComparison.vue";
 import CompanyScoring from "./CompanyScoring.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
 import CompanyOtherCompteDeResultats from "./CompanyOtherCompteDeResultats.vue";
+import CompanyAccountMetadata from "./CompanyAccountMetadata.vue";
 
 export default {
   name: "DynamicDetail",
@@ -51,9 +53,18 @@ export default {
     CompanyScoring,
     CompanyOtherData,
     CompanyOtherCompteDeResultats,
+    CompanyAccountMetadata,
   },
   props: ["companyData"],
   computed: {
+    thereIsFinancialData() {
+      for (var i in this.companyData.comptesDeResultats) {
+        if (this.companyData.comptesDeResultats[i]) {
+          return true;
+        }
+      }
+      return false;
+    },
     chartCADetails() {
       return ChartDataService.calculateCAChartDetails(
         this.companyData.comptesDeResultats

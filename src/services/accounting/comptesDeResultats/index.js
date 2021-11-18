@@ -11,6 +11,9 @@ const calculateComptesDeResultats = (declarations) => {
 };
 
 const declarationToTree = ([year, declaration]) => {
+  if (!declaration.financial_data) {
+    return null;
+  }
   var yearTree = convertDataToTree(declaration.financial_data);
   checkTreeData(yearTree);
   yearTree.scores = computeScore(yearTree);
