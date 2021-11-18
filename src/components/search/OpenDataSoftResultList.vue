@@ -45,7 +45,7 @@
           {{ getDates(company) }}
         </td>
         <td>
-            {{ company.fields.naturejuridiqueunitelegale }}
+          {{ company.fields.naturejuridiqueunitelegale }}
         </td>
       </tr>
     </table>

@@ -69,6 +69,9 @@ const calculateMarginChartUnits = (comptesDeResultats) => {
 };
 
 const calculateCAChartDetails = (comptesDeResultats) => {
+  if (!comptesDeResultats[0]) {
+    return null;
+  }
   let units = calculateCAChartUnits(comptesDeResultats);
 
   let xLabels = [];
@@ -271,6 +274,9 @@ const calculateCAChartDetails = (comptesDeResultats) => {
 };
 
 const calculateMarginChartDetails = (comptesDeResultats) => {
+  if (!comptesDeResultats[0]) {
+    return null;
+  }
   let marginUnits = calculateMarginChartUnits(comptesDeResultats);
 
   let xLabels = [];

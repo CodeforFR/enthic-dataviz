@@ -1,5 +1,5 @@
 <template>
-  <div class="columns" v-if="!companyData.comptesDeResultats">
+  <div class="columns">
     <div class="column">
       <div class="box has-background-info">
         <h3 class="title is-12">
