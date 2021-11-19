@@ -4,25 +4,37 @@
     titleColor="#99ff99"
     v-if="companyData"
   >
-    <div class="control-bar">
-      <div class="title is-6 m-r-30">Comparaison avec code APE :</div>
-      <label v-for="ape in apeCodes" v-bind:key="ape" class="radio">
-        <input
-          type="radio"
-          name="answer"
-          v-bind:value="ape"
-          v-model="APEToCompare"
-          @change="updateAPEComparison"
-        />
-        {{ ape }}
-      </label>
+    <div>
+      <div>
+        Ce tableau permet de visualiser la valeur obtenu par l'entreprise pour
+        chaque indicateur et chaque année où il est possible de le calculer. La
+        couleur des nombres permet de voir dans quel décile la valeur de
+        l'indicateurse trouve, par rapport à l'ensemble des valeurs calculées
+        pour l'ensemble des entreprises la même année et pour le même secteur.
+        Le secteur peut être sélectionné ci-dessous:
+      </div>
+      <div class="title is-6 m-r-30">
+        Comparaison avec code APE :
+        <p>
+          <label v-for="ape in apeCodes" v-bind:key="ape[0]" class="radio">
+            <input
+              type="radio"
+              name="answer"
+              v-bind:value="ape[0]"
+              v-model="APEToCompare"
+              @change="updateAPEComparison"
+            />
+            {{ ape[1] }}
+          </label>
+        </p>
+      </div>
     </div>
     <table class="table">
-      <thead>
+      <thead v-if="statistics">
         <tr>
           <th>Indicateur</th>
           <th
-            v-for="(yearData, yearName) in companyData.declarations"
+            v-for="(yearValue, yearName) in statistics[1].values"
             v-bind:key="yearName"
           >
             {{ yearName }}
@@ -89,13 +101,14 @@ export default {
   computed: {
     apeCodes: function () {
       var companyApe = this.companyData.ape.code;
-      while (companyApe.length < 4) {
+      while (companyApe.length < 5) {
         companyApe = "0" + companyApe;
       }
       return [
-        companyApe,
-        companyApe.substring(0, 3),
-        companyApe.substring(0, 2),
+        [this.companyData.ape.code, this.companyData.ape.value],
+        [companyApe.substring(0, 5), companyApe.substring(0, 5)],
+        [companyApe.substring(0, 4), companyApe.substring(0, 4)],
+        [companyApe.substring(0, 2), companyApe.substring(0, 2)],
       ];
     },
   },
@@ -103,31 +116,40 @@ export default {
     fillStatistics: function (statistics) {
       // Fill scores description with company's values
       for (var year in this.companyData.declarations) {
-        var serverComputationNeeded = false;
         var yearData = this.companyData.declarations[year];
+        if (!yearData.statistics) {
+          if (yearData.financial_data) {
+            this.serverComputeScore(year);
+          }
+          continue;
+        }
+        var serverComputationAsked = false;
         for (var statType in statistics) {
-          if ("statistics" in yearData && statType in yearData["statistics"]) {
+          if (statType in yearData["statistics"]) {
             statistics[statType].values[year] =
               yearData["statistics"][statType].value;
           } else {
             statistics[statType].values[year] = "XXX";
-            serverComputationNeeded = true;
+            if (!serverComputationAsked) {
+              serverComputationAsked = true;
+              this.serverComputeScore(year);
+            }
           }
-        }
-        if (serverComputationNeeded) {
-          console.log(
-            "trigger server computation for company ",
-            this.companyData.denomination.value,
-            " and year ",
-            year
-          );
-          CompaniesRepository.triggerServerComputation(
-            this.companyData.denomination.value,
-            year
-          );
         }
       }
       return statistics;
+    },
+    serverComputeScore: function (year) {
+      console.log(
+        "trigger server computation for company ",
+        this.companyData.denomination.value,
+        " and year ",
+        year
+      );
+      CompaniesRepository.triggerServerComputation(
+        this.companyData.denomination.value,
+        year
+      );
     },
     initializeStatistics: async function () {
       // Get scores description
@@ -159,8 +181,8 @@ export default {
       ) {
         return -1;
       }
-      var percentiles = this.percentiles[this.APEToCompare][year][statType]
-        .percentiles;
+      var percentiles =
+        this.percentiles[this.APEToCompare][year][statType].percentiles;
       for (var percentile in percentiles) {
         if (value < percentiles[percentile]) {
           return Math.round((percentile * 10) / 100);

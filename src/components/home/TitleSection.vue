@@ -3,14 +3,19 @@
     <div class="banner">
       <div class="banner-flex">
         <div class="banner-text">
-          <h2>Découvrez les informations étonnantes contenues dans la comptabilité des entreprises françaises !</h2>
+          <h2>
+            Découvrez les informations étonnantes contenues dans la comptabilité
+            des entreprises françaises !
+          </h2>
           <img
             src="@/assets/img/home/banner_illustration.png"
             alt="banner illustration"
             class="banner-img-mobile"
           />
           <p>
-            Vous pensez que ces données ne sont pas intéressantes pour le grand public ? Trop techniques ? Pas interprétables ? Enthic est fait pour vous !
+            Vous pensez que ces données ne sont pas intéressantes pour le grand
+            public ? Trop techniques ? Pas interprétables ? Enthic est fait pour
+            vous !
           </p>
         </div>
         <img

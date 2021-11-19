@@ -7,7 +7,10 @@ const calculateComptesDeResultats = (declarations) => {
     return null;
   }
 
-  return Object.entries(declarations).map(declarationToTree);
+  var result = Object.entries(declarations).map(declarationToTree);
+  return result.filter((element) => {
+    return element !== null;
+  });
 };
 
 const declarationToTree = ([year, declaration]) => {

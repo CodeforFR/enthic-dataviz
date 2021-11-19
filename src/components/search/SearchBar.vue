@@ -9,7 +9,7 @@
           :value="searchText"
           placeholder="Saisissez le nom d'une entreprise (ex: enercoop)"
         />
-<!-- Il faut conditionner l'affichage des inputs au niveau vue-js, sinon on a 2 textes de recherche dans l'URL 
+        <!-- Il faut conditionner l'affichage des inputs au niveau vue-js, sinon on a 2 textes de recherche dans l'URL 
         <input
           type="search"
           name="text"
