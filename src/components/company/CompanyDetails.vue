@@ -10,14 +10,35 @@
           <span> Retour aux résultats de recherche </span>
         </a>
         <CompanyIdentity :companyData="companyData" />
-        <CompanyChartCA :chartDetails="chartCADetails" v-if="thereIsFinancialData"/>
-        <CompanyChartMargin :chartDetails="chartMarginDetails" v-if="thereIsFinancialData"/>
-        <CompanyCompteDeResultatsTree :companyData="companyData" v-if="thereIsFinancialData"/>
-        <CompanySocialImpactComparison :companyData="companyData" v-if="thereIsFinancialData"/>
+        <CompanyChartCA
+          :chartDetails="chartCADetails"
+          v-if="thereIsFinancialData"
+        />
+        <CompanyChartMargin
+          :chartDetails="chartMarginDetails"
+          v-if="thereIsFinancialData"
+        />
+        <CompanyCompteDeResultatsTree
+          :companyData="companyData"
+          v-if="thereIsFinancialData"
+        />
+        <CompanySocialImpactComparison
+          :companyData="companyData"
+          v-if="thereIsFinancialData"
+        />
         <CompanyAccountMetadata :companyData="companyData" />
-        <CompanyNoCompteDeResultats :companyData="companyData" v-if="!thereIsFinancialData"/>
-        <CompanyScoring :companyData="companyData" v-if="thereIsFinancialData"/>
-        <CompanyOtherData :companyData="companyData" v-if="thereIsFinancialData" />
+        <CompanyNoCompteDeResultats
+          :companyData="companyData"
+          v-if="!thereIsFinancialData"
+        />
+        <CompanyScoring
+          :companyData="companyData"
+          v-if="thereIsFinancialData"
+        />
+        <CompanyOtherData
+          :companyData="companyData"
+          v-if="thereIsFinancialData"
+        />
         <CompanyOtherCompteDeResultats
           v-if="false"
           :companyData="companyData"
