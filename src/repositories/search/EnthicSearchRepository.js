@@ -24,6 +24,10 @@ export default {
     const results = await apiClient.get(url);
     return this.formatResult(results);
   },
+  async checkSirenExist(sirenList) {
+    const results = await apiClient.get("/exist/siren/" + sirenList.join(","));
+    return results.data;
+  },
   formatResult(results) {
     console.log("results from Enthic:", results);
     return results

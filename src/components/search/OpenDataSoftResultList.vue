@@ -21,7 +21,7 @@
               @sortOrderChanged="
                 (order) => handleSortOrderChangeForField(FIELD_TRI_DATE)(order)
               "
-              name="Dates"
+              name="Date de création"
             />
           </th>
           <th>Nature juridique</th>
@@ -29,9 +29,16 @@
       </thead>
       <tr v-for="(company, index) in companies" :key="index">
         <td>
-          <router-link class="result-link" :to="companyDetailRoute(company)">
+          <router-link
+            class="result-link"
+            :to="companyDetailRoute(company)"
+            v-if="company.isInEnthic"
+          >
             {{ getDenomination(company) }} ({{ company.fields.siren }})
           </router-link>
+          <div v-if="!company.isInEnthic">
+            {{ getDenomination(company) }} ({{ company.fields.siren }})
+          </div>
         </td>
         <td>
           {{ getEffectif(company) }}
@@ -154,13 +161,11 @@ export default {
       return text;
     },
     getDates(company) {
-      return (
-        "(" +
-        company.fields.datecreationunitelegale +
-        ")-(" +
-        company.fields.datefermetureunitelegale +
-        ")"
-      );
+      var result = company.fields.datecreationunitelegale;
+      if (company.fields.datefermetureunitelegale) {
+        result += "Fermée le " + company.fields.datefermetureunitelegale;
+      }
+      return result;
     },
   },
 };

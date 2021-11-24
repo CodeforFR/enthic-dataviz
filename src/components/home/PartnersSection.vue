@@ -14,11 +14,11 @@
       <h1 class="partner-title">L'écosystème</h1>
 
       <div class="logo-container">
-        <a href="https://www.enthic.fr">
+        <a href="https://www.enthic.fr" target="_blank">
           <img src="/favicon.ico" alt="logo Enthic" class="is-128 logo" />
         </a>
 
-        <a href="https://codefor.fr/">
+        <a href="https://codefor.fr/" target="_blank">
           <img
             src="https://fork.osp.cat/uploads/decidim/organization/logo/1/medium_logo-code-for-france-alpha-gray.png"
             alt="logo Code For France"
@@ -26,7 +26,7 @@
           />
         </a>
 
-        <a href="https://wexample.com/">
+        <a href="https://wexample.com/" target="_blank">
           <img
             src="https://wexample.com/wp-content/uploads/2021/04/cropped-favicon-wexample-ss-bk-192x192.png"
             alt="Logo Wexample"
@@ -34,7 +34,7 @@
           />
         </a>
 
-        <a href="https://dataforgood.fr">
+        <a href="https://dataforgood.fr" target="_blank">
           <img
             src="https://dataforgood.fr/img/logo-dfg-new.png"
             class="is-128 logo"
@@ -42,7 +42,7 @@
           />
         </a>
 
-        <a href="https://www.latitudes.cc/">
+        <a href="https://www.latitudes.cc/" target="_blank">
           <img
             src="https://uploads-ssl.webflow.com/610e20d69f9e1d3cae586963/6149d32f1c27af536f04ba69_Logo_Latitudes.svg"
             alt="logo Latitude - Exploring Tech for Good"
