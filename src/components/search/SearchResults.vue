@@ -217,6 +217,7 @@ export default {
         );
         this.error = null;
         this.lastResults = firstResults;
+        await this.checkWithEnthic(firstResults.items);
         this.items = firstResults.items;
       } catch (e) {
         this.error = e;
@@ -231,6 +232,7 @@ export default {
           this.searchOptions
         );
         this.lastResults = nextResults;
+        await this.checkWithEnthic(nextResults.items);
         this.items.push(...nextResults.items);
         this.loadingNext = false;
       } catch (e) {
@@ -240,6 +242,29 @@ export default {
         this.loadingNext = false;
         this.checkScrollPosition();
       }
+    },
+    async checkWithEnthic(resultsToCheck) {
+      var sirenList = [];
+      for (var i in resultsToCheck) {
+        sirenList.push(resultsToCheck[i].fields.siren);
+      }
+      const existingSiren = await EnthicSearchRepository.checkSirenExist(
+        sirenList
+      );
+      for (i in existingSiren) {
+        for (var j in resultsToCheck) {
+          if (resultsToCheck[j].fields.siren == existingSiren[i]) {
+            resultsToCheck[j].isInEnthic = true;
+            break;
+          }
+        }
+        console.log(
+          "ERREUR : Siren",
+          existingSiren[i],
+          "pas trouvé dans les résultats"
+        );
+      }
+      return existingSiren;
     },
     handleSortChange({ field, order }) {
       const sort = this.buildSortQuery(field, order);
