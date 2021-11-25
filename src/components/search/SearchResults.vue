@@ -12,48 +12,47 @@
         Résultats pour la recherche
         <span class="is-3 is-italic">"{{ text }}"</span>
       </h3>
-
       <div class="error-message" v-if="error">
         Erreur lors de la recherche '{{ text }}' : {{ error }}
       </div>
-      <div v-if="items">
-        <span>via </span>
-        <span class="control">
-          <label class="radio">
-            <input
-              type="radio"
-              name="answer"
-              v-model="SearchEngine"
-              value="OpenDataSoft"
-              @change="searchInitial"
-            />
-            OpenDataSoft
-          </label>
-          <label class="radio">
-            <input
-              type="radio"
-              name="answer"
-              v-model="SearchEngine"
-              value="Enthic"
-              @change="searchInitial"
-            />
-            Enthic
-          </label>
+      <span>via </span>
+      <span class="control">
+        <label class="radio">
+          <input
+            type="radio"
+            name="answer"
+            v-model="SearchEngine"
+            value="OpenDataSoft"
+            @change="searchInitial"
+          />
+          OpenDataSoft
+        </label>
+        <label class="radio">
+          <input
+            type="radio"
+            name="answer"
+            v-model="SearchEngine"
+            value="Enthic"
+            @change="searchInitial"
+          />
+          Enthic
+        </label>
+      </span>
+    </div>
+    <div v-if="items">
+      <h4 v-if="!loading && !error" class="result-count">
+        <span class="result-count-number">
+          {{ totalItems }}
         </span>
-        <h4 v-if="!loading && !error" class="result-count">
-          <span class="result-count-number">
-            {{ totalItems }}
-          </span>
-          sociétés trouvées
-        </h4>
-        <OpenDataSoftResultList
-          v-if="SearchEngine == 'OpenDataSoft'"
-          :companies="items"
-          :sort="sortDataForDisplay"
-          @sortChanged="handleSortChange"
-        />
-        <EnthicResultList v-if="SearchEngine == 'Enthic'" :companies="items" />
-      </div>
+        sociétés trouvées
+      </h4>
+      <OpenDataSoftResultList
+        v-if="SearchEngine == 'OpenDataSoft'"
+        :companies="items"
+        :sort="sortDataForDisplay"
+        @sortChanged="handleSortChange"
+      />
+      <EnthicResultList v-if="SearchEngine == 'Enthic'" :companies="items" />
     </div>
     <div v-if="remainingResultsCount > 0" class="next-results-plachodler">
       <div class="error-message" v-if="errorNext">
@@ -123,7 +122,8 @@ export default {
     },
     totalItems() {
       if (!this.lastResults) return null;
-      if (this.lastResults.nhits) return this.lastResults.nhits;
+      console.log("this.lastResults:", this.lastResults)
+      if (this.lastResults.nhits !== null) return this.lastResults.nhits;
       return this.lastResults.totalItems;
     },
     remainingResultsCount() {
@@ -244,6 +244,10 @@ export default {
       }
     },
     async checkWithEnthic(resultsToCheck) {
+      console.log("resultsToCheck:", resultsToCheck)
+      if (resultsToCheck.length == 0){
+        return;
+      }
       var sirenList = [];
       for (var i in resultsToCheck) {
         sirenList.push(resultsToCheck[i].fields.siren);
@@ -258,13 +262,7 @@ export default {
             break;
           }
         }
-        console.log(
-          "ERREUR : Siren",
-          existingSiren[i],
-          "pas trouvé dans les résultats"
-        );
       }
-      return existingSiren;
     },
     handleSortChange({ field, order }) {
       const sort = this.buildSortQuery(field, order);
@@ -300,7 +298,6 @@ h4 {
 .layout-search {
   text-align: center;
   margin-top: 1rem;
-  min-height: 30vh;
 }
 .layout-search-footer {
   height: 4rem;
@@ -320,9 +317,7 @@ h4 {
 }
 .next-results {
   text-align: center;
-  // margin: 0 auto;
   color: gray;
-  // margin: 1rem;
 }
 .end-results {
   text-align: center;

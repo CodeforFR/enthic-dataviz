@@ -1,73 +1,60 @@
 <template>
-  <div>
-    <table v-if="companies" class="layout-search-table">
-      <thead>
-        <tr>
-          <th>Dénomination (n°SIREN)</th>
-          <th>
-            <SortableTitle
-              :sortOrder="sortOrderForField(FIELD_TRI_EFFECTIF)"
-              @sortOrderChanged="
-                (order) =>
-                  handleSortOrderChangeForField(FIELD_TRI_EFFECTIF)(order)
-              "
-              name="Effectif"
-            />
-          </th>
-          <th>Secteur (code APE)</th>
-          <th>
-            <SortableTitle
-              :sortOrder="sortOrderForField(FIELD_TRI_DATE)"
-              @sortOrderChanged="
-                (order) => handleSortOrderChangeForField(FIELD_TRI_DATE)(order)
-              "
-              name="Date de création"
-            />
-          </th>
-          <th>Nature juridique</th>
-        </tr>
-      </thead>
-      <tr v-for="(company, index) in companies" :key="index">
-        <td>
-          <router-link
-            class="result-link"
-            :to="companyDetailRoute(company)"
-            v-if="company.isInEnthic"
-          >
-            {{ getDenomination(company) }} ({{ company.fields.siren }})
-          </router-link>
-          <div v-if="!company.isInEnthic">
-            {{ getDenomination(company) }} ({{ company.fields.siren }})
-          </div>
-        </td>
-        <td>
-          {{ getEffectif(company) }}
-        </td>
-        <td>
-          {{ company.fields.classeetablissement }}({{
-            company.fields.activiteprincipaleunitelegale
-          }})
-        </td>
-        <td>
-          {{ getDates(company) }}
-        </td>
-        <td>
-          {{ company.fields.naturejuridiqueunitelegale }}
-        </td>
-      </tr>
-    </table>
+  <div v-if="companies" class="layout-search-table px-6">
+    <div class="columns">
+      <div class="column">Dénomination (n°SIREN)</div>
+      <div class="column">
+        <SortableTitle
+          :sortOrder="sortOrderForField(FIELD_TRI_EFFECTIF)"
+          @sortOrderChanged="
+            (order) => handleSortOrderChangeForField(FIELD_TRI_EFFECTIF)(order)
+          "
+          name="Effectif"
+        />
+      </div>
+      <div class="column">Secteur (code APE)</div>
+      <div class="column">
+        <SortableTitle
+          :sortOrder="sortOrderForField(FIELD_TRI_DATE)"
+          @sortOrderChanged="
+            (order) => handleSortOrderChangeForField(FIELD_TRI_DATE)(order)
+          "
+          name="Date de création"
+        />
+      </div>
+      <div class="column">Nature juridique</div>
+    </div>
+    <div
+      v-for="(company, index) in companies"
+      :key="index"
+    >
+      <router-link
+        class="result-link"
+        :to="companyDetailRoute(company)"
+        v-if="company.isInEnthic"
+      >
+        <OpenDataSoftOneResult
+          :displayable_company="computeDisplayableCompany(company)"
+        />
+      </router-link>
+      <div class="company_no_data" v-else>
+        <OpenDataSoftOneResult
+          :displayable_company="computeDisplayableCompany(company)"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import SortableTitle from "./SortableTitle.vue";
 import OpenDataSoftSearchRepository from "@/repositories/search/OpenDataSoftSearchRepository";
+import OpenDataSoftOneResult from "./OpenDataSoftOneResult.vue";
 
 const { FIELD_TRI_EFFECTIF, FIELD_TRI_DATE } =
   OpenDataSoftSearchRepository.fields;
 
 export default {
-  components: { SortableTitle },
+  components: { SortableTitle, OpenDataSoftOneResult },
   props: {
     companies: {
       type: Array,
@@ -112,9 +99,22 @@ export default {
     emitSortOrderChange(field, order) {
       this.$emit("sortChanged", { field, order });
     },
+    computeDisplayableCompany(company) {
+      return {
+        denomination: this.getDenomination(company),
+        siren: company.fields.siren,
+        effectif: this.getEffectif(company),
+        secteur: {
+          description: company.fields.classeetablissement,
+          code: company.fields.activiteprincipaleunitelegale,
+        },
+        dates: this.getDates(company),
+        nature_juridique: company.fields.naturejuridiqueunitelegale,
+      };
+    },
     getEffectif(company) {
       if (!company.fields.trancheeffectifsunitelegale) {
-        return "Pas rempli";
+        return { count: "Non rempli" };
       }
       var effectifMapping = {
         "00": "0 salarié⋅e",
@@ -139,10 +139,11 @@ export default {
       } else {
         text = company.fields.trancheeffectifsunitelegale;
       }
+      var annee = "";
       if (company.fields.anneeeffectifsunitelegale) {
-        text += " ( en " + company.fields.anneeeffectifsunitelegale + ")";
+        annee = " (en " + company.fields.anneeeffectifsunitelegale + ")";
       }
-      return text;
+      return { count: text, annee: annee };
     },
     getDenomination(company) {
       if (company.fields.denominationunitelegale) {
@@ -161,11 +162,12 @@ export default {
       return text;
     },
     getDates(company) {
-      var result = company.fields.datecreationunitelegale;
+      var creation_date = company.fields.datecreationunitelegale;
       if (company.fields.datefermetureunitelegale) {
-        result += "Fermée le " + company.fields.datefermetureunitelegale;
+        var closing_date =
+          "(Fermée le " + company.fields.datefermetureunitelegale + ")";
       }
-      return result;
+      return { creation: creation_date, fermeture: closing_date };
     },
   },
 };
@@ -174,22 +176,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/css/app-colors.scss";
 
-.layout-search-table {
-  margin: 0 auto;
-}
-
-table th,
-table td {
-  padding: 0 0.5rem;
-  text-align: left;
-}
-.result-link {
-  font-weight: 600;
-  text-decoration: underline;
-  color: $app-grey-light;
-
-  &:hover {
-    color: $app-success;
-  }
+.company_no_data {
+  opacity: 0.7;
 }
 </style>
