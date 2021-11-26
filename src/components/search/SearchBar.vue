@@ -5,19 +5,10 @@
         <input
           type="search"
           name="text"
-          class="input search-box search-laptop"
+          class="input search-box"
           :value="searchText"
-          placeholder="Saisissez le nom d'une entreprise (ex: enercoop)"
+          :placeholder="placeholder_value"
         />
-        <!-- Il faut conditionner l'affichage des inputs au niveau vue-js, sinon on a 2 textes de recherche dans l'URL 
-        <input
-          type="search"
-          name="text"
-          class="input search-box search-mobile"
-          :value="searchText"
-          placeholder="Nom de l'entreprise"
-        />
-      -->
         <span class="icon is-left" id="search-icon">
           <i class="fas fa-search"></i>
         </span>
@@ -35,6 +26,14 @@ export default {
     searchText: {
       type: String,
       required: false,
+    },
+  },
+  computed: {
+    placeholder_value: function () {
+      if (screen.width > 800) {
+        return "Saisissez le nom d'une entreprise (ex: enercoop)";
+      }
+      return "Nom de l'entreprise";
     },
   },
 };
