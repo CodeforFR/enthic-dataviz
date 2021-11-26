@@ -9,10 +9,6 @@
     margin: 0 auto 20px auto;
   }
 
-  .search-mobile {
-    display: none;
-  }
-
   .search-box {
     width: 100%;
     // margin: auto;
@@ -48,11 +44,6 @@
       opacity: 1;
     }
 
-    // .search-btn-as-icon {
-    //   padding: 0 !important;
-    //   margin: 0 !important;
-    // }
-
     .search-btn-as-text {
       font-size: 16px;
       color: white;
@@ -66,17 +57,7 @@
     .control {
       width: 95%;
     }
-
-    .search-mobile {
-      display: block;
-    }
-
-    .search-laptop {
-      display: none;
-    }
   }
-
-
 }
 
 @media (min-width: 768px) and (max-width: 1150px) {

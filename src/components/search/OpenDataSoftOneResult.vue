@@ -4,9 +4,7 @@
       <div class="company_denomination">
         {{ displayable_company.denomination }}
       </div>
-      <div class="siren_number">
-        {{ displayable_company.siren }}
-      </div>
+      <div class="siren_number">SIREN : {{ displayable_company.siren }}</div>
     </div>
     <div class="column">
       <div class="company_main_info">
@@ -21,7 +19,7 @@
         {{ displayable_company.secteur.description }}
       </div>
       <div class="company_secondary_info">
-        ({{ displayable_company.secteur.code }})
+        {{ displayable_company.secteur.code }}
       </div>
     </div>
     <div class="column company_secondary_info">
@@ -55,7 +53,7 @@ export default {
 .company_denomination {
   font-family: Poppins;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: bold;
   font-stretch: normal;
   font-style: normal;
   line-height: 1;

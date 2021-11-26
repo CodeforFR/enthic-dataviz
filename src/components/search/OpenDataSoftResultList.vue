@@ -1,18 +1,20 @@
 <template>
   <div v-if="companies" class="layout-search-table px-6">
     <div class="columns">
-      <div class="column">Dénomination (n°SIREN)</div>
-      <div class="column">
+      <div class="column column_name">
+        {{ search_result_count }} sociétés trouvées
+      </div>
+      <div class="column column_name">
         <SortableTitle
           :sortOrder="sortOrderForField(FIELD_TRI_EFFECTIF)"
           @sortOrderChanged="
             (order) => handleSortOrderChangeForField(FIELD_TRI_EFFECTIF)(order)
           "
-          name="Effectif"
+          name="Salarié⋅es"
         />
       </div>
-      <div class="column">Secteur (code APE)</div>
-      <div class="column">
+      <div class="column column_name">Secteur / code APE</div>
+      <div class="column column_name">
         <SortableTitle
           :sortOrder="sortOrderForField(FIELD_TRI_DATE)"
           @sortOrderChanged="
@@ -21,12 +23,9 @@
           name="Date de création"
         />
       </div>
-      <div class="column">Nature juridique</div>
+      <div class="column column_name">Nature juridique</div>
     </div>
-    <div
-      v-for="(company, index) in companies"
-      :key="index"
-    >
+    <div v-for="(company, index) in companies" :key="index">
       <router-link
         class="result-link"
         :to="companyDetailRoute(company)"
@@ -65,6 +64,7 @@ export default {
       default: null,
       required: false,
     },
+    search_result_count: Number,
   },
   data() {
     return {
@@ -178,5 +178,16 @@ export default {
 
 .company_no_data {
   opacity: 0.7;
+}
+
+.column_name {
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #18097c;
 }
 </style>

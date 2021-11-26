@@ -8,10 +8,6 @@
         alt=""
       />
       <h3 v-if="loading">recherche en cours pour '{{ text }}'</h3>
-      <h3 v-if="!loading && !error" class="is-size-3">
-        Résultats pour la recherche
-        <span class="is-3 is-italic">"{{ text }}"</span>
-      </h3>
       <div class="error-message" v-if="error">
         Erreur lors de la recherche '{{ text }}' : {{ error }}
       </div>
@@ -40,15 +36,10 @@
       </span>
     </div>
     <div v-if="items">
-      <h4 v-if="!loading && !error" class="result-count">
-        <span class="result-count-number">
-          {{ totalItems }}
-        </span>
-        sociétés trouvées
-      </h4>
       <OpenDataSoftResultList
         v-if="SearchEngine == 'OpenDataSoft'"
         :companies="items"
+        :search_result_count="totalItems"
         :sort="sortDataForDisplay"
         @sortChanged="handleSortChange"
       />
@@ -122,7 +113,6 @@ export default {
     },
     totalItems() {
       if (!this.lastResults) return null;
-      console.log("this.lastResults:", this.lastResults)
       if (this.lastResults.nhits !== null) return this.lastResults.nhits;
       return this.lastResults.totalItems;
     },
@@ -244,8 +234,7 @@ export default {
       }
     },
     async checkWithEnthic(resultsToCheck) {
-      console.log("resultsToCheck:", resultsToCheck)
-      if (resultsToCheck.length == 0){
+      if (resultsToCheck.length == 0) {
         return;
       }
       var sirenList = [];
