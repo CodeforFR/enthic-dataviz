@@ -39,7 +39,7 @@
           <a href="https://chat.codefor.fr" target="_blank">Chat</a>
         </li>
         <li>
-          <a href="https://github.com/phe-sto/enthic" target="_blank">
+          <a href="https://github.com/CodeforFR/enthic-backend" target="_blank">
             Code source back
           </a>
           /
