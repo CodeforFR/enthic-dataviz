@@ -1,24 +1,30 @@
-.search-bar{
+.search-text {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.search-bar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: $light-orange;
 
   .control {
     width: 40%;
-    margin: 0 auto 20px auto;
   }
 
   .search-box {
     width: 100%;
+    height: 50px;
     // margin: auto;
-    background-color: $light-blue;
     border: none;
     box-shadow: none;
-    text-align: center;
-    padding: 0!important;
     border-radius: 10px;
     font-size: 16px;
+    font-family: Poppins;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 13px 0px 11px 16px;
+    color: #18097c;
+    &:focus {
+      border: 1px solid #536dfc;
+    }
   }
 
   #search-icon {
@@ -26,28 +32,61 @@
     padding-left: 25px;
     font-size: 16px;
   }
-
-  .search-box::placeholder {
-    font-family: 'Open Sans';
-    color: $dark-blue;
+  input[type="search" i]:enabled:read-write:-webkit-any(:focus, :hover)::-webkit-search-cancel-button {
+    display: none;
   }
-
-  .search-btn {
-    background-color: $orange;
-    opacity: 0.8;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
+  .search-clear {
     cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 35%;
+    background-color: #9ca4d1;
+    border-radius: 50%;
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .dashs-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      .dash-1,
+      .dash-2 {
+        width: 2px;
+        height: 12px;
+        background-color: white;
+        position: absolute;
+      }
+      .dash-1 {
+        transform: rotate(315deg);
+      }
+      .dash-2 {
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .search-btn {
+    border: none;
+    width: 122px;
+    height: 50px;
+    padding: 16px 12px 15px;
+    border-radius: 3px;
+    background-color: #dfe4ff;
+    cursor: pointer;
+    margin-left: 10px;
 
     &:hover {
       opacity: 1;
     }
 
     .search-btn-as-text {
-      font-size: 16px;
-      color: white;
-      font-family: 'Open Sans';
+      font-size: 12px;
+      font-weight: bold;
+      color: #536dfc;
+      font-family: "Open Sans";
     }
   }
 }

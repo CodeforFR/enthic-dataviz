@@ -2,23 +2,24 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 25px;
-  background-color: $light-orange;
-
+  background-color: $dark-blue2;
 
   .logo-enthic {
     margin: 0.3rem 0 0 1rem;
-    width: 60px;
-    // transform: scale(0.2);
+    font-weight: bold;
+    width: 100px;
+    height: 49px;
+    font-family: Poppins;
+    font-size: 30px;
+    color: #fff;
   }
 
   #navMenu {
     .navbar-item {
-      color: $purple;
-      font-size: 17px;
-
-      &:hover {
-        color: #3d3a39;
-      }
+      color: #fff;
+      font-family: Poppins;
+      font-size: 14px;
+      font-weight: bold;
     }
   }
 }
@@ -36,10 +37,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: $purple;
+        //color: $purple;
+        color: #fff;
 
         .burger-size {
-          font-size: 30px;        }
+          font-size: 30px;
+        }
       }
     }
 
@@ -48,18 +51,21 @@
       width: 100vw;
       top: 80px;
       right: 0;
-      background-color: $light-orange;
+      background-color: $dark-blue2;
       box-shadow: none;
 
       .navbar-item {
-        color: $purple;
+        //  color: $purple;
+        color: #fff;
         text-align: center;
+        &:hover {
+          background-color: inherit !important;
+          color: #fff !important;
+        }
       }
     }
   }
-
 }
-
 
 // ----- UNUSED CSS FOR NAVBAR -----
 
@@ -76,7 +82,6 @@
 // .nav a.router-link-exact-active {
 //   color: #2c3e5085;
 // }
-
 
 // html[lang="fr"] nav #navbar-main .navbar-item [lang="fr"],
 // html[lang="en"] nav #navbar-main .navbar-item [lang="en"]{
@@ -100,12 +105,10 @@
 // 	}
 // }
 
-
 // #navbar-top {
 // 	height: $app-navbar-height;
 // 	z-index:10;
 // }
-
 
 // .skip-navbar {
 // 	padding-top: $app-navbar-height;

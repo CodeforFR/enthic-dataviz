@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div ref="searchBox" class="layout-search">
+    <div ref="searchBox" class="layout-search"  v-if="false">
       <img
         v-if="loading"
         class="loading-indicator"
@@ -283,6 +283,9 @@ h4 {
   font-size: 100%;
   margin: 0;
   padding: 0;
+}
+.pd-left-0 {
+  padding-left: 0px !important;
 }
 .layout-search {
   text-align: center;

@@ -6,11 +6,7 @@
   >
     <div class="navbar-brand">
       <router-link to="/">
-        <img
-          src="@/assets/enthic_without_bg.png"
-          alt="Main logo"
-          class="logo-enthic"
-        />
+        <div class="logo-enthic">Enthic</div>
       </router-link>
       <a
         role="button"

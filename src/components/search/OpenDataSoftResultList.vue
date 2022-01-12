@@ -1,7 +1,7 @@
 <template>
   <div v-if="companies" class="layout-search-table px-6">
     <div class="columns">
-      <div class="column column_name">
+      <div class="column column_name pd-left-0">
         {{ search_result_count }} sociétés trouvées
       </div>
       <div class="column column_name">

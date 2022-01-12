@@ -1,14 +1,20 @@
-@import './app-colors.scss';
-@import './app-misc.scss';
-@import './app-spacing.scss';
-@import './app-typography.scss';
-@import './banner.scss';
-@import './carousel.scss';
-@import './commons.scss';
-@import './commons-cis.scss';
-@import './custom-bulma.scss';
-@import './footer.scss';
-@import './http-errors.scss';
-@import './navbar.scss';
-@import './rem.scss';
-@import './search-bar.scss';
+@import "./app-colors.scss";
+@import "./app-misc.scss";
+@import "./app-spacing.scss";
+@import "./app-typography.scss";
+@import "./banner.scss";
+@import "./carousel.scss";
+@import "./commons.scss";
+@import "./commons-cis.scss";
+@import "./custom-bulma.scss";
+@import "./footer.scss";
+@import "./http-errors.scss";
+@import "./navbar.scss";
+@import "./rem.scss";
+@import "./search-bar.scss";
+
+.columns {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
