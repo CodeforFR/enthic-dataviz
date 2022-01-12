@@ -62,7 +62,7 @@ export default {
 }
 
 .siren_number {
-  font-family: OpenSans;
+  font-family: 'Open Sans';
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -84,7 +84,7 @@ export default {
 }
 
 .company_secondary_info {
-  font-family: OpenSans;
+  font-family: 'Open Sans';
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
