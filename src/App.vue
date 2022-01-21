@@ -31,6 +31,10 @@ hr {
   display: block;
   height: 2px;
   margin: 1.5rem 0;
-  background-color: #f5f5f5;
+  background-color: rgba(156, 164, 209, 0.16);
+}
+
+.box {
+  background-color: none !important;
 }
 </style>

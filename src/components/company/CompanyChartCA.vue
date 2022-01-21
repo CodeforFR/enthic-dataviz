@@ -1,16 +1,17 @@
 <template>
   <Widget
     title="Répartition du chiffre d'affaire"
-    titleColor="#ff99ff"
+    titleColor="#536dfc"
     v-if="chartDetails"
   >
-    <p>
+    <p class="description-chart-ca">
       Ce graphique montre la répartition des charges payées par le chiffre
       d'affaire de l'entreprise. La hauteur de chaque colonne correspond au
       chiffre d'affaire.
     </p>
 
     <BarChart
+      :CHART_OPTIONS="this.CHART_OPTIONS"
       :options="chartDetails.optionsChartCA"
       :isStacked="true"
     ></BarChart>
@@ -35,6 +36,64 @@ import BarChart from "@/components/charts/BarChart";
 export default {
   name: "CompanyChartCA",
   props: ["chartDetails"],
+  data: () => {
+    return {
+      CHART_OPTIONS: {
+        color: [
+          "#00BFC7",
+          "#514BD3",
+          "#9089FA",
+          "#E8871B",
+          "#CC2581",
+          "#47E26F",
+        ],
+        grid: {
+          top: "40%",
+        },
+        xAxis: {
+          type: "category",
+        },
+        yAxis: {
+          type: "value",
+          nameLocation: "middle",
+          nameGap: 50,
+        },
+        legend: {
+          orient: "horizontal",
+          width: "40%",
+          x: "middle", //The legend can be set to the left, right and center
+          y: "top", //You can set the legend to be on top, bottom, and center
+          formatter: "{a|{name}}",
+          textStyle: {
+            color: "#1B1B4E",
+            rich: {
+              a: {
+                fontSize: 12,
+              },
+            },
+          },
+        },
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+          },
+        },
+        label: {
+          normal: {
+            show: true,
+            position: "top",
+          },
+        },
+        series: [
+          {
+            type: "bar",
+            barCategoryGap: "20%",
+          },
+        ],
+      },
+    };
+  },
   components: {
     BarChart,
     Widget,
@@ -45,5 +104,9 @@ export default {
 <style lang="scss" scoped>
 ul {
   list-style-type: circle;
+}
+
+.description-chart-ca {
+  width: 60%;
 }
 </style>

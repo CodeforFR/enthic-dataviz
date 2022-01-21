@@ -10,7 +10,7 @@
           v-for="(data, year) in companyData.declarations"
           :key="year"
         >
-          <p>Année {{ year }} :</p>
+          <p>année {{ year }} :</p>
           <ul class="list-company-props m-30">
             <li>
               code motif : {{ data.metadata.code_motif.description }} (code

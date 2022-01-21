@@ -1,7 +1,7 @@
 <template>
   <Widget
     title="Comptes de résultat détaillés"
-    titleColor="#ffff99"
+    titleColor="#536dfc"
     v-if="companyData.comptesDeResultats"
   >
     <div
@@ -11,9 +11,6 @@
         companyData.comptesDeResultats.length > 0
       "
     >
-      <p>
-        Cliquer sur une ligne permet de découvrir les détails de sa composition
-      </p>
       <div class="tile is-parent">
         <div class="tile is-6"></div>
         <div
@@ -21,21 +18,21 @@
           v-for="(oneYeardata, index) in companyData.comptesDeResultats"
           :key="index"
         >
-          Année {{ oneYeardata.year }}
+          année {{ oneYeardata.year }}
         </div>
       </div>
       <FoldingArray :rowItem="companyData.comptesDeResultats"></FoldingArray>
       <div>
-        <p style="color: #194">
+        <p style="color: #194;">
           Une valeur en vert est une valeur officielle et qui peut être
           retrouvée avec les autres valeurs fournies (erreur de maximum 0,5% ou
           10€ tolérée)
         </p>
-        <p style="color: #419">
+        <p style="color: #419;">
           Une valeur en bleu est une valeur non fournie mais qui peut être
           retrouvée avec les autres valeurs
         </p>
-        <p style="color: #941">
+        <p style="color: #941;">
           Une valeur en rouge est une valeur non fournie, ou officielle mais ne
           correspondant pas aux autres valeurs
         </p>
@@ -58,3 +55,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.tile {
+  color: #18097c;
+  font-weight: bold;
+}
+</style>

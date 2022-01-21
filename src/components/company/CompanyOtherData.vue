@@ -1,5 +1,5 @@
 <template>
-  <Widget title="Autres données" titleColor="#ff99ff" v-if="companyData">
+  <Widget title="Autres données" titleColor="#536dfc" v-if="companyData">
     <div class="m-l-30 m-b-20" v-for="(year, index) in yearData" :key="index">
       <span class="title is-6">
         {{ year.year }}

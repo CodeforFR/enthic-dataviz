@@ -1,7 +1,7 @@
 <template>
   <Widget
     title="Scoring (version beta)"
-    titleColor="#9999ff"
+    titleColor="#536dfc"
     v-if="companyData.comptesDeResultats"
   >
     <div class="tile is-ancestor is-vertical">

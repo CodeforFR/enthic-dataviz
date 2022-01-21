@@ -1,7 +1,7 @@
 <template>
   <Widget
     title="Comparaison de l'impact social"
-    titleColor="#99ff99"
+    titleColor="#536dfc"
     v-if="companyData"
   >
     <div>
