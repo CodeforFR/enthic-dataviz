@@ -1,5 +1,9 @@
 <template>
-  <Widget :title="companyData.denomination.value" titleColor="#9999ff">
+  <Widget
+    :title="companyData.denomination.value"
+    class="blue-border"
+    titleColor="#536dfc"
+  >
     <div class="tile is-parent">
       <div classe="tile is-child">
         <ul class="list-company-props m-30">
@@ -53,14 +57,6 @@
             >
           </li>
         </ul>
-      </div>
-      <div class="tile is-child box">
-        <h3 class="title is-5">Télécharger les données en csv</h3>
-        <p>
-          <a class="button is-primary" :href="`${CsvCompanyUrl}`">
-            De l'entreprise {{ companyData.denomination.value }}
-          </a>
-        </p>
       </div>
     </div>
   </Widget>
@@ -118,6 +114,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.blue-border {
+  border: solid 1px #536dfcb8;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgba(113, 108, 174, 0.09);
+}
 .list-company-props {
   list-style-type: circle;
 }

@@ -4,10 +4,20 @@
     v-bind:class="{ gotchildren: hasChildren }"
   >
     <div class="tile is-parent" @click="toggle">
-      <div class="tile is-child is-6" :class="{ bold: hasChildren }">
-        {{ getDescription }}
-        <span v-if="hasChildren">[{{ isOpen ? "-" : "+" }}]</span>
+      <div class="is-6-container">
+        <div
+          class="tile is-child is-6"
+          :style="[
+            hasChildren ? { fontWeight: 'bold' } : { fontWeight: 'normal' },
+          ]"
+        >
+          {{ getDescription }}
+        </div>
+        <div class="button-dropdown" v-if="hasChildren">
+          {{ isOpen ? "-" : "+" }}
+        </div>
       </div>
+
       <div
         class="tile is-child tooltip"
         v-for="(oneYearItem, index) in rowItem"
@@ -29,6 +39,86 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+.is-6-container {
+  display: flex;
+  justify-content: space-between;
+  width: 45%;
+}
+
+body {
+  color: #444;
+}
+
+.button-dropdown {
+  width: 60px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(156, 164, 209, 0.16);
+}
+.gotchildren {
+  cursor: pointer;
+}
+.subtotal {
+  margin-left: 10px;
+  cursor: auto;
+}
+.bold {
+  font-weight: bold;
+}
+
+.tile .is-child {
+  border-collapse: collapse;
+  border-bottom: 1px solid rgb(179, 179, 179);
+  margin-right: 10px !important;
+  font-size: 14px;
+}
+.tile .is-parent {
+  padding: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  padding: 10px 14px 5px 25px;
+  background-color: white;
+  width: 45%;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+white-space: initial;
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
 <script>
 export default {
   name: "FoldingRow",
@@ -46,6 +136,7 @@ export default {
     },
     getDescription() {
       let text = "";
+      console.log(this.rowItem);
       if (this.rowItem[0].data.description === "non fourni") {
         text += this.rowItem[0].name;
       } else {
@@ -161,65 +252,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-body {
-  color: #444;
-}
-.gotchildren {
-  cursor: pointer;
-}
-.subtotal {
-  border: 1px solid #666;
-  margin-left: 10px;
-  cursor: auto;
-}
-.bold {
-  font-weight: bold;
-}
-.tile .is-child {
-  border-collapse: collapse;
-  border: 1px solid #aaa;
-  margin: 0px;
-  padding: 0px;
-}
-.tile .is-parent {
-  padding: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-/* Tooltip container */
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Position the tooltip text */
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-
-  /* Fade in tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-</style>

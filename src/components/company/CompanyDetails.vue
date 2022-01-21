@@ -1,27 +1,43 @@
 <template>
   <div>
     <main v-if="companyData">
-      <div class="container">
+      <div class="company-data-container">
         <!-- BACK TO RESULTS -->
-        <a class="back" @click="goBack">
-          <span class="icon">
-            <i class="fas fa-arrow-left"></i>
-          </span>
-          <span> Retour aux résultats de recherche </span>
-        </a>
-        <CompanyIdentity :companyData="companyData" />
-        <CompanyChartCA
-          :chartDetails="chartCADetails"
-          v-if="thereIsFinancialData"
-        />
+        <div class="navbar-and-csv container">
+          <a class="back" @click="goBack">
+            <span class="icon">
+              <i class="fas fa-arrow-left"></i>
+            </span>
+            <span>Retour aux résultats de recherche</span>
+          </a>
+          <ExportCsv :companyData="companyData" />
+        </div>
+        <div class="grey-layer">
+          <div class="first-section container">
+            <CompanyIdentity
+              class="company-detail"
+              :companyData="companyData"
+            />
+            <CompanyChartCA
+              class="company-chart-ca"
+              :chartDetails="chartCADetails"
+              v-if="thereIsFinancialData"
+            />
+          </div>
+        </div>
+
         <CompanyChartMargin
+          class="container"
           :chartDetails="chartMarginDetails"
           v-if="thereIsFinancialData"
         />
-        <CompanyCompteDeResultatsTree
-          :companyData="companyData"
-          v-if="thereIsFinancialData"
-        />
+        <div class="grey-layer">
+          <CompanyCompteDeResultatsTree
+            :companyData="companyData"
+            v-if="thereIsFinancialData"
+          />
+        </div>
+        s
         <CompanySocialImpactComparison
           :companyData="companyData"
           v-if="thereIsFinancialData"
@@ -61,6 +77,7 @@ import CompanyScoring from "./CompanyScoring.vue";
 import CompanyOtherData from "./CompanyOtherData.vue";
 import CompanyOtherCompteDeResultats from "./CompanyOtherCompteDeResultats.vue";
 import CompanyAccountMetadata from "./CompanyAccountMetadata.vue";
+import ExportCsv from "./exportCsv.vue";
 
 export default {
   name: "DynamicDetail",
@@ -75,6 +92,7 @@ export default {
     CompanyOtherData,
     CompanyOtherCompteDeResultats,
     CompanyAccountMetadata,
+    ExportCsv,
   },
   props: ["companyData"],
   computed: {
@@ -109,9 +127,33 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/css/app-colors.scss";
 @import "../../assets/css/app-misc.scss";
+.company-data-container {
+  width: 100%;
+}
+.first-section {
+  display: flex;
+  position: relative;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.grey-layer {
+  background-color: rgba(156, 164, 209, 0.16);
+}
+.company-chart-ca {
+  width: 60%;
+}
+
+.company-detail {
+  width: 40%;
+}
 
 .layout-company-details {
   text-align: left;
+}
+
+.navbar-and-csv {
+  display: flex;
+  justify-content: space-between;
 }
 
 main {

@@ -27,66 +27,6 @@ use([
   LegendComponent,
 ]);
 const DEFAULT_SERIE_TYPE = "bar";
-const DEFAULT_COLOR_SCHEMA = [
-  "#00BFC7",
-  "#514BD3",
-  "#9089FA",
-  "#E8871B",
-  "#CC2581",
-  "#47E26F",
-];
-
-const DEFAULT_CHART_OPTIONS = {
-  color: DEFAULT_COLOR_SCHEMA,
-  grid: {
-    right: "20%",
-  },
-  xAxis: {
-    type: "category",
-  },
-  yAxis: {
-    type: "value",
-    nameLocation: "middle",
-    nameGap: 50,
-  },
-  legend: {
-    orient: "vertical",
-    width: "40%",
-    x: "right", //The legend can be set to the left, right and center
-    y: "top", //You can set the legend to be on top, bottom, and center
-    align: "left",
-    formatter: "{a|{name}}",
-    textStyle: {
-      color: "#1B1B4E",
-      padding: [0, 0, 0, 0],
-      rich: {
-        a: {
-          fontSize: 12,
-          padding: 5,
-          lineHeight: 14,
-        },
-      },
-    },
-  },
-  tooltip: {
-    trigger: "axis",
-    axisPointer: {
-      type: "shadow",
-    },
-  },
-  label: {
-    normal: {
-      show: true,
-      position: "top",
-    },
-  },
-  series: [
-    {
-      type: "bar",
-      barCategoryGap: "10%",
-    },
-  ],
-};
 
 export default {
   name: "BarChart",
@@ -97,6 +37,7 @@ export default {
     [THEME_KEY]: "light",
   },
   props: {
+    CHART_OPTIONS: {},
     options: {
       type: Object,
       required: true,
@@ -145,11 +86,11 @@ export default {
       });
     },
     updateChartOptions() {
-      return merge({}, DEFAULT_CHART_OPTIONS, this.options);
+      return merge({}, this.CHART_OPTIONS, this.options);
     },
   },
   mounted() {
-    this.chartOptions = DEFAULT_CHART_OPTIONS;
+    this.chartOptions = this.CHART_OPTIONS;
   },
 };
 </script>

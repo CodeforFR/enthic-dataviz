@@ -1,7 +1,7 @@
 <template>
-  <div class="columns">
+  <div class="container">
     <div class="column">
-      <div class="box widget-box">
+      <div class="widget-box">
         <h3 class="title is-3 widget-title" :style="titleStyle">{{ title }}</h3>
         <div class="widget-content">
           <slot></slot>
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     titleStyle() {
-      return { backgroundColor: this.titleColor };
+      return { color: this.titleColor };
     },
   },
 };
