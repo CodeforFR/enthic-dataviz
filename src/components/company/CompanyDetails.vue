@@ -39,7 +39,6 @@
             v-if="thereIsFinancialData"
           />
         </div>
-        s
         <CompanySocialImpactComparison
           :companyData="companyData"
           v-if="thereIsFinancialData"
@@ -136,11 +135,12 @@ export default {
   color: #18097c;
   font-weight: bold;
 }
+
 .first-section {
   display: flex;
   position: relative;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 0rem !important;
 }
 .grey-layer {
   background-color: rgba(156, 164, 209, 0.16);
@@ -199,7 +199,8 @@ a.back {
 @media (max-width: 1400px) {
   .first-section {
     flex-direction: column;
-    .company-detail, .company-chart-ca {
+    .company-detail,
+    .company-chart-ca {
       width: 90%;
     }
   }
