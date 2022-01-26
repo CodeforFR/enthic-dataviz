@@ -8,7 +8,9 @@
             <span class="icon">
               <i class="fas fa-arrow-left"></i>
             </span>
-            <span class="back-to-results">Retour aux résultats de recherche</span>
+            <span class="back-to-results"
+              >Retour aux résultats de recherche</span
+            >
           </a>
           <ExportCsv :companyData="companyData" />
         </div>
@@ -149,6 +151,7 @@ export default {
 
 .company-detail {
   width: 40%;
+  height: 50%;
 }
 
 .layout-company-details {
@@ -190,6 +193,15 @@ a.back {
   span {
     margin-left: 1em;
     // color: white ;
+  }
+}
+
+@media (max-width: 1400px) {
+  .first-section {
+    flex-direction: column;
+    .company-detail, .company-chart-ca {
+      width: 90%;
+    }
   }
 }
 </style>

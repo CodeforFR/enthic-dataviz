@@ -96,6 +96,7 @@ export default {
 </script>
 
 <style scoped>
+
 .chart__container {
   width: 900px;
   height: 500px;
@@ -103,13 +104,13 @@ export default {
 @media (min-width: 768px) and (max-width: 1023px) {
   .chart__container {
     width: 740px;
-    height: 350px;
+    height: 100%;
   }
 }
 @media screen and (max-width: 767px) {
   .chart__container {
     width: 80vw;
-    height: 350px;
+    height: 100%;
   }
 }
 </style>

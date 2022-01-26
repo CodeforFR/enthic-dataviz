@@ -66,6 +66,9 @@ body {
   .is-child {
     padding-left: 10px;
   }
+  .is-parent {
+    padding-left: 10px !important;
+  }
 }
 .bold {
   font-weight: bold;
@@ -122,6 +125,12 @@ body {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+@media (max-width: 1215px) {
+  .tile .is-parent {
+    white-space: initial;
+  }
 }
 </style>
 <script>
