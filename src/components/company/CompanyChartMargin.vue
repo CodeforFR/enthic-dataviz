@@ -33,15 +33,17 @@ export default {
     return {
       CHART_OPTIONS: {
         color: [
-          "#00BFC7",
-          "#514BD3",
-          "#9089FA",
-          "#E8871B",
+          "#ff926b",
+          "#536dfc",
+          "#00bfc7",
+          "#ff4a4a",
           "#CC2581",
           "#47E26F",
         ],
         grid: {
-          bottom: "40%",
+          bottom: "20%",
+          right: "0%",
+          left: "15%",
         },
         xAxis: {
           type: "category",
@@ -52,9 +54,9 @@ export default {
           nameGap: 50,
         },
         legend: {
-          orient: "vertical",
-          width: "40%",
-          x: "5%", //The legend can be set to the left, right and center
+          orient: "horizontal",
+          width: "100%",
+          x: "10%", //The legend can be set to the left, right and center
           y: "bottom", //You can set the legend to be on top, bottom, and center
           formatter: "{a|{name}}",
           textStyle: {
@@ -104,6 +106,7 @@ ul {
 }
 .profit-description {
   width: 30%;
+  padding-top: 4%;
 }
 .canvas-profit {
   width: 100%;

@@ -21,7 +21,7 @@
       <div
         class="tile is-child tooltip"
         v-for="(oneYearItem, index) in rowItem"
-        v-bind:style="{ color: '#' + getColor(oneYearItem) }"
+        v-bind:style="{ borderLeft: '3px solid #' + getColor(oneYearItem) }"
         :key="index"
       >
         <span class="tooltiptext">{{ getTooltip(oneYearItem) }}</span>
@@ -62,8 +62,10 @@ body {
   cursor: pointer;
 }
 .subtotal {
-  margin-left: 10px;
   cursor: auto;
+  .is-child {
+    padding-left: 10px;
+  }
 }
 .bold {
   font-weight: bold;
@@ -74,6 +76,9 @@ body {
   border-bottom: 1px solid rgb(179, 179, 179);
   margin-right: 10px !important;
   font-size: 14px;
+  width: 100px;
+  display: flex;
+  align-items: center;
 }
 .tile .is-parent {
   padding: 0px;
@@ -87,7 +92,7 @@ body {
 /* Tooltip container */
 .tooltip {
   position: relative;
-  padding: 10px 14px 5px 25px;
+  padding: 10px 11px 5px 20px;
   background-color: white;
   width: 45%;
 }
@@ -100,7 +105,7 @@ body {
   color: #fff;
   text-align: center;
   border-radius: 6px;
-white-space: initial;
+  white-space: initial;
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
@@ -136,7 +141,6 @@ export default {
     },
     getDescription() {
       let text = "";
-      console.log(this.rowItem);
       if (this.rowItem[0].data.description === "non fourni") {
         text += this.rowItem[0].name;
       } else {
@@ -239,13 +243,13 @@ export default {
         oneYearItem.data.status === "official" ||
         oneYearItem.data.status === "checked"
       ) {
-        return 194;
+        return "00bfc7";
       } else if (oneYearItem.data.status === "error") {
         return 941;
       } else if (oneYearItem.data.status === "computed") {
-        return 419;
+        return "536dfc";
       } else if (oneYearItem.data.status === "signFlipped") {
-        return 499;
+        return "ff4a4a";
       }
       return 941;
     },
