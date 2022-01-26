@@ -23,19 +23,33 @@
       </div>
       <FoldingArray :rowItem="companyData.comptesDeResultats"></FoldingArray>
       <div>
-        <p style="color: #194;">
-          Une valeur en vert est une valeur officielle et qui peut être
-          retrouvée avec les autres valeurs fournies (erreur de maximum 0,5% ou
-          10€ tolérée)
-        </p>
-        <p style="color: #419;">
-          Une valeur en bleu est une valeur non fournie mais qui peut être
-          retrouvée avec les autres valeurs
-        </p>
-        <p style="color: #941;">
-          Une valeur en rouge est une valeur non fournie, ou officielle mais ne
-          correspondant pas aux autres valeurs
-        </p>
+        <div class="value-legend-container">
+          <div class="square green"></div>
+
+          <p>
+            Une valeur en vert est une valeur officielle et qui peut être
+            retrouvée avec les autres valeurs fournies (erreur de maximum 0,5%
+            ou 10€ tolérée)
+          </p>
+        </div>
+
+        <div class="value-legend-container">
+          <div class="square blue"></div>
+
+          <p>
+            Une valeur en bleu est une valeur non fournie mais qui peut être
+            retrouvée avec les autres valeurs
+          </p>
+        </div>
+
+        <div class="value-legend-container">
+          <div class="square red"></div>
+
+          <p>
+            Une valeur en rouge est une valeur non fournie, ou officielle mais
+            ne correspondant pas aux autres valeurs
+          </p>
+        </div>
       </div>
     </div>
     <div v-else>Aucune données</div>
@@ -57,6 +71,25 @@ export default {
 </script>
 
 <style scoped>
+.value-legend-container {
+  display: flex;
+  align-items: center;
+}
+.square {
+  width: 25px;
+  height: 15px;
+  margin-right: 10px;
+  background: blue;
+}
+.green {
+  background: #00bfc7;
+}
+.blue {
+  background: #536dfc;
+}
+.red {
+  background: #ff4a4a;
+}
 .tile {
   color: #18097c;
   font-weight: bold;

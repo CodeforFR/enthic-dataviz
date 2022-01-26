@@ -15,8 +15,8 @@
       :options="chartDetails.optionsChartCA"
       :isStacked="true"
     ></BarChart>
-    <div v-if="chartDetails.listOfUndisplayableData.length > 0">
-      <p class="title is-6">Listes des problèmes pour afficher le graphique</p>
+    <div class="m-t-30" v-if="chartDetails.listOfUndisplayableData.length > 0">
+      <p class="title is-6 ">Listes des problèmes pour afficher le graphique</p>
       <ul class="m-30">
         <li
           v-for="(item, index) in chartDetails.listOfUndisplayableData"
@@ -40,16 +40,14 @@ export default {
     return {
       CHART_OPTIONS: {
         color: [
-          "#00BFC7",
-          "#514BD3",
-          "#9089FA",
-          "#E8871B",
-          "#CC2581",
-          "#47E26F",
+          "#00bfc7",
+          "#ff926b",
+          "#c32346",
+          "#536dfc",
+          "#0bbb79",
+          "#ff4a4a",
         ],
-        grid: {
-          top: "40%",
-        },
+
         xAxis: {
           type: "category",
         },
@@ -58,11 +56,14 @@ export default {
           nameLocation: "middle",
           nameGap: 50,
         },
+        grid: {
+          bottom: "25%",
+        },
         legend: {
           orient: "horizontal",
-          width: "40%",
-          x: "middle", //The legend can be set to the left, right and center
-          y: "top", //You can set the legend to be on top, bottom, and center
+          width: "100%",
+          x: "3%", //The legend can be set to the left, right and center
+          y: "bottom", //You can set the legend to be on top, bottom, and center
           formatter: "{a|{name}}",
           textStyle: {
             color: "#1B1B4E",
@@ -107,6 +108,6 @@ ul {
 }
 
 .description-chart-ca {
-  width: 60%;
+  width: 80%;
 }
 </style>

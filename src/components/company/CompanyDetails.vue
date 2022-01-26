@@ -8,7 +8,7 @@
             <span class="icon">
               <i class="fas fa-arrow-left"></i>
             </span>
-            <span>Retour aux résultats de recherche</span>
+            <span class="back-to-results">Retour aux résultats de recherche</span>
           </a>
           <ExportCsv :companyData="companyData" />
         </div>
@@ -129,6 +129,10 @@ export default {
 @import "../../assets/css/app-misc.scss";
 .company-data-container {
   width: 100%;
+}
+.back-to-results {
+  color: #18097c;
+  font-weight: bold;
 }
 .first-section {
   display: flex;

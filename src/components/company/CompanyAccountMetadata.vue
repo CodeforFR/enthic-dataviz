@@ -51,7 +51,7 @@ export default {
 
 <style lang="scss" scoped>
 .list-company-props {
-  list-style-type: circle;
+  list-style-type: none;
 }
 
 .inline-link {

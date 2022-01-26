@@ -6,57 +6,71 @@
   >
     <div class="tile is-parent">
       <div classe="tile is-child">
-        <ul class="list-company-props m-30">
+        <ul class="list-company-props">
           <li v-for="(data, index) in flatData" :key="index">
-            {{ data.description }} : {{ data.value }}
+            <div class="item-list-title">{{ data.description }} :</div>
+            {{ data.value }}
           </li>
+          <div class="item-list-title">Salariés</div>
           <li>{{ lastEffectif }}</li>
         </ul>
-        <h3 class="is-3">
-          Source officielle des données :
-          <a
-            class="inline-link"
-            :href="`https://data.inpi.fr/entreprises/${flatData.siren.value}`"
-          >
-            data.inpi.fr
-          </a>
-        </h3>
-        <h3 class="is-3">
-          D'autres sources officielles :
-          <a
-            class="inline-link"
-            :href="`https://entreprise.data.gouv.fr/sirene/${flatData.siren.value}`"
-          >
-            data.gouv.fr</a
-          >
-        </h3>
-        <p>Autres sites présentant ces données :</p>
-        <ul class="list-company-props m-30">
-          <li>
+        <div
+          class="sources-button"
+          @click="
+            () => {
+              sourcesOpened = !sourcesOpened;
+            }
+          "
+        >
+          Sources
+        </div>
+        <div v-if="sourcesOpened" class="sources">
+          <h3 class="is-3">
+            Source officielle des données :
             <a
               class="inline-link"
-              :href="`https://societe.ninja/data.php?siren=${flatData.siren.value}`"
+              :href="`https://data.inpi.fr/entreprises/${flatData.siren.value}`"
             >
-              sur societe.ninja</a
-            >
-          </li>
-          <li>
+              data.inpi.fr
+            </a>
+          </h3>
+          <h3 class="is-3">
+            D'autres sources officielles :
             <a
               class="inline-link"
-              :href="`https://www.legaltile.com/search?q=${flatData.siren.value}`"
+              :href="`https://entreprise.data.gouv.fr/sirene/${flatData.siren.value}`"
             >
-              sur legaltile.com</a
+              data.gouv.fr</a
             >
-          </li>
-          <li>
-            <a
-              class="inline-link"
-              :href="`https://www.pappers.fr/recherche?q=${flatData.siren.value}`"
-            >
-              sur pappers.fr</a
-            >
-          </li>
-        </ul>
+          </h3>
+          <p>Autres sites présentant ces données :</p>
+          <ul class="list-company-props">
+            <li>
+              <a
+                class="inline-link"
+                :href="`https://societe.ninja/data.php?siren=${flatData.siren.value}`"
+              >
+                sur societe.ninja</a
+              >
+            </li>
+            <li>
+              <a
+                class="inline-link"
+                :href="`https://www.legaltile.com/search?q=${flatData.siren.value}`"
+              >
+                sur legaltile.com</a
+              >
+            </li>
+            <li>
+              <a
+                class="inline-link"
+                :href="`https://www.pappers.fr/recherche?q=${flatData.siren.value}`"
+              >
+                sur pappers.fr</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </Widget>
@@ -68,6 +82,11 @@ import CSVRepository from "@/repositories/csv/CSVRepository";
 
 export default {
   name: "CompanyIdentity",
+  data: function () {
+    return {
+      sourcesOpened: false,
+    };
+  },
   props: ["companyData"],
   components: { Widget },
   computed: {
@@ -114,13 +133,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sources-button {
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.item-list-title {
+  color: #18097c;
+  font-weight: bold;
+  font-size: 15px;
+}
 .blue-border {
   border: solid 1px #536dfcb8;
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(113, 108, 174, 0.09);
 }
 .list-company-props {
-  list-style-type: circle;
+  list-style-type: none;
 }
 
 .inline-link {

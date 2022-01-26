@@ -1,6 +1,6 @@
 <template>
   <p class="export-container">
-    <a class="button is-primary" :href="`${CsvCompanyUrl}`">
+    <a class="button" :href="`${CsvCompanyUrl}`">
       Exporter en CSV
       <!--  De l'entreprise {{ companyData.denomination.value }} -->
     </a>
@@ -24,10 +24,23 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .export-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    background: #dfe4ff;
+    color: #536dfc;
+    font-weight: bold;
+    transition-property: background-color, color;
+    transition-duration: 0.1s;
+    &:hover {
+      background-color: #536dfc;
+      color: #dfe4ff;
+      transition-property: background-color, color;
+      transition-duration: 0.1s;
+    }
+  }
 }
 </style>
