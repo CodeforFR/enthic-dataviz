@@ -111,4 +111,13 @@ ul {
 .canvas-profit {
   width: 100%;
 }
+
+@media (max-width: 1024px) {
+  .profit-description {
+    width: 90%;
+  }
+  .profit-elements-container {
+    flex-direction: column;
+  }
+}
 </style>
