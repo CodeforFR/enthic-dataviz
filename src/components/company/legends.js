@@ -1,12 +1,5 @@
 export const CHART_OPTIONS = {
-  color: [
-    "#00BFC7",
-    "#514BD3",
-    "#9089FA",
-    "#E8871B",
-    "#CC2581",
-    "#47E26F",
-  ],
+  color: ["#00BFC7", "#514BD3", "#9089FA", "#E8871B", "#CC2581", "#47E26F"],
   grid: {
     top: "40%",
   },

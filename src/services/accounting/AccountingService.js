@@ -25,10 +25,10 @@ let formatter = new Intl.NumberFormat(undefined, {
 });
 
 const formatAmount = (amount) => {
-    return formatter.format(amount);
-}
+  return formatter.format(amount);
+};
 
 export default {
   addAccountingCalculations,
-  formatAmount
+  formatAmount,
 };
