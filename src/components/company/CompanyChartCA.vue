@@ -16,7 +16,7 @@
       :isStacked="true"
     ></BarChart>
     <div class="m-t-30" v-if="chartDetails.listOfUndisplayableData.length > 0">
-      <p class="title is-6 ">Listes des problèmes pour afficher le graphique</p>
+      <p class="title is-6">Listes des problèmes pour afficher le graphique</p>
       <ul class="m-30">
         <li
           v-for="(item, index) in chartDetails.listOfUndisplayableData"

@@ -134,9 +134,7 @@ body {
 }
 </style>
 <script>
-
 import AccountingService from "@/services/accounting/AccountingService";
-
 
 export default {
   name: "FoldingRow",
@@ -184,7 +182,9 @@ export default {
       let text = "";
       if (isNaN(oneYearItem.data.value)) {
         if (oneYearItem.data.computedValue) {
-          text += AccountingService.formatAmount(oneYearItem.data.computedValue) + " (calculé)";
+          text +=
+            AccountingService.formatAmount(oneYearItem.data.computedValue) +
+            " (calculé)";
         } else {
           text += "non fourni";
         }

@@ -96,7 +96,6 @@ export default {
 </script>
 
 <style scoped>
-
 .chart__container {
   width: 900px;
   height: 500px;

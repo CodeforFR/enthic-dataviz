@@ -13,22 +13,19 @@ const routes = [
   {
     path: "/recherche",
     name: "Search",
-    component: () =>
-      import("../views/Search.vue"),
+    component: () => import("../views/Search.vue"),
   },
   {
     path: "/entreprises/:siren",
     name: "Detail",
     props: true,
-    component: () =>
-      import("../views/Detail.vue"),
+    component: () => import("../views/Detail.vue"),
   },
   {
     path: "/tops",
     name: "Tops",
     props: true,
-    component: () =>
-      import("../views/Tops.vue"),
+    component: () => import("../views/Tops.vue"),
   },
   {
     path: "/*",
