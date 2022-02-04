@@ -2,6 +2,7 @@ import { apiClient } from "../ServerConfiguration";
 
 var APEOntology = null;
 var ScoreOntology = null;
+var BundleOntology = null;
 
 export default {
   async getAPE() {
@@ -31,5 +32,19 @@ export default {
     }
     ScoreOntology = results ? results.data : null;
     return ScoreOntology;
+  },
+  async getBundles() {
+    if (BundleOntology != null) {
+      return BundleOntology;
+    }
+    const url = `/ontology/bundles`;
+    let results = null;
+    try {
+      results = await apiClient.get(url);
+    } catch (error) {
+      console.log("getBundles Error", error);
+    }
+    BundleOntology = results ? results.data : null;
+    return BundleOntology;
   },
 };

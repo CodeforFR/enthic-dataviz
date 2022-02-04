@@ -14,14 +14,21 @@ const routes = [
     path: "/recherche",
     name: "Search",
     component: () =>
-      import(/* webpackChunkName: "search" */ "../views/Search.vue"),
+      import("../views/Search.vue"),
   },
   {
     path: "/entreprises/:siren",
     name: "Detail",
     props: true,
     component: () =>
-      import(/* webpackChunkName: "search" */ "../views/Detail.vue"),
+      import("../views/Detail.vue"),
+  },
+  {
+    path: "/tops",
+    name: "Tops",
+    props: true,
+    component: () =>
+      import("../views/Tops.vue"),
   },
   {
     path: "/*",

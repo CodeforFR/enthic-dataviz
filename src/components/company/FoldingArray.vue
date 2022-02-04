@@ -134,6 +134,10 @@ body {
 }
 </style>
 <script>
+
+import AccountingService from "@/services/accounting/AccountingService";
+
+
 export default {
   name: "FoldingRow",
   props: {
@@ -177,21 +181,15 @@ export default {
       }
     },
     getDisplayedValue(oneYearItem) {
-      let formatter = new Intl.NumberFormat(undefined, {
-        style: "currency",
-        currency: "EUR",
-        minimumFractionDigits: 0,
-      });
       let text = "";
       if (isNaN(oneYearItem.data.value)) {
         if (oneYearItem.data.computedValue) {
-          text +=
-            formatter.format(oneYearItem.data.computedValue) + " (calculé)";
+          text += AccountingService.formatAmount(oneYearItem.data.computedValue) + " (calculé)";
         } else {
           text += "non fourni";
         }
       } else {
-        text += formatter.format(oneYearItem.data.value);
+        text += AccountingService.formatAmount(oneYearItem.data.value);
       }
       return text; //+ ' ' + JSON.stringify(oneYearItem.data, {}, 2)
     },

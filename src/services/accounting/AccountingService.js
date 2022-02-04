@@ -18,6 +18,17 @@ const addAccountingCalculations = (companyData) => {
   };
 };
 
+let formatter = new Intl.NumberFormat(undefined, {
+  style: "currency",
+  currency: "EUR",
+  minimumFractionDigits: 0,
+});
+
+const formatAmount = (amount) => {
+    return formatter.format(amount);
+}
+
 export default {
   addAccountingCalculations,
+  formatAmount
 };
