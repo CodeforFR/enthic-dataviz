@@ -3,11 +3,11 @@
     <select class="form-control" v-model="BundleTypeTop" @change="top50data()">
       <option value="" selected disabled>Choose</option>
       <option
-        v-for="(bundle_type, bundle_key) in bundle_types"
-        :value="bundle_key"
-        :key="bundle_type['0']"
+        v-for="bundle in bundle_types"
+        :value="bundle[0]"
+        :key="bundle[0]"
       >
-        {{ bundle_type["1"] }}
+        {{ bundle[1] }}
       </option>
     </select>
     <select class="form-control" v-model="selected_year" @change="top50data()">
@@ -57,9 +57,9 @@ export default {
     return {
       top_data: {},
       bundle_types: [7, 8, 9],
-      years: [2021, 2020, 2019],
+      years: [2020, 2019, 2018, 2017],
       BundleTypeTop: 7,
-      selected_year: 2021,
+      selected_year: 2020,
     };
   },
   mounted() {
@@ -91,7 +91,19 @@ export default {
       let result = await OntologyRepository.getBundles();
       let bundles = result.accounting[0].code;
       console.log("bundles:", bundles);
-      this.bundle_types = bundles;
+      this.bundle_types = [
+        [4, bundles[4]["1"]],
+        [7, bundles[7]["1"]],
+        [16, bundles[16]["1"]],
+        [17, bundles[17]["1"]],
+        [18, bundles[18]["1"]],
+        [21, bundles[21]["1"]],
+        [32, bundles[32]["1"]],
+        [47, bundles[47]["1"]],
+        [48, bundles[48]["1"]],
+        [60, bundles[60]["1"]],
+        [67, bundles[67]["1"]],
+      ];
     },
   },
 };
