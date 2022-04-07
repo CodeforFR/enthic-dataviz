@@ -44,20 +44,20 @@
       <tbody>
         <tr
           v-for="(statType, statTypeId) in statistics"
-          v-bind:key="statType.id"
+          v-bind:key="statTypeId"
         >
           <td>{{ statType.description }}</td>
           <td
-            v-for="(value, year) in statType.values"
+            v-for="(data, year) in statType.values"
             class="statsValue"
-            v-bind:style="{ color: getColor(statTypeId, year, value) }"
-            v-bind:key="value.id"
+            v-bind:style="{ color: getColor(statTypeId, year, data.value) }"
+            v-bind:key="data.id"
           >
             <div class="tooltip">
               <span class="tooltiptext">{{
-                getTooltip(statTypeId, year, value)
+                getTooltip(statTypeId, year, data)
               }}</span>
-              {{ value.toLocaleString() }}
+              {{ data.value.toLocaleString() }}
             </div>
           </td>
         </tr>
@@ -92,27 +92,54 @@ export default {
       percentiles: {},
       APEToCompare: this.companyData.ape.code,
       statistics: null,
+      error_code_description: null,
+      apeCodes: null,
     };
   },
   created() {
+    OntologyRepository.getScoreError().then((response) => {
+      this.error_code_description = response;
+    });
     this.initializeStatistics();
     this.updateAPEComparison();
+    this.computeApeCodes();
   },
-  computed: {
-    apeCodes: function () {
-      var companyApe = this.companyData.ape.code;
-      while (companyApe.length < 5) {
-        companyApe = "0" + companyApe;
-      }
-      return [
-        [this.companyData.ape.code, this.companyData.ape.value],
-        [companyApe.substring(0, 5), companyApe.substring(0, 5)],
-        [companyApe.substring(0, 4), companyApe.substring(0, 4)],
-        [companyApe.substring(0, 2), companyApe.substring(0, 2)],
-      ];
-    },
-  },
+  computed: {},
   methods: {
+    computeApeCodes: function () {
+      OntologyRepository.getAPE().then((response) => {
+        console.log("APEOntology:", response);
+        var companyApe = this.companyData.ape.code;
+        while (companyApe.length < 5) {
+          companyApe = "0" + companyApe;
+        }
+        this.apeCodes = [
+          [
+            this.companyData.ape.code,
+            this.companyData.ape.value + "(" + this.companyData.ape.code + ")",
+          ],
+          [
+            companyApe.substring(0, 5),
+            this.findAPEDescription(companyApe.substring(0, 5), response),
+          ],
+          [
+            companyApe.substring(0, 4),
+            this.findAPEDescription(companyApe.substring(0, 4), response),
+          ],
+          [
+            companyApe.substring(0, 2),
+            this.findAPEDescription(companyApe.substring(0, 2), response),
+          ],
+        ];
+      });
+    },
+    findAPEDescription(code, ontology) {
+      for (var key in ontology) {
+        if (ontology[key][0] == code) {
+          return ontology[key][1] + "(" + code + ")";
+        }
+      }
+    },
     fillStatistics: function (statistics) {
       // Fill scores description with company's values
       for (var year in this.companyData.declarations) {
@@ -126,10 +153,34 @@ export default {
         var serverComputationAsked = false;
         for (var statType in statistics) {
           if (statType in yearData["statistics"]) {
-            statistics[statType].values[year] =
-              yearData["statistics"][statType].value;
+            if (
+              yearData["statistics"][statType].value in
+              this.error_code_description
+            ) {
+              statistics[statType].values[year] = {
+                tooltip:
+                  this.error_code_description[
+                    yearData["statistics"][statType].value
+                  ],
+                value: "XXX",
+                decile: -1,
+              };
+            } else {
+              statistics[statType].values[year] = {
+                value: yearData["statistics"][statType].value,
+                decile: this.getDecile(
+                  statType,
+                  year,
+                  yearData["statistics"][statType].value
+                ),
+              };
+            }
           } else {
-            statistics[statType].values[year] = "XXX";
+            statistics[statType].values[year] = {
+              value: "XXX",
+              decile: -1,
+              tooltip: "Calcul impossible",
+            };
             if (!serverComputationAsked) {
               serverComputationAsked = true;
               this.serverComputeScore(year);
@@ -137,6 +188,7 @@ export default {
           }
         }
       }
+      console.log("statistics", statistics);
       return statistics;
     },
     serverComputeScore: function (year) {
@@ -192,16 +244,16 @@ export default {
     },
     getColor: function (statType, year, value) {
       var colorsGradient = [
-        "#f80d01",
-        "#f73302",
-        "#f66403",
-        "#f49404",
-        "#F2C307",
-        "#f1f108",
-        "#BEEF09",
-        "#8FED0C",
-        "#63EC0D",
-        "#37EA0E",
+        "#571845",
+        "#900c3e",
+        "#c70039",
+        "#e83e22",
+        "#e83e22",
+        "#ff5733",
+        "#ed7e1e",
+        "#f7c508",
+        "#7bbc3f",
+        "#008649",
       ];
       var decile = this.getDecile(statType, year, value);
       if (decile == -1) {
@@ -209,8 +261,12 @@ export default {
       }
       return colorsGradient[decile];
     },
-    getTooltip: function (statType, year, value) {
-      var decile = this.getDecile(statType, year, value);
+    getTooltip: function (statType, year, data) {
+      if ("tooltip" in data) {
+        return data.tooltip;
+      }
+      var decile = this.getDecile(statType, year, data.value);
+
       if (decile >= 0) {
         return (
           "dans le décile " +
@@ -219,8 +275,6 @@ export default {
           this.percentiles[this.APEToCompare][year][statType].total_count +
           " sociétés"
         );
-      } else if (value == "XXX") {
-        return "Calcul impossible";
       }
       return "Déciles pas (encore) calculés";
     },
