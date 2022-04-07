@@ -228,6 +228,8 @@ export default {
         text += "montant fourni et pas de vérification possible";
       } else if (oneYearItem.data.status === "signFlipped") {
         text += "montant fourni avec, semble-t-il, une erreur de signe";
+      } else if (oneYearItem.data.status === "computed then signFlipped") {
+        text += "montant non fourni mais déduit puis signe inversé";
       } else {
         text +=
           "montant fourni mais incohérent avec les autres montants présents";
@@ -257,6 +259,8 @@ export default {
         return "536dfc";
       } else if (oneYearItem.data.status === "signFlipped") {
         return "ff4a4a";
+      } else if (oneYearItem.data.status === "computed then signFlipped") {
+        return "ff1515";
       }
       return 941;
     },

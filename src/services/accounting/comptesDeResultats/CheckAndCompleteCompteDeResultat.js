@@ -8,6 +8,11 @@ data = {
   status : "official"
 }
 */
+
+// Accepted amount of difference when checking parent value against it's children
+const relativeError = 0.008;
+const absoluteError = 10;
+
 export function checkTreeData(item) {
   if (!item.data) {
     // console.log(" from item :", item);
@@ -22,10 +27,6 @@ export function checkTreeData(item) {
     for (var childName in item.children) {
       checkTreeData(item.children[childName]);
     }
-
-    // Accepted amount of difference when checking parent value against it's children
-    const relativeError = 0.005;
-    const absoluteError = 10;
 
     // Compute ourself item's value from its children
     var computedSum = 0; // Result from official children's value
@@ -73,24 +74,66 @@ export function checkTreeData(item) {
         // Fix children values if needed
         for (var childName3 in item.children) {
           if (item.children[childName3].data.value == undefined) {
-            item.children[childName3].data.value =
-              item.children[childName3].data.computedValue;
+            if ("computedValue" in item.children[childName3].data) {
+              item.children[childName3].data.value =
+                item.children[childName3].data.computedValue;
+              for (childName in item.children[childName3].children) {
+                setToZeroComputed(
+                  item.children[childName3].children[childName]
+                );
+              }
+            } else {
+              item.children[childName3].data.value = 0;
+            }
             item.children[childName3].data.status = "computed";
           }
         }
         computedSum = computedSumFromComputed;
       }
-      // If there is only on value missing from children, set this child's value equal to the computed difference
+      // If official value match computed value * 1000, it mean value was multiplied by 1000 by mistake
+      else if (
+        Math.abs((computedSum * 1000 - item.data.value) / item.data.value) <
+          relativeError ||
+        Math.abs(computedSum * 1000 - item.data.value) < absoluteError
+      ) {
+        item.data.status = "scaled down";
+        item.data.value = computedSum;
+        // Fix children values if needed
+        if (childMissingCount > 0) {
+          for (childName in item.children) {
+            setToZeroComputed(item.children[childName]);
+          }
+        }
+      }
+      // If official value match computed value / 1000, it mean value was divided by 1000 by mistake
+      else if (
+        Math.abs((computedSum - item.data.value * 1000) / item.data.value) <
+          relativeError ||
+        Math.abs(computedSum - item.data.value * 1000) < absoluteError
+      ) {
+        item.data.status = "scaled up";
+        item.data.value = computedSum;
+        // Fix children values if needed
+        if (childMissingCount > 0) {
+          for (childName in item.children) {
+            setToZeroComputed(item.children[childName]);
+          }
+        }
+      }
+      // If there is only one value missing from children, set this child's value equal to the computed difference
       else if (childMissingCount == 1) {
         for (var childName4 in item.children) {
           var child2 = item.children[childName4];
-          if (!child2.data.value) {
-            item.children[childName4].data.computedValue =
-              (item.data.value - computedSum) / (child2.sign ? -1 : 1);
-            item.children[childName4].data.value =
-              item.children[childName4].data.computedValue;
-            item.children[childName4].data.status = "computed";
+          if (!item.children[childName4].data.value) {
+            doubleCheckComputedValueWithChildren(
+              item.children[childName4],
+              (item.data.value - computedSum) / (child2.sign ? -1 : 1)
+            );
             item.data.status = "checked";
+
+            if (item.data.value == 6) {
+              console.log("checked 3 item:", item);
+            }
             break;
           }
         }
@@ -102,6 +145,11 @@ export function checkTreeData(item) {
         Math.abs(computedSumWithoutSign - item.data.value) < absoluteError
       ) {
         item.data.status = "checked";
+
+        if (item.data.value == 6) {
+          console.log("checked 4 item:", item);
+        }
+        item.data.computedValue = computedSumWithoutSign;
         // Fix children sign and/or set to zero missing values if any
         for (var childName5 in item.children) {
           flipSign(item.children[childName5]);
@@ -111,39 +159,52 @@ export function checkTreeData(item) {
         Math.abs((computedSum - item.data.value) / item.data.value) > 100
       ) {
         item.data.status = "error";
-        // console.log(
-        //   "checkTreeData detected very big error for ",
-        //   item.name,
-        //   " value doesn't match by several order of magnitude. Maybe units problem ?"
-        // );
       } else {
         item.data.status = "error";
-        // console.log(
-        //   "checkTreeData detected error for ",
-        //   item.name,
-        //   " value doesn't match with ",
-        //   computedSumWithoutSign
-        // );
       }
     }
-    if (computedSum != item.data.value) {
-      // console.log(
-      //   "computed sum : ",
-      //   computedSum,
-      //   "computed sum from computed : ",
-      //   computedSumFromComputed,
-      //   " and given sum : ",
-      //   item.data.value,
-      //   " diff en pour 100 : ",
-      //   ((computedSum - item.data.value) * 100) / item.data.value
-      // );
+    if (computedSum != item.data.value && !item.data.computedValue) {
       item.data.computedValue = computedSumFromComputed;
     }
   }
 }
 
+function computeChildrenSum(item) {
+  console.log("computeChildrenSum", item);
+  var result = 0;
+  for (var childName in item.children) {
+    var child = item.children[childName];
+    if (child.data.value) {
+      result += child.data.value * (child.sign ? -1 : 1);
+    }
+  }
+  return result;
+}
+
+function areOpposite(value, reference) {
+  var sum = value + reference;
+  if (
+    Math.abs(sum / reference) < relativeError ||
+    Math.abs(sum) < absoluteError
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function doubleCheckComputedValueWithChildren(item, computedValue) {
+  item.data.value = computedValue;
+  item.data.status = "computed";
+  if (item.children) {
+    var computedSum = computeChildrenSum(item);
+    if (areOpposite(computedSum, item.data.value)) {
+      item.data.value = -item.data.value;
+      flipSign(item);
+    }
+  }
+}
+
 function setToZeroComputed(item) {
-  // console.log("setToZeroComputed called for : ", item.name, item.data);
   if (
     item.data.value == undefined &&
     (item.data.computedValue == undefined || item.data.computedValue == 0)
@@ -157,9 +218,22 @@ function setToZeroComputed(item) {
 }
 
 function flipSign(item) {
-  // console.log("flipSign called for : ", item.name, item.data);
   if (item.sign && item.sign == -1) {
     item.data.value = -item.data.value;
     item.data.status = "signFlipped";
+    console.log(item.name, "flipped, newvalue=", item.data.value);
+    var computedSum = computeChildrenSum(item);
+    if (areOpposite(computedSum, item.data.value)) {
+      for (var childName in item.children) {
+        var child = item.children[childName];
+        child.data.value = -child.data.value;
+        console.log("child", child.name, "flipped");
+        if (child.data.status == "computed") {
+          child.data.status = "computed then signFlipped";
+        } else {
+          child.data.status = "signFlipped";
+        }
+      }
+    }
   }
 }
