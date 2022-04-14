@@ -14,7 +14,7 @@
     "bulma-carousel": "4.0",
     "bulma-checkradio": "1.1",
     "bulma-extensions": "6.2",
-    "core-js": "3.15",
+    "core-js": "^3.21.1",
     "echarts": "5.1",
     "vue": "2.6",
     "vue-carousel": "^0.18.0",
