@@ -96,26 +96,6 @@ $button-disabled-opacity: $disabled-opacity;
   border-color: $primary-invert;
 }
 
-// BULMA-CAROUSEL OVERRIDE
-.slider-navigation-previous, .slider-navigation-next {
-  top: unset !important;
-  margin: 1em;
-
-  &:hover {
-    box-shadow: $app-strong-shadow;
-  }
-
-}
 .slider:focus {
   outline: none !important;
 }
-.slider-navigation-previous {
-  background-image: url('/static/icons/icon_chevron2_violet.svg');
-  left: calc(50% + (-4em)); // To ensure correct spacing and alignment on various screen sizes; avoid buttons to overflow
-}
-.slider-navigation-next {
-  background-image: url('/static/icons/icon_chevron1_violet.svg');
-  right: calc(50% + (-4em)); // Same as above
-}
-
-

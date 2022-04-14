@@ -1,5 +1,5 @@
 <template>
-  <Widget
+  <WidgetComponent
     :title="companyData.denomination.value"
     class="blue-border"
     titleColor="#536dfc"
@@ -73,11 +73,11 @@
         </div>
       </div>
     </div>
-  </Widget>
+  </WidgetComponent>
 </template>
 
 <script>
-import Widget from "./Widget.vue";
+import WidgetComponent from "./WidgetComponent.vue";
 import CSVRepository from "@/repositories/csv/CSVRepository";
 
 export default {
@@ -88,7 +88,7 @@ export default {
     };
   },
   props: ["companyData"],
-  components: { Widget },
+  components: { WidgetComponent },
   computed: {
     CsvCompanyUrl: function () {
       let url = CSVRepository.getCompanyFinancialDataUrl(

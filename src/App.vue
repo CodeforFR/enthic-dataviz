@@ -2,18 +2,18 @@
   <div id="app">
     <NavBar />
     <router-view />
-    <Footer />
+    <FooterComponent />
     <BottomReferences />
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/site/NavBar";
-import Footer from "@/components/site/Footer";
+import FooterComponent from "@/components/site/FooterComponent";
 import BottomReferences from "@/components/site/BottomReferences";
 
 export default {
-  components: { NavBar, Footer, BottomReferences },
+  components: { NavBar, FooterComponent, BottomReferences },
 };
 </script>
 

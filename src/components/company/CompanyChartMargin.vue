@@ -1,5 +1,5 @@
 <template>
-  <Widget
+  <WidgetComponent
     title="Répartition du profit de l'entreprise"
     titleColor="#536dfc"
     v-if="chartDetails"
@@ -20,11 +20,11 @@
         :options="chartDetails.optionsChartMargin"
       ></BarChart>
     </div>
-  </Widget>
+  </WidgetComponent>
 </template>
 
 <script>
-import Widget from "./Widget.vue";
+import WidgetComponent from "./WidgetComponent.vue";
 import BarChart from "@/components/charts/BarChart";
 
 export default {
@@ -92,7 +92,7 @@ export default {
   props: ["chartDetails"],
   components: {
     BarChart,
-    Widget,
+    WidgetComponent,
   },
 };
 </script>

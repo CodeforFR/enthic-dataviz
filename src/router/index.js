@@ -1,31 +1,31 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import HomePage from "../views/HomePage.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    name: "HomePage",
+    component: HomePage,
   },
   {
     path: "/recherche",
-    name: "Search",
-    component: () => import("../views/Search.vue"),
+    name: "SearchComponent",
+    component: () => import("../views/SearchComponent.vue"),
   },
   {
     path: "/entreprises/:siren",
-    name: "Detail",
+    name: "DetailComponent",
     props: true,
-    component: () => import("../views/Detail.vue"),
+    component: () => import("../views/DetailComponent.vue"),
   },
   {
     path: "/tops",
-    name: "Tops",
+    name: "TopsPage",
     props: true,
-    component: () => import("../views/Tops.vue"),
+    component: () => import("../views/TopsPage.vue"),
   },
   {
     path: "/*",

@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "Widget",
+  name: "WidgetComponent",
   props: {
     title: String,
     titleColor: String,

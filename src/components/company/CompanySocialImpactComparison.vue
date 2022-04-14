@@ -1,5 +1,5 @@
 <template>
-  <Widget
+  <WidgetComponent
     title="Comparaison de l'impact social"
     titleColor="#536dfc"
     v-if="companyData"
@@ -69,11 +69,11 @@
         >Lien pour accéder au code source qui calcul les indicateurs</a
       >
     </p>
-  </Widget>
+  </WidgetComponent>
 </template>
 
 <script>
-import Widget from "./Widget.vue";
+import WidgetComponent from "./WidgetComponent.vue";
 import CompaniesRepository from "@/repositories/company/CompanyRepository";
 import APERepository from "@/repositories/ape/APERepository";
 import OntologyRepository from "@/repositories/ontology/OntologyRepository";
@@ -85,7 +85,7 @@ export default {
     companyData: Object,
   },
   components: {
-    Widget,
+    WidgetComponent,
   },
   data: function () {
     return {

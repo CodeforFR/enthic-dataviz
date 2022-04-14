@@ -1,5 +1,5 @@
 <template>
-  <Widget
+  <WidgetComponent
     title="Comptes de résultat détaillés"
     titleColor="#536dfc"
     v-if="companyData.comptesDeResultats"
@@ -53,11 +53,11 @@
       </div>
     </div>
     <div v-else>Aucune données</div>
-  </Widget>
+  </WidgetComponent>
 </template>
 
 <script>
-import Widget from "./Widget.vue";
+import WidgetComponent from "./WidgetComponent.vue";
 import FoldingArray from "./FoldingArray.vue";
 
 export default {
@@ -65,7 +65,7 @@ export default {
   props: ["companyData"],
   components: {
     FoldingArray,
-    Widget,
+    WidgetComponent,
   },
 };
 </script>

@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     companyDetailRoute: (company) => ({
-      name: "Detail",
+      name: "DetailComponent",
       params: { siren: company.siren },
     }),
     top50data: function () {
