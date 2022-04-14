@@ -1,5 +1,5 @@
 <template>
-  <Widget
+  <WidgetComponent
     title="Scoring (version beta)"
     titleColor="#536dfc"
     v-if="companyData.comptesDeResultats"
@@ -46,17 +46,17 @@
         </div>
       </div>
     </div>
-  </Widget>
+  </WidgetComponent>
 </template>
 
 <script>
-import Widget from "./Widget.vue";
+import WidgetComponent from "./WidgetComponent.vue";
 
 export default {
   name: "CompanyScoring",
   props: ["companyData"],
   components: {
-    Widget,
+    WidgetComponent,
   },
 };
 </script>

@@ -8,7 +8,7 @@
 import TopsBrowser from "@/components/tops/TopsBrowser";
 
 export default {
-  name: "Tops",
+  name: "TopsPage",
   components: {
     TopsBrowser,
   },

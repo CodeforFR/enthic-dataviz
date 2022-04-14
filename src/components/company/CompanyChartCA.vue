@@ -1,5 +1,5 @@
 <template>
-  <Widget
+  <WidgetComponent
     title="Répartition du chiffre d'affaire"
     titleColor="#536dfc"
     v-if="chartDetails"
@@ -26,11 +26,11 @@
         </li>
       </ul>
     </div>
-  </Widget>
+  </WidgetComponent>
 </template>
 
 <script>
-import Widget from "./Widget.vue";
+import WidgetComponent from "./WidgetComponent.vue";
 import BarChart from "@/components/charts/BarChart";
 
 export default {
@@ -97,7 +97,7 @@ export default {
   },
   components: {
     BarChart,
-    Widget,
+    WidgetComponent,
   },
 };
 </script>

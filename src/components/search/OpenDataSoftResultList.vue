@@ -78,7 +78,7 @@ export default {
       return null;
     },
     companyDetailRoute: (company) => ({
-      name: "Detail",
+      name: "DetailComponent",
       params: { siren: company.fields.siren },
     }),
     handleSortOrderChangeForField(field) {

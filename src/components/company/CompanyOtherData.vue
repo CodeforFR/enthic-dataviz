@@ -1,5 +1,9 @@
 <template>
-  <Widget title="Autres données" titleColor="#536dfc" v-if="companyData">
+  <WidgetComponent
+    title="Autres données"
+    titleColor="#536dfc"
+    v-if="companyData"
+  >
     <div class="m-l-30 m-b-20" v-for="(year, index) in yearData" :key="index">
       <span class="title is-6">
         {{ year.year }}
@@ -10,17 +14,17 @@
         </li>
       </ul>
     </div>
-  </Widget>
+  </WidgetComponent>
 </template>
 
 <script>
-import Widget from "./Widget.vue";
+import WidgetComponent from "./WidgetComponent.vue";
 
 export default {
   name: "CompanyOtherData",
   props: ["companyData"],
   components: {
-    Widget,
+    WidgetComponent,
   },
   computed: {
     yearData: function () {

@@ -745,35 +745,6 @@ html[lang="en"] nav #navbar-main .navbar-item [lang="en"] {
             margin-bottom: 1em;
         }
 
-        .caroussel{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-
-            button{
-                border: 0;
-                font-size: 2em;
-                font-weight: bold;
-
-                background-repeat: no-repeat;
-                background-color: transparent;
-
-                &:focus,
-                &:active{
-                    box-shadow: none;
-                    border: 0;
-                }
-
-                &.previous{
-                    background-image: url('/static/icons/icon_chevron2.svg');
-                }
-                &.next{
-                    background-image: url('/static/icons/icon_chevron1.svg');
-                }
-            }
-        }
-
         $CAROUSSEL_ELEMENT_WIDTH: 17em;
 
         .caroussel-container{

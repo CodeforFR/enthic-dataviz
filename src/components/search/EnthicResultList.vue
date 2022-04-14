@@ -32,7 +32,7 @@ export default {
   props: ["companies"],
   methods: {
     companyDetailRoute: (company) => ({
-      name: "Detail",
+      name: "DetailComponent",
       params: { siren: company.siren.value },
     }),
   },
