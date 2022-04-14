@@ -31,7 +31,7 @@ export default {
   computed: {
     placeholder_value: function () {
       if (screen.width > 800) {
-        return "Cherchez une entreprise par son nom, ou numéro SIREN ou SIRET";
+        return "Cherchez une entreprise par son nom, SIREN ou SIRET";
       }
       return "Nom de l'entreprise";
     },
