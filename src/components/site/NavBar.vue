@@ -25,6 +25,7 @@
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-end">
         <router-link class="navbar-item" to="/tops">Les Tops</router-link>
+        <a class="navbar-item" href="https://share.streamlit.io/lawiss/enthic-web-app/main/app.py">Data Analyse</a>
         <a class="navbar-item">A propos</a>
         <a class="navbar-item">L'écosystème</a>
         <a class="navbar-item">Qui sommes-nous ?</a>
