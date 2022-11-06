@@ -71,6 +71,30 @@
             </li>
           </ul>
         </div>
+        <div
+          v-if="companiesSameAPE"
+          class="sources-button"
+          @click="
+            () => {
+              otherCompaniesOpened = !otherCompaniesOpened;
+            }
+          "
+        >
+          Autres companies du même secteur
+        </div>
+        <div v-if="otherCompaniesOpened" class="sources">
+          <div
+            v-for="otherCompany in companiesSameAPE"
+            v-bind:key="otherCompany.siren"
+          >
+            <router-link
+              class="result-link"
+              :to="companyDetailRoute(otherCompany.siren)"
+            >
+              {{ otherCompany.denomination }}
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </WidgetComponent>
@@ -79,16 +103,27 @@
 <script>
 import WidgetComponent from "./WidgetComponent.vue";
 import CSVRepository from "@/repositories/csv/CSVRepository";
+import APERepository from "@/repositories/ape/APERepository";
 
 export default {
   name: "CompanyIdentity",
   data: function () {
     return {
       sourcesOpened: false,
+      otherCompaniesOpened: false,
+      companiesSameAPE: null,
     };
   },
   props: ["companyData"],
   components: { WidgetComponent },
+  mounted() {
+    APERepository.getAPECompanies(this.companyData.ape.code).then(
+      (response) => {
+        console.log("CompaniesSameAPE :", response);
+        this.companiesSameAPE = response;
+      }
+    );
+  },
   computed: {
     CsvCompanyUrl: function () {
       let url = CSVRepository.getCompanyFinancialDataUrl(
@@ -128,6 +163,12 @@ export default {
       }
       return flatData;
     },
+  },
+  methods: {
+    companyDetailRoute: (siren) => ({
+      name: "DetailComponent",
+      params: { siren: siren },
+    }),
   },
 };
 </script>

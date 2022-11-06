@@ -18,4 +18,14 @@ export default {
     }
     return results ? results.data : null;
   },
+  async getAPECompanies(ape) {
+    const url = `/company/ape/${ape}`;
+    let results = null;
+    try {
+      results = await apiClient.get(url);
+    } catch (error) {
+      console.log("getAPECompanies Error", error);
+    }
+    return results ? results.data : null;
+  },
 };
