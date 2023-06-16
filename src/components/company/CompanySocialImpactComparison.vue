@@ -97,9 +97,6 @@ export default {
     };
   },
   created() {
-    OntologyRepository.getScoreError().then((response) => {
-      this.error_code_description = response;
-    });
     this.initializeStatistics();
     this.updateAPEComparison();
     this.computeApeCodes();
@@ -144,7 +141,7 @@ export default {
       // Fill scores description with company's values
       for (var year in this.companyData.declarations) {
         var yearData = this.companyData.declarations[year];
-        if (!yearData.statistics) {
+        if (yearData.statistics == null) {
           if (yearData.financial_data) {
             this.serverComputeScore(year);
           }
@@ -152,7 +149,7 @@ export default {
         }
         var serverComputationAsked = false;
         for (var statType in statistics) {
-          if (statType in yearData["statistics"]) {
+          if (statType in yearData.statistics) {
             if (
               yearData["statistics"][statType].value in
               this.error_code_description
@@ -204,6 +201,7 @@ export default {
       );
     },
     initializeStatistics: async function () {
+      this.error_code_description = await OntologyRepository.getScoreError();
       // Get scores description
       let result = await OntologyRepository.getScores();
       for (var statType in result) {

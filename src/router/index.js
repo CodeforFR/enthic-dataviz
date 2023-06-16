@@ -28,6 +28,12 @@ const routes = [
     component: () => import("../views/TopsPage.vue"),
   },
   {
+    path: "/sbf120",
+    name: "SBF120Study",
+    props: true,
+    component: () => import("../views/SBF120Study.vue"),
+  },
+  {
     path: "/*",
     redirect: "/",
   },

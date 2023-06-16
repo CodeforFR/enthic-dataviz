@@ -24,6 +24,7 @@
     </div>
     <div id="navMenu" class="navbar-menu">
       <div class="navbar-end">
+        <router-link class="navbar-item" to="/sbf120">Le SBF120</router-link>
         <router-link class="navbar-item" to="/tops">Les Tops</router-link>
         <a
           class="navbar-item"

@@ -14,6 +14,10 @@
           <div class="item-list-title">Salariés</div>
           <li>{{ lastEffectif }}</li>
         </ul>
+        <AnalyseTransparence
+          class="company-detail"
+          :companyData="companyData"
+        />
         <div
           class="sources-button"
           @click="
@@ -102,6 +106,7 @@
 
 <script>
 import WidgetComponent from "./WidgetComponent.vue";
+import AnalyseTransparence from "@/components/analyses/AnalyseTransparence.vue";
 import CSVRepository from "@/repositories/csv/CSVRepository";
 import APERepository from "@/repositories/ape/APERepository";
 
@@ -115,11 +120,10 @@ export default {
     };
   },
   props: ["companyData"],
-  components: { WidgetComponent },
+  components: { WidgetComponent, AnalyseTransparence },
   mounted() {
     APERepository.getAPECompanies(this.companyData.ape.code).then(
       (response) => {
-        console.log("CompaniesSameAPE :", response);
         this.companiesSameAPE = response;
       }
     );

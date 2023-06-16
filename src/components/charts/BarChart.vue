@@ -1,5 +1,5 @@
 <template>
-  <div class="chart__container">
+  <div class="chart__container_n" :style="{ height: div_height }">
     <v-chart class="chart" :option="chartOptions" ref="barChart" />
   </div>
 </template>
@@ -10,6 +10,8 @@ import { merge } from "lodash";
 
 import { CanvasRenderer } from "echarts/renderers";
 import { BarChart } from "echarts/charts";
+import { GaugeChart } from "echarts/charts";
+import { LineChart } from "echarts/charts";
 import {
   TitleComponent,
   TooltipComponent,
@@ -21,10 +23,12 @@ import VChart, { THEME_KEY } from "vue-echarts";
 use([
   CanvasRenderer,
   BarChart,
+  GaugeChart,
   GridComponent,
   TitleComponent,
   TooltipComponent,
   LegendComponent,
+  LineChart,
 ]);
 const DEFAULT_SERIE_TYPE = "bar";
 
@@ -61,7 +65,9 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      div_height: null,
+    };
   },
   methods: {
     breakLine(str) {
@@ -89,7 +95,10 @@ export default {
       return merge({}, this.CHART_OPTIONS, this.options);
     },
   },
-  mounted() {
+  beforeMount() {
+    if ("enthic_options" in this.CHART_OPTIONS) {
+      this.div_height = this.CHART_OPTIONS.enthic_options.height;
+    }
     this.chartOptions = this.CHART_OPTIONS;
   },
 };
@@ -97,7 +106,7 @@ export default {
 
 <style scoped>
 .chart__container {
-  width: 900px;
+  /*  width: 900px;*/
   height: 500px;
 }
 @media (min-width: 768px) and (max-width: 1023px) {

@@ -36,7 +36,6 @@
 export default {
   name: "CompanyAccountMetadata",
   props: ["companyData"],
-
   computed: {
     detailToDisplay() {
       console.log(

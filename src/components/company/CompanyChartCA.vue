@@ -39,6 +39,9 @@ export default {
   data: () => {
     return {
       CHART_OPTIONS: {
+        enthic_options: {
+          height: "500px",
+        },
         color: [
           "#00bfc7",
           "#ff926b",

@@ -6,45 +6,45 @@
   ],
   "children": {
     "ResultatAvantImpot": {
-      "name": "Résultat courant d'avant impôts ",
+      "name": "Résultat courant d'avant impôts",
       "codeLiasses": [
         "GW"
       ],
       "children": {
         "ResultatExploitation": {
-          "name": "Résultat d'exploitation ",
+          "name": "Résultat d'exploitation",
           "codeLiasses": [
             "GG",
             "270"
           ],
           "children": {
             "ProduitsExploitation": {
-              "name": "Produits d'exploitation ",
+              "name": "Produits d'exploitation",
               "codeLiasses": [
                 "FR",
                 "232"
               ],
               "children": {
                 "ChiffresAffairesNet": {
-                  "name": "Chiffres d'affaires nets ",
+                  "name": "Chiffres d'affaires nets",
                   "codeLiasses": [
                     "FJ"
                   ],
                   "children": {
                     "VenteMarchandises": {
-                      "name": "Ventes de marchandises ",
+                      "name": "Ventes de marchandises",
                       "codeLiasses": [
                         "FA"
                       ]
                     },
                     "ProductionVendueDeBiens": {
-                      "name": "Production vendues de biens ",
+                      "name": "Production vendues de biens",
                       "codeLiasses": [
                         "FD"
                       ]
                     },
                     "ProductionVendueDeServices": {
-                      "name": "Production vendue de services ",
+                      "name": "Production vendue de services",
                       "codeLiasses": [
                         "FG"
                       ]
@@ -52,34 +52,34 @@
                   }
                 },
                 "ProductionStocked": {
-                  "name": "Production stockée ",
+                  "name": "Production stockée",
                   "codeLiasses": [
                     "FM",
                     "222"
                   ]
                 },
                 "ProductionImmobilisee": {
-                  "name": "Production immobilisée ",
+                  "name": "Production immobilisée",
                   "codeLiasses": [
                     "FN",
                     "224"
                   ]
                 },
                 "SubventionsExploitation": {
-                  "name": "Subvention d'exploitation ",
+                  "name": "Subvention d'exploitation",
                   "codeLiasses": [
                     "FO",
                     "226"
                   ]
                 },
                 "RepriseDepreciationProvisionsTransfertChargesExploitation": {
-                  "name": "Reprises sur dépréciations, provisions (et amortissements), transfert de charges ",
+                  "name": "Reprises sur dépréciations, provisions (et amortissements), transfert de charges",
                   "codeLiasses": [
                     "FP"
                   ]
                 },
                 "AutresProduits": {
-                  "name": "Autres produits ",
+                  "name": "Autres produits",
                   "codeLiasses": [
                     "FQ",
                     "230"
@@ -88,7 +88,7 @@
               }
             },
             "ChargesExploitation": {
-              "name": "Charges d'exploitation ",
+              "name": "Charges d'exploitation",
               "codeLiasses": [
                 "GF",
                 "264"
@@ -124,61 +124,61 @@
                   ]
                 },
                 "AutresAchatEtChargesExternes": {
-                  "name": "Autres achats et charges externes ",
+                  "name": "Autres achats et charges externes",
                   "codeLiasses": [
                     "FW",
                     "242"
                   ]
                 },
                 "ImpotTaxesEtVersementsAssimiles": {
-                  "name": "Impôts, taxes et versements assimilés ",
+                  "name": "Impôts, taxes et versements assimilés",
                   "codeLiasses": [
                     "FX",
                     "244"
                   ]
                 },
                 "SalairesEtTraitements": {
-                  "name": "Salaires et traitements ",
+                  "name": "Salaires et traitements",
                   "codeLiasses": [
                     "FY",
                     "250"
                   ]
                 },
                 "ChargesSociales": {
-                  "name": "Cotisations sociales ",
+                  "name": "Cotisations sociales",
                   "codeLiasses": [
                     "FZ",
                     "252"
                   ]
                 },
                 "DotationAmortissementImmobilisations": {
-                  "name": "Sur immobilisations : dotations aux amortissements ",
+                  "name": "Sur immobilisations : dotations aux amortissements",
                   "codeLiasses": [
                     "GA",
                     "254"
                   ]
                 },
                 "DotationDepreciationImmobilisations": {
-                  "name": "Sur immobilisations : dotations aux dépréciations ",
+                  "name": "Sur immobilisations : dotations aux dépréciations",
                   "codeLiasses": [
                     "GB"
                   ]
                 },
                 "DotationDepreciationActifCirculant": {
-                  "name": "Sur actif circulant : dotations aux dépréciations ",
+                  "name": "Sur actif circulant : dotations aux dépréciations",
                   "codeLiasses": [
                     "GC"
                   ]
                 },
                 "DotationProvisions": {
-                  "name": "Dotations aux provisions ",
+                  "name": "Dotations aux provisions",
                   "codeLiasses": [
                     "GD",
                     "256"
                   ]
                 },
                 "AutresCharges": {
-                  "name": "Autres charges ",
+                  "name": "Autres charges",
                   "codeLiasses": [
                     "GE",
                     "262"
@@ -189,13 +189,13 @@
           }
         },
         "ResultatFinancier": {
-          "name": "Résultat financier ",
+          "name": "Résultat financier",
           "codeLiasses": [
             "GV"
           ],
           "children": {
             "ProduitsFinanciers": {
-              "name": "Produits financiers ",
+              "name": "Produits financiers",
               "codeLiasses": [
                 "GP",
                 "280"
@@ -240,7 +240,7 @@
               }
             },
             "ChargesFinancieres": {
-              "name": "Charges financières ",
+              "name": "Charges financières",
               "codeLiasses": [
                 "GU",
                 "294"
@@ -291,13 +291,13 @@
       }
     },
     "ResultatExceptionnel": {
-      "name": "Résultat exceptionnel ",
+      "name": "Résultat exceptionnel",
       "codeLiasses": [
         "HI"
       ],
       "children": {
         "ProduitsExceptionnels": {
-          "name": "Produits exceptionnels ",
+          "name": "Produits exceptionnels",
           "codeLiasses": [
             "HD",
             "290"
@@ -324,7 +324,7 @@
           }
         },
         "ChargesExceptionnelles": {
-          "name": "Charges exceptionnelles ",
+          "name": "Charges exceptionnelles",
           "codeLiasses": [
             "HH",
             "300"
@@ -354,14 +354,14 @@
       }
     },
     "ParticipationSalariesAuxResultats": {
-      "name": "Participation des salarié⋅es aux résultats de l'entreprise ",
+      "name": "Participation des salarié⋅es aux résultats de l'entreprise",
       "codeLiasses": [
         "HJ"
       ],
       "sign": -1
     },
     "ImpotsSurLesBenefices": {
-      "name": "Impôts sur les bénéfices ",
+      "name": "Impôts sur les bénéfices",
       "codeLiasses": [
         "HK",
         "306"
